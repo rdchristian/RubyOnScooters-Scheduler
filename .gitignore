@@ -17,4 +17,4 @@
 /tmp
 
 # Ignore ide preferences
-*.sublime-project
+*.sublime*
