@@ -1,7 +1,6 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is deployed on [Heroku](https://rubyonscooters-scheduler.herokuapp.com "RubyOnScooters Scheduler").
 
 Things you may want to cover:
 
