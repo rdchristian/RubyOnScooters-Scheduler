@@ -1,0 +1,13 @@
+%h1 Browsing Facilities
+
+%table#facilities
+  %thead
+    %tr
+      %th Name
+      %th Description
+  %tbody
+    - @facilities.each do |facility|
+      %tr
+        %td= facility.name
+        %td= facility.description
+        %td= link_to "More about #{facility.name}", facility_path(facility)

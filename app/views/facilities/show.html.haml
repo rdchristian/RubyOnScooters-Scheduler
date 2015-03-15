@@ -1,0 +1,12 @@
+%h2 Details about #{@facility.name}
+ 
+%ul#details
+  %li
+    Name:
+    = @facility.name
+ 
+%h3 Description:
+ 
+%p#description= @facility.description
+ 
+= link_to 'Back to facility list', facilities_path

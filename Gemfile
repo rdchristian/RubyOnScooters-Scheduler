@@ -7,6 +7,11 @@ gem 'rails', '4.2.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
+# This ensures that any time you generate a resource, view, or mailer, you'll get Haml templates (instead of ERB)
+gem "haml-rails"
+
+gem 'haml'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -28,7 +33,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# postgresql
 gem 'pg'
+
+# to allow attr_accessible to be used in rails 4 ('cause I'm lazy and don't wanna adapt to change...)
+gem 'protected_attributes'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

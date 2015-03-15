@@ -1,0 +1,816 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"O",
+				"ORIG_PATH"
+			],
+			[
+				"selfish",
+				"selfishUtilityFunction"
+			],
+			[
+				"distanc",
+				"distanceLost	statement"
+			],
+			[
+				"self",
+				"selfishUtilityFunction	function"
+			],
+			[
+				"utili",
+				"utilityFunction	function"
+			],
+			[
+				"vel",
+				"velocity	statement"
+			],
+			[
+				"uti",
+				"utilities"
+			],
+			[
+				"sep",
+				"SEPARATION_DIST_SQ"
+			],
+			[
+				"rea",
+				"reachMultiwayDeal"
+			],
+			[
+				"Sep",
+				"SEPARATION_DIST_SQ"
+			],
+			[
+				"colli",
+				"COLLISION_DIST_SQ"
+			],
+			[
+				"SEp",
+				"SEPARATION_DIST_SQ"
+			],
+			[
+				"sin",
+				"sinTheta"
+			],
+			[
+				"velo",
+				"velocity"
+			],
+			[
+				"angle",
+				"anglesZ"
+			],
+			[
+				"mu",
+				"multiwayUtilities	statement"
+			],
+			[
+				"Aler",
+				"ALERT_DIST_SQ"
+			],
+			[
+				"font",
+				"fontsize"
+			],
+			[
+				"Plan",
+				"PLANE_SIZE"
+			],
+			[
+				"orig",
+				"origVelocity"
+			],
+			[
+				"norm",
+				"normalized"
+			],
+			[
+				"of",
+				"offcourse"
+			],
+			[
+				"back",
+				"backTime"
+			],
+			[
+				"nom",
+				"normalized"
+			],
+			[
+				"ori",
+				"origVelocity"
+			],
+			[
+				"int",
+				"int2Dpos"
+			],
+			[
+				"del",
+				"delta_position	statement"
+			],
+			[
+				"veloci",
+				"velocityIntervals	statement"
+			],
+			[
+				"rada",
+				"radarInput	statement"
+			],
+			[
+				"ba",
+				"backTime	statement"
+			],
+			[
+				"com",
+				"commitment	statement"
+			],
+			[
+				"coli",
+				"collisionsEnd	statement"
+			],
+			[
+				"breka",
+				"breakpoint	breakpoint"
+			],
+			[
+				"brek",
+				"breakpoint	breakpoint"
+			],
+			[
+				"deal",
+				"dealspace	statement"
+			],
+			[
+				"mul",
+				"multiwayParties	statement"
+			],
+			[
+				"multi",
+				"multiwayUtilities	statement"
+			],
+			[
+				"det",
+				"detectCollision	function"
+			],
+			[
+				"delta_",
+				"delta_velocity"
+			],
+			[
+				"othe",
+				"otherUtilities	statement"
+			],
+			[
+				"new",
+				"newParties	statement"
+			],
+			[
+				"oth",
+				"otherParties	statement"
+			],
+			[
+				"other",
+				"otherParties	statement"
+			],
+			[
+				"max",
+				"maxNashDeal	statement"
+			],
+			[
+				"coll",
+				"collisionTimes	statement"
+			],
+			[
+				"clo",
+				"collisionTimes	statement"
+			],
+			[
+				"on",
+				"ongoingCollisions	statement"
+			],
+			[
+				"dist",
+				"distanceLost	statement"
+			],
+			[
+				"is",
+				"isinstance	function"
+			],
+			[
+				"ve",
+				"velocity	statement"
+			],
+			[
+				"commi",
+				"commitments"
+			],
+			[
+				"Velo",
+				"VelocityInterval	class"
+			],
+			[
+				"Vel",
+				"VelocityInterval	class"
+			],
+			[
+				"col",
+				"collisionTimes	statement"
+			],
+			[
+				"Veo",
+				"VelocityInterval	class"
+			],
+			[
+				"inte",
+				"interval	forflow"
+			],
+			[
+				"delt",
+				"delta_speed	statement"
+			],
+			[
+				"break",
+				"breakpoint	breakpoint"
+			],
+			[
+				"sq",
+				"squareDistance	function"
+			],
+			[
+				"pla",
+				"PLANE_SIZE"
+			],
+			[
+				"al",
+				"ALERT_DIST_SQ	statement"
+			],
+			[
+				"hei",
+				"heightToColor	statement"
+			],
+			[
+				"min",
+				"MIN_ALTITUDE	statement"
+			],
+			[
+				"mi",
+				"MIN_ALTITUDE	statement"
+			],
+			[
+				"plans",
+				"PLANE_SIZE	statement"
+			],
+			[
+				"co",
+				"collisions	statement"
+			],
+			[
+				"all",
+				"allsprites	statement"
+			],
+			[
+				"pos",
+				"pos_new	statement"
+			],
+			[
+				"get",
+				"get_rect"
+			],
+			[
+				"spl",
+				"splitter"
+			],
+			[
+				"Boo",
+				"BoolLit"
+			],
+			[
+				"ople",
+				"OpLess"
+			],
+			[
+				"opgre",
+				"OpGreater"
+			],
+			[
+				"in",
+				"inequality"
+			],
+			[
+				"opless",
+				"OpLessEQ"
+			],
+			[
+				"OpGr",
+				"OpGreaterEQ"
+			],
+			[
+				"string",
+				"stringToOp"
+			],
+			[
+				"strin",
+				"stringToOp"
+			],
+			[
+				"Sc",
+				"SCompare"
+			],
+			[
+				"left",
+				"leafToC"
+			],
+			[
+				"False",
+				"False"
+			],
+			[
+				"ma",
+				"maxElementOfAList"
+			],
+			[
+				"inse",
+				"insertionSort"
+			],
+			[
+				"ins",
+				"insert"
+			],
+			[
+				"con",
+				"concatenate"
+			],
+			[
+				"lexi",
+				"lexicoMergeSort"
+			],
+			[
+				"mer",
+				"mergeSortP"
+			],
+			[
+				"me",
+				"mergeSortP"
+			],
+			[
+				"merg",
+				"mergeSort"
+			],
+			[
+				"merge",
+				"mergeSort"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 127.0,
+		"selected_items":
+		[
+			[
+				"file open",
+				"File: Copy Path From Project Encoded"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"Snippet: brea",
+				"Snippet: breakpoint"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"ali",
+				"AlignTab"
+			],
+			[
+				"alig",
+				"AlignTab"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"align",
+				"AlignTab"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/Synix/Documents/Programming/GitHub Repo/RubyOnScooters-Scheduler"
+	],
+	"file_history":
+	[
+		"/Users/Synix/.bashrc",
+		"/Users/Synix/.profile",
+		"/Users/Synix/Documents/Programming/GitHub Repo/RubyOnScooters-Scheduler/config/database.yml",
+		"/Users/Synix/Documents/Programming/GitHub Repo/RubyOnScooters-Scheduler/Gemfile",
+		"/Users/Synix/Documents/Programming/GitHub Repo/RubyOnScooters-Scheduler/config/database.yml.sqlite",
+		"/Users/Synix/Documents/Programming/GitHub Repo/RubyOnScooters-Scheduler/config/application.rb",
+		"/Users/Synix/.bash_profile",
+		"/Users/Synix/.rvm/scripts/rvm",
+		"/Users/Synix/.rvm/rubies/ruby-2.2.0/lib/ruby/gems/2.2.0/bundler/gems/extensions/x86_64-darwin-13/2.2.0/byebug-98d11827cb39/gem_make.out",
+		"/Users/Synix/Downloads/SmsBackup.txt",
+		"/Users/Synix/Google Drive/Texas A&M/Research/src/profiling.log",
+		"/Users/Synix/Documents/Programming/C++/Constraint Satisfaction Problem [AI][5]/main.cpp",
+		"/Users/Synix/Google Drive/Texas A&M/Fall 2014/Research/src/pygame/examples/macosx/aliens_app_example/aliens.py",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/Synix/Documents/Programming/C++/Traveling Salesman (Simulated Annealing) [AI][4]/Release/output.txt",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/User/breakpoint.sublime-snippet",
+		"/Users/Synix/Documents/Programming/C++/Blocksworld (A*) [AI][3]/.cproject",
+		"/Users/Synix/Documents/Programming/C++/Blocksworld (A*) [AI][3]/.project",
+		"/Users/Synix/Downloads/Austin/Assignment 1/program3.cpp",
+		"/Users/Synix/Downloads/Austin/Assignment 1/program2.cpp",
+		"/Users/Synix/Downloads/Austin/Assignment 1/program1.cpp",
+		"/Users/Synix/Documents/Programming/Python/TopCoder/BinaryCode.py",
+		"/Users/Synix/Documents/Programming/Python/TopCoder/Lottery.py",
+		"/Users/Synix/Google Drive/Texas A&M/Fall 2014/CSCE 420/CA2/makefile",
+		"/Users/Synix/Documents/Programming/C++/BFS Navigation [AI][1]/Debug/testcase_1.1__20.20.txt",
+		"/Users/Synix/Documents/Programming/C++/BFS Navigation [AI][1]/Debug/testcase_1.20__20.1.txt",
+		"/Users/Synix/Documents/Programming/C++/BFS Navigation [AI][1]/Debug/testcase_7.7__7.20.txt",
+		"/Users/Synix/Documents/Programming/C++/BFS Navigation [AI][1]/Debug/testcase_7.6__13.6.txt",
+		"/Users/Synix/Documents/Programming/C++/BFS Navigation [AI][1]/Debug/testcase_1.1__4.4.txt",
+		"/Users/Synix/Documents/Programming/C++/BFS Navigation [AI][1]/Debug/makefile",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/FileHeader/FileHeader.sublime-settings",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/FileHeader/template/body/Python.tmpl",
+		"/Users/Synix/Documents/Programming/Python/TopCoder/sad",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/FileHeader/something.cpp",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/FileHeader/something.py",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/User/FileHeader.sublime-settings",
+		"/Users/Synix/Documents/Programming/Python/TopCoder/asdasd.py",
+		"/Users/Synix/Documents/Programming/Python/Path Finder [AI][CA0]/main.py",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/Users/Synix/Downloads/Packages.rar Folder/User/Anaconda.sublime-settings",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/Users/Synix/Documents/Programming/Java/Testing ThingZ/input.txt",
+		"/Users/Synix/Documents/Programming/Java/Testing ThingZ/mightytext-edited.txt",
+		"/Users/Synix/Downloads/andrea.csv",
+		"/Users/Synix/Documents/Programming/Java/Testing ThingZ/iphone.txt",
+		"/Users/Synix/Documents/Programming/Java/Testing ThingZ/output.txt",
+		"/Users/Synix/Documents/Programming/Java/Testing ThingZ/iphone short.csv",
+		"/Users/Synix/Documents/Programming/Haskell/A Mini Language [CSCE 314]/p1-skeleton/ParserCombinators.hs",
+		"/Users/Synix/Documents/Programming/Haskell/A Mini Language [CSCE 314]/p1-skeleton/mini",
+		"/Users/Synix/Documents/Programming/Haskell/A Mini Language [CSCE 314]/p1-skeleton/MiniLangSyntax.hs",
+		"/Users/Synix/Documents/Programming/Haskell/A Mini Language [CSCE 314]/p1-skeleton/MiniLangParser.hs",
+		"/Users/Synix/Documents/Programming/Haskell/A Mini Language [CSCE 314]/p1-skeleton/MiniLangEvaluator.hs",
+		"/Users/Synix/Documents/Programming/Haskell/A Mini Language [CSCE 314]/p1-skeleton/Main.hs",
+		"/Users/Synix/Downloads/mightytext-edited.txt",
+		"/Users/Synix/Downloads/mightytext.html",
+		"/Users/Synix/Downloads/mightytext.xml",
+		"/Users/Synix/Google Drive/SMS Export, December 14, 2013  23:25:04.txt",
+		"/Users/Synix/Documents/Programming/C#/Shuffle and Rename/Shuffle and Rename/Program.cs",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 1/Assignment 1 [CSCE 314].hs",
+		"/Users/Synix/Downloads/Natasha's Scandal/Central Authentication Service.html",
+		"/Users/Synix/Downloads/Natasha's Scandal/Howdy.html",
+		"/Users/Synix/Desktop/Biology/key to review 3.txt",
+		"/Users/Synix/Documents/Programming/Haskell/Test-Haskell/Setup.hs",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 3/tester.hs",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 3/a3.hs",
+		"/Users/Synix/Documents/Programming/Haskell/Test-Haskell/src/Main.hs",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 2/a2.hs",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 3/    Declared at",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 3/                 /Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 3/a3.hs",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 3/    Not in scope",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 2/tester.hs",
+		"/Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 2/                             defined at /Users/Synix/Documents/Programming/Haskell/CSCE 314 Assignment 2/a2.hs",
+		"/Users/Synix/Documents/Programming/Haskell/Haskell.sublime-project",
+		"/Users/Synix/Documents/Programming/exeter/stapl/test/algorithms/shayan_test.cc",
+		"/Users/Synix/Documents/Programming/exeter/stapl/test/algorithms/shayan_test",
+		"/Users/Synix/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/Synix/Documents/Programming/exeter/stapl/benchmarks/nas/GNUmakefile",
+		"/Users/Synix/Desktop/hw0.tex",
+		"/Users/Synix/Desktop/Test/Assignment 1 [CSCE 314].hs",
+		"/Users/Synix/Desktop/Test/test.hs",
+		"/Users/Synix/Desktop/Test/tester.hs"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"tests.log",
+			"",
+			"key to review 3.txt",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"$PATH:",
+			"foo",
+			"PATH",
+			":$PATH",
+			"$PATH:",
+			":$PATH",
+			"export",
+			"$PATH:",
+			"echo $PATH\n",
+			":$PATH",
+			"$PATH:",
+			"Test .*\\n\\n",
+			"Total collisions = ",
+			"Test Result .*\\n\\n",
+			"import pdb",
+			"Total separations = ",
+			"Total collisions = ",
+			"Total separations = ",
+			"12",
+			"8",
+			"self.velocity",
+			"origVelocity",
+			"FRAMERATE",
+			"16 .* plane",
+			"16",
+			".*postal.*",
+			"postal",
+			"utilities",
+			"generate",
+			"Total collisions = ",
+			"Total losses of separation = ",
+			"END \\d*",
+			"Test Parameters:",
+			"separations",
+			"12",
+			"generic",
+			"generic	",
+			"Test Result \\d*\\s*END \\d*",
+			"Test Result \\d*\\s*END\\d*",
+			"pdb",
+			"#",
+			"reachedMultiwayDeal",
+			"reachMultiwayDeal",
+			"distance",
+			"findCollisionTimes",
+			"blue",
+			"collision",
+			"Collisions",
+			"COLLISION",
+			"COLLISION_DIST_SQ",
+			"20",
+			"cos",
+			"anglesZ",
+			"origin",
+			" (",
+			"(",
+			">,",
+			"generateAlternates",
+			"s2.plane",
+			"s1.plane",
+			"sprites",
+			"impor",
+			"print",
+			"DEBUG",
+			"8 ",
+			"{}",
+			"{ }",
+			"{}",
+			"numpy",
+			"self.commitment['time']",
+			"commitment['time']",
+			"*",
+			"1e6",
+			"commitment['offcourse']",
+			"interval",
+			"normalized",
+			"round",
+			"int(",
+			"int",
+			"COLLISION_DIST_SQ",
+			"int2Dpos",
+			"(),",
+			"int2Dpos",
+			"COLLISION_DIST_SQ",
+			"* 2",
+			"delta_velocity",
+			"+",
+			"*",
+			"findCollisionTimes",
+			"frame",
+			"planes",
+			"allsprites",
+			"multiwayParties",
+			"maxNashDeal[0]",
+			"append",
+			"self.collisionTimes",
+			"'Strayed'",
+			"'Time'",
+			"Time",
+			"commitment",
+			"Strayed",
+			"goingBack",
+			"speedSquared",
+			"self.velocity",
+			"self.utilities",
+			"speedSquared",
+			"utilities",
+			"dealspace",
+			"uvl",
+			"isslice",
+			"plan",
+			"plan2",
+			"plan1",
+			"plan",
+			"p",
+			"plans",
+			"plan2",
+			"plan1",
+			"detectCollision",
+			"plane",
+			"VelocityInterval",
+			"radarInput",
+			"self.velocity",
+			"2.1764952520133218",
+			"1.37, 0.37",
+			"self.",
+			"commitments[other.id]",
+			"[other.id]"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": true,
+		"replace_history":
+		[
+			"",
+			"@",
+			"",
+			"$1",
+			"\\n",
+			"$2",
+			"$1",
+			"d",
+			"leafToC",
+			"insertIt"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 182.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "rubyonscooters.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"shayan",
+				"test/algorithms/shayan_test.cc"
+			],
+			[
+				"ngu",
+				"benchmarks/nas/GNUmakefile"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 209.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
