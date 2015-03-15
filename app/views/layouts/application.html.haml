@@ -13,13 +13,14 @@
 
   %body
     = navbar position: :top do
-      = vertical do
-        = nav do
-          = link_to 'Home', root_path
-      = horizontal do
-        = nav class: 'navbar-right' do
-          = link_to 'Profile', root_path
-          = link_to 'Settings', root_path
+      .container-float
+        = vertical do
+          = nav do
+            = link_to 'Home', root_path
+        = horizontal do
+          = nav class: 'navbar-right' do
+            = link_to 'Profile', root_path
+            = link_to 'Settings', root_path
     .container-float
       .row-float
         .col-sm-3
