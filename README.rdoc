@@ -1,6 +1,6 @@
 == README
 
-This application is deployed on [Heroku](https://rubyonscooters-scheduler.herokuapp.com "RubyOnScooters Scheduler").
+This application is deployed on Heroku[https://rubyonscooters-scheduler.herokuapp.com].
 
 Things you may want to cover:
 
