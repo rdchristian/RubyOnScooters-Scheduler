@@ -1,12 +1,17 @@
-%h2 Details about #{@facility.name}
- 
-%ul#details
-  %li
-    Name:
-    = @facility.name
- 
-%h3 Description:
- 
-%p#description= @facility.description
- 
-= link_to 'Back to facility list', facilities_path
+- model_class = Facility
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+%p
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
+  = @facility.name
+%p
+  %strong= model_class.human_attribute_name(:description) + ':'
+  %br
+  = @facility.description
+
+
+= link_to t('.back', :default => t("helpers.links.back")), facilities_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_facility_path(@facility), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), facility_path(@facility), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
