@@ -1,12 +1,15 @@
 -# This file encapsulates every page
 
-!!! 5 -# Compliance with html 5
+-# Compliance with html 5
+!!! 5
 %html
   %head
     %title Fellowship Church Scheduler
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
-    = csrf_meta_tags -# protects against some kind of cross-site request forgery
+    
+    -# protects against some kind of cross-site request forgery
+    = csrf_meta_tags
 
   %body
     #main
