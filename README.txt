@@ -27,6 +27,6 @@ Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
 
-Helpful Links
-http://fullscreen.github.io/bh/
-http://getbootstrap.com/components/
+Helpful Links  
+http://fullscreen.github.io/bh/  
+http://getbootstrap.com/components/  
