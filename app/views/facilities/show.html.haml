@@ -10,6 +10,10 @@
   %strong= model_class.human_attribute_name(:description) + ':'
   %br
   = @facility.description
+%p
+  %strong= model_class.human_attribute_name(:capacity) + ':'
+  %br
+  = @facility.capacity
 
 
 = link_to t('.back', :default => t("helpers.links.back")), facilities_path, :class => 'btn btn-default'

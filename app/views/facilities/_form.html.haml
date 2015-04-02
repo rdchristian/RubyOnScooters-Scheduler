@@ -9,5 +9,10 @@
     .controls
       = f.text_field :description, class: 'form-control', required: true
     = error_span(@facility[:description])
+  .form-group
+    = f.label :capacity, class: 'control-label'
+    .controls
+      = f.text_field :capacity, class: 'form-control', required: true
+    = error_span(@facility[:capacity])
   = f.submit nil,class: 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), facilities_path, :class => 'btn btn-default'
