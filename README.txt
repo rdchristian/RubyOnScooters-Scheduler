@@ -35,3 +35,9 @@ http://guides.rubyonrails.org/command_line.html#rails-generate
 
 Helpful commands
 rails g bootstrap:themed facilities
+
+Updated Scaffolding
+dropdb scheduler_dev
+createdb scheduler_dev
+rake db:migrate
+rake db:seed
