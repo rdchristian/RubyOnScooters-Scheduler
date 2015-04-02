@@ -1,18 +1,22 @@
-= form_for @resource, html: { class: "form form-horizontal resource" } do |f|
-  .form-group
-    = f.label :name, class: 'control-label'
-    .controls
-      = f.text_field :name, class: 'form-control', required: true
-    = error_span(@resource[:name])
-  .form-group
-    = f.label :description, class: 'control-label'
-    .controls
-      = f.text_field :description, class: 'form-control', required: true
-    = error_span(@resource[:description])
-  .form-group
-    = f.label :numberOf, class: 'control-label'
-    .controls
-      = f.text_field :numberOf, class: 'form-control', required: true
-    = error_span(@resource[:numberOf])
-  = f.submit nil,class: 'btn btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), resources_path, :class => 'btn btn-default'
+= form_for @resource, html: { class: "form resource" } do |f|
+  .row  
+    .form-group.col-sm-4
+      = f.label :name, class: 'control-label'
+      .controls
+        = f.text_field :name, class: 'form-control', required: true
+      = error_span(@resource[:name])
+  .row  
+    .form-group.col-sm-6
+      = f.label :description, class: 'control-label'
+      .controls
+        = f.text_field :description, class: 'form-control', required: true
+      = error_span(@resource[:description])
+  .row  
+    .form-group.col-sm-2
+      = f.label :numberOf, class: 'control-label'
+      .controls
+        = f.text_field :numberOf, class: 'form-control', required: true
+      = error_span(@resource[:numberOf])
+  .row-float
+    = f.submit nil,class: 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), resources_path, :class => 'btn btn-default'
