@@ -31,3 +31,7 @@ Helpful Links
 http://fullscreen.github.io/bh/  
 http://getbootstrap.com/components/  
 http://guides.rubyonrails.org/command_line.html#rails-generate
+
+
+Helpful commands
+rails g bootstrap:themed facilities
