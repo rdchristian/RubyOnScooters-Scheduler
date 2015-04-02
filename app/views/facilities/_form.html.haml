@@ -1,19 +1,18 @@
-= form_for @facility do |f|
-  - if @facility.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@facility.errors.count, "error")} prohibited this facility from being saved:"
-      %ul
-        - @facility.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :capacity
-    = f.number_field :capacity
-  .actions
-    = f.submit 'Save'
+= form_for @facility, html: { class: "form form-horizontal facility" } do |f|
+  .form-group
+    = f.label :name, class: 'control-label'
+    .controls
+      = f.text_field :name, class: 'form-control', required: true
+    = error_span(@facility[:name])
+  .form-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_field :description, class: 'form-control', required: true
+    = error_span(@facility[:description])
+  .form-group
+    = f.label :capacity, class: 'control-label'
+    .controls
+      = f.text_field :capacity, class: 'form-control', required: true
+    = error_span(@facility[:capacity])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), facilities_path, :class => 'btn btn-default'
