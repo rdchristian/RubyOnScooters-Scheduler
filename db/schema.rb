@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331012251) do
+ActiveRecord::Schema.define(version: 20150402225412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+  end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
+  create_table "events_facilities", id: false, force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "facility_id"
+  end
+
+  add_index "events_facilities", ["event_id", "facility_id"], name: "index_events_facilities_on_event_id_and_facility_id", using: :btree
+  add_index "events_facilities", ["facility_id"], name: "index_events_facilities_on_facility_id", using: :btree
+
+  create_table "events_resources", id: false, force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "resource_id"
+  end
+
+  add_index "events_resources", ["event_id", "resource_id"], name: "index_events_resources_on_event_id_and_resource_id", using: :btree
+  add_index "events_resources", ["resource_id"], name: "index_events_resources_on_resource_id", using: :btree
 
   create_table "facilities", force: :cascade do |t|
     t.string   "name"
@@ -38,4 +66,11 @@ ActiveRecord::Schema.define(version: 20150331012251) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "events", "users"
 end
