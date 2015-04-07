@@ -35,12 +35,6 @@ describe "Resource object" do
 
 	it 'cannot have the name of an existing resource' do
 		Resource.create(:name => "Name", :description => "Description", :numberOf => 50).should_not be_valid
-	#context "if resource with name 'name' exists" do
-	#	before do
-	#		Resource.create!(:name => "Name", :description => "Description", :numberOf => 50)
-	#	end
-	#	it { should_not accept_values_for(:name, "Name") }
-	#end
 	end
 
 end
