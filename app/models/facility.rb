@@ -1,4 +1,4 @@
 class Facility < ActiveRecord::Base
-  attr_accessible :name, :description
-  has_and_belongs_to_many :events
+	attr_accessible :name, :description, :capacity
+	validates :name, :presence => true, :uniqueness => true, on: :create
 end

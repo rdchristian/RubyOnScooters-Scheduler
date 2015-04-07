@@ -1,16 +1,18 @@
-= form_for @facility, html: { class: "form facility" } do |f|
-  .row
-    .form-group.col-sm-4
-      = f.label :name, class: 'control-label'
-      .controls
-        = f.text_field :name, class: 'form-control', required: true
-      = error_span(@facility[:name])
-  .row
-    .form-group.col-sm-8
-      = f.label :description, class: 'control-label'
-      .controls
-        = f.text_field :description, class: 'form-control', required: true
-      = error_span(@facility[:description])
-  .row-float
-    = f.submit nil,class: 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), facilities_path, :class => 'btn btn-default'
+= form_for @facility, html: { class: "form form-horizontal facility" } do |f|
+  .form-group
+    = f.label :name, class: 'control-label'
+    .controls
+      = f.text_field :name, class: 'form-control', required: true
+    = error_span(@facility[:name])
+  .form-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_field :description, class: 'form-control', required: true
+    = error_span(@facility[:description])
+  .form-group
+    = f.label :capacity, class: 'control-label'
+    .controls
+      = f.text_field :capacity, class: 'form-control', required: true
+    = error_span(@facility[:capacity])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), facilities_path, :class => 'btn btn-default'

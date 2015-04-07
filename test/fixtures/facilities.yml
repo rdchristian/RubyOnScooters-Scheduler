@@ -2,8 +2,10 @@
 
 one:
   name: MyString
-  description: MyString
+  description: MyText
+  capacity: 1
 
 two:
   name: MyString
-  description: MyString
+  description: MyText
+  capacity: 1
