@@ -9,5 +9,5 @@ sample_facilities = [
 ]
  
 sample_facilities.each do |facility|
-  Facility.create!(facility)
+  Facility.create!(facility.merge!( {:capacity => 5} ))
 end
