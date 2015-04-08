@@ -3,24 +3,24 @@ development:
   encoding: utf8
   database: scheduler_dev
   pool: 5
-  username: 
-  password:
+  username: andrew
+  password: Greenbird65
 
 test: &TEST
   adapter: postgresql
   encoding: utf8
   database: scheduler_test
   pool: 5
-  username: 
-  password:
+  username: andrew
+  password: Greenbird65
 
 production:
   adapter: postgresql
   encoding: utf8
   database: scheduler_prod
   pool: 5
-  username: 
-  password:
+  username: andrew
+  password: Greenbird65
 
 cucumber:
   <<: *TEST
