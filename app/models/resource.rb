@@ -3,9 +3,4 @@ class Resource < ActiveRecord::Base
 	has_and_belongs_to_many :events
 	validates :name, :presence => true, :uniqueness => true, on: :create
 
-	def generate_hours
-    	Array.new(24.hours / 15.minutes) do |i| 
-        (Time.now.midnight + (i*30.minutes)).strftime("%k:%M")
-    end
-  end
 end

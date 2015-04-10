@@ -27,7 +27,7 @@
     .form-group.col-sm-2
       = f.label :max_reserve_time , class: 'control-label'
       .controls
-        = f.select :max_reserve_time, options_for_select(@resource.generate_hours), :prompt => "Hours:Minutes", class: 'form-control', required: true
+        = f.select :max_reserve_time, options_for_select(generate_hour_selections), :prompt => "Hours:Minutes", class: 'form-control', required: true
       = error_span(@resource[:max_reserve_time])            
   .row-float
     = f.submit nil,class: 'btn btn-primary'
