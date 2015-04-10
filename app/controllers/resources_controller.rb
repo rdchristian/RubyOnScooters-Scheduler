@@ -1,6 +1,12 @@
 class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
+
+  def generate_hours
+    [""] + Array.new(24.hours / 15.minutes) do |i| 
+        (Time.now.midnight + (i*30.minutes)).strftime("%k:%M")
+    end
+  end
   # GET /resources
   # GET /resources.json
   def index
@@ -69,6 +75,6 @@ class ResourcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:resource).permit(:name, :description, :numberOf)
+      params.require(:resource).permit(:name, :description, :numberOf, :storage_location, :max_reserve_time)
     end
 end
