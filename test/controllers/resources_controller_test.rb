@@ -17,8 +17,10 @@ class ResourcesControllerTest < ActionController::TestCase
   end
 
   test "should create resource" do
-    assert_difference('Resource.count') do
-      post :create, resource: { description: @resource.description, name: @resource.name, numberOf: @resource.numberOf }
+    assert_difference('Resource.count', +1) do
+      post :create, resource: { description: @resource.description, name: "Test 3", 
+                                numberOf: @resource.numberOf, storage_location: @resource.storage_location,
+                                max_reserve_time: @resource.max_reserve_time }
     end
 
     assert_redirected_to resource_path(assigns(:resource))
@@ -35,7 +37,9 @@ class ResourcesControllerTest < ActionController::TestCase
   end
 
   test "should update resource" do
-    patch :update, id: @resource, resource: { description: @resource.description, name: @resource.name, numberOf: @resource.numberOf }
+    patch :update, id: @resource, resource: { description: @resource.description, name: @resource.name,
+                                               numberOf: @resource.numberOf, storage_location: @resource.storage_location,
+                                               max_reserve_time: @resource.max_reserve_time }
     assert_redirected_to resource_path(assigns(:resource))
   end
 

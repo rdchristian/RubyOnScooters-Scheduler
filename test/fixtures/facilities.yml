@@ -6,6 +6,6 @@ one:
   capacity: 1
 
 two:
-  name: MyString
+  name: MyString2
   description: MyText
   capacity: 1

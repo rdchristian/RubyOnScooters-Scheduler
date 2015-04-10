@@ -23,6 +23,8 @@
   %br
   = @resource.max_reserve_time.strftime("%k hours and %M minutes")
 
+
+
 = link_to t('.back', :default => t("helpers.links.back")), resources_path, :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_resource_path(@resource), :class => 'btn btn-default'
 = link_to t('.destroy', :default => t("helpers.links.destroy")), resource_path(@resource), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

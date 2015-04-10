@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
+  name: Resource 1
+  description: Describing resource 1
   numberOf: 1
+  storage_location: Closet
+  max_reserve_time: <%= Time.now.midnight + 2.hours %>
 
 two:
-  name: MyString
-  description: MyString
-  numberOf: 1
+  name: Resource 2
+  description: Describing resrouce 2
+  numberOf: 2
+  storage_location: Closet 3
+  max_reserve_time: <%= Time.now.midnight + 2.hours %>
