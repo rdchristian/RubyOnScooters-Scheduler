@@ -7,6 +7,12 @@ gem 'rails', '4.2.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
+# Twitter Bootstrap
+gem "bh" # Helpers for bootstrap
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
+
 # This ensures that any time you generate a resource, view, or mailer, you'll get Haml templates (instead of ERB)
 gem "haml-rails"
 

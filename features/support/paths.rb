@@ -21,7 +21,8 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-
+    when /^the facilities page$/
+      new_facility_path
     else
       begin
         page_name =~ /^the (.*) page$/
@@ -30,6 +31,34 @@ module NavigationHelpers
       rescue NoMethodError, ArgumentError
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
           "Now, go and add a mapping in #{__FILE__}"
+      end
+    end
+  end
+
+  def click_button(button_name)
+    case button_name
+    when /^Add$/
+      new_facility_path
+    else
+      begin
+      rescue NoMethodError, ArgumentError
+        raise "ERROR SOMEWHERE IN click_button\n"
+      end
+    end
+  end
+
+  def fill_in(field, value)
+    case field
+    when /^name$/
+      
+    when /^description$/
+      
+    when /^capacity$/
+
+    else
+      begin
+      rescue NoMethodError, ArgumentError
+        raise "ERROR SOMEWHERE IN fill_in\n"
       end
     end
   end

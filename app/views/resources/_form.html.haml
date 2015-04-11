@@ -1,0 +1,34 @@
+= form_for @resource, html: { class: "form resource" } do |f|
+  .row  
+    .form-group.col-sm-4
+      = f.label :name, class: 'control-label'
+      .controls
+        = f.text_field :name, class: 'form-control', required: true
+      = error_span(@resource[:name])
+  .row  
+    .form-group.col-sm-6
+      = f.label :description, class: 'control-label'
+      .controls
+        = f.text_field :description, class: 'form-control', required: true
+      = error_span(@resource[:description])
+  .row  
+    .form-group.col-sm-2
+      = f.label :numberOf, class: 'control-label'
+      .controls
+        = f.select :numberOf, options_for_select(1..500), class: 'form-control', required: true
+      = error_span(@resource[:numberOf])
+  .row  
+    .form-group.col-sm-4
+      = f.label :storage_location, class: 'control-label'
+      .controls
+        = f.text_field :storage_location, class: 'form-control', required: true
+      = error_span(@resource[:storage_location])
+  .row  
+    .form-group.col-sm-2
+      = f.label :max_reserve_time , class: 'control-label'
+      .controls
+        = f.select :max_reserve_time, options_for_select(generate_hour_selections), :prompt => "Hours:Minutes", class: 'form-control', required: true
+      = error_span(@resource[:max_reserve_time])            
+  .row-float
+    = f.submit nil,class: 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), resources_path, :class => 'btn btn-default'

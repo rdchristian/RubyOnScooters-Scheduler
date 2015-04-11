@@ -1,0 +1,28 @@
+= form_for @event, html: { class: "form form-horizontal event" } do |f|
+  .form-group
+    = f.label :title, class: 'control-label'
+    .controls
+      = f.text_field :title, class: 'form-control', required: true
+    = error_span(@event[:title])
+  .form-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_field :description, class: 'form-control', required: true
+    = error_span(@event[:description])
+  .form-group
+    = f.label :start, class: 'control-label'
+    .controls
+      = f.text_field :start, class: 'form-control', required: true
+    = error_span(@event[:start])
+  .form-group
+    = f.label :end, class: 'control-label'
+    .controls
+      = f.text_field :end, class: 'form-control', required: true
+    = error_span(@event[:end])
+  .form-group
+    = f.label :user_id, class: 'control-label'
+    .controls
+      = f.text_field :user_id, class: 'form-control', required: true
+    = error_span(@event[:user_id])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
