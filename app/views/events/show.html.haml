@@ -19,9 +19,9 @@
   %br
   = @event.end
 %p
-  %strong= model_class.human_attribute_name(:user_id) + ':'
+  %strong= model_class.human_attribute_name(:creator_name) + ':'
   %br
-  = @event.user_id
+  = @event.creator_name
 
 
 = link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn btn-default'
