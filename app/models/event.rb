@@ -9,8 +9,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :facilities
 
   def creator_name
-    return self.creator.name if self.creator
-    'N/A'
+    self.creator.name if self.creator
   end
 
   def creator_name=(user_name)

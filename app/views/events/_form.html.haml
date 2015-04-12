@@ -1,51 +1,60 @@
 - javascript "global_controller"
 
 = form_for @event, html: { class: "form form-vertical event" } do |f|
-  .form-group
-    = f.label :title, class: 'control-label'
-    .controls
-      = f.text_field :title, class: 'form-control', required: true
-    = error_span(@event[:title])
-  
-  .form-group
-    = f.label :description, class: 'control-label'
-    .controls
-      = f.text_field :description, class: 'form-control', required: true
-    = error_span(@event[:description])
-  
-  .form-group
-    = f.label :start, class: 'control-label'
-    .controls
-      = f.text_field :start, class: 'form-control', required: true
-    = error_span(@event[:start])
-  
-  .form-group
-    = f.label :end, class: 'control-label'
-    .controls
-      = f.text_field :end, class: 'form-control', required: true
-    = error_span(@event[:end])
-  
-  .form-group
-    = f.label :creator_name, class: 'control-label'
-    .controls
-      = f.text_field :creator_name, class: 'form-control', required: true
-    = error_span(@event[:creator_name])
+  .row  
+    .form-group.col-sm-4
+      = f.label :title, class: 'control-label'
+      .controls
+        = f.text_field :title, class: 'form-control', required: true
+      = error_span(@event[:title])
+    
+  .row  
+    .form-group.col-sm-6
+      = f.label :description, class: 'control-label'
+      .controls
+        = f.text_field :description, class: 'form-control', required: true
+      = error_span(@event[:description])
+    
+  .row  
+    .form-group.col-sm-3
+      = f.label :start, class: 'control-label'
+      .controls
+        = f.text_field :start, class: 'form-control', required: true
+      = error_span(@event[:start])
+    
+  .row
+    .form-group.col-sm-3
+      = f.label :end, class: 'control-label'
+      .controls
+        = f.text_field :end, class: 'form-control', required: true
+      = error_span(@event[:end])
+    
+  .row  
+    .form-group.col-sm-3
+      = f.label :creator_name, class: 'control-label'
+      .controls
+        = f.text_field :creator_name, class: 'form-control', required: true,
+        placeholder: 'No creator'
+      = error_span(@event[:creator_name])
 
-  .form-group
-    = f.label :facilities, class: 'control-label'
-    .controls
-      = f.collection_select(:facility_ids, Facility.all, :id, :name,
-        { prompt: "Please select your desired facilities" },
-        { class: 'selectable', :multiple => true })
-    = error_span(@event[:facility_ids])
+  .row-float  
+    .form-group
+      = f.label :facilities, class: 'control-label'
+      .controls
+        = f.collection_select(:facility_ids, Facility.all, :id, :name,
+          { prompt: "Please select your desired facilities" },
+          { class: 'selectable', :multiple => true })
+      = error_span(@event[:facility_ids])
 
-  .form-group
-    = f.label :resources, class: 'control-label'
-    .controls
-      = f.collection_select(:resource_ids, Resource.all, :id, :name,
-        { prompt: "Please select your desired resources" },
-        { class: 'selectable', :multiple => true })
-    = error_span(@event[:resource_ids])
+  .row-float  
+    .form-group
+      = f.label :resources, class: 'control-label'
+      .controls
+        = f.collection_select(:resource_ids, Resource.all, :id, :name,
+          { prompt: "Please select your desired resources" },
+          { class: 'selectable', :multiple => true })
+      = error_span(@event[:resource_ids])
 
-  = f.submit nil,class: 'btn btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
+  .row-float
+    = f.submit nil,class: 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
