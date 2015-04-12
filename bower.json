@@ -1,0 +1,17 @@
+{
+  "name": "RubyOnScooters-Scheduler",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ssynix/RubyOnScooters-Scheduler",
+  "authors": [
+    "Shayan Sayahi <ss.synix@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+
+}

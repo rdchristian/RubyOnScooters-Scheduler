@@ -19,7 +19,7 @@
 @fa-font-path: "/assets"; // Override fontawesome less variable in order for it to work with Rails asset pipeline 
 
 // Glyphicons
-// @import "twitter/bootstrap/glyphicons.less";
+@import "twitter/bootstrap/glyphicons.less";
 
 // Your custom LESS stylesheets goes here
 //
@@ -31,3 +31,13 @@
 //
 // Example:
 // @link-color: #ff0000;
+
+// Fucking finally fixed glyphicons....
+@font-face {
+   font-family: 'Glyphicons Halflings';
+   src: url('bootstrap/fonts/glyphicons-halflings-regular.eot');
+   src: url('bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+      url('bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'),
+      url('bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+      url('bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}

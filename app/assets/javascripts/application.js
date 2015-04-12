@@ -15,4 +15,5 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require selectize
-
+//= require bootstrap-touchspin/dist/jquery.bootstrap-touchspin
+//= require_tree ../../../vendor/assets/javascripts/.
