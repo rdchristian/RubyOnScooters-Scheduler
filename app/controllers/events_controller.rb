@@ -43,12 +43,12 @@ class EventsController < ApplicationController
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
-        Rails.logger.info(@event.errors.inspect)
       else
         format.html { render :edit }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+    logger.info(event_params.inspect)
   end
 
   # DELETE /events/1
@@ -69,6 +69,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :start, :end, :creator_name)
+      params.require(:event).permit(:title, :description, :start, :end, :creator_name, resource_ids: [], facility_ids: [])
     end
 end

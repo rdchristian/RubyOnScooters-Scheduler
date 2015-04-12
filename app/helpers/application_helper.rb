@@ -6,4 +6,8 @@ module ApplicationHelper
       end
   end
 
+  def javascript(*files)
+	content_for(:page_specific_js) { javascript_include_tag(*files) }
+  end
+
 end

@@ -13,6 +13,9 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 
+# Awesome responsive search form
+gem "selectize-rails"
+
 # This ensures that any time you generate a resource, view, or mailer, you'll get Haml templates (instead of ERB)
 gem "haml-rails"
 
