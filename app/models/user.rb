@@ -1,4 +1,4 @@
 class User < ActiveRecord::Base
-	attr_accessor :name
+	attr_accessible :name
 	has_many :events
 end
