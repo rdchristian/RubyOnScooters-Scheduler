@@ -1,21 +1,23 @@
-= form_for @facility, html: { class: "form form-horizontal facility" } do |f|
+- javascript "global_controller"
+
+= form_for @facility, html: { class: "form form-vertical facility" } do |f|
   .row
-    .form-group.col-sm-
+    .form-group.col-sm-4
       = f.label :name, class: 'control-label'
       .controls
         = f.text_field :name, class: 'form-control', required: true
       = error_span(@facility[:name])
   .row
-    .form-group.col-sm-
+    .form-group.col-sm-6
       = f.label :description, class: 'control-label'
       .controls
         = f.text_field :description, class: 'form-control', required: true
       = error_span(@facility[:description])
   .row
-    .form-group.col-sm-
+    .form-group.col-sm-2
       = f.label :capacity, class: 'control-label'
       .controls
-        = f.text_field :capacity, class: 'form-control numberpicker', required: true
+        = f.text_field :capacity, class: 'form-control number-picker', required: true
       = error_span(@facility[:capacity])
 
   .row-float
