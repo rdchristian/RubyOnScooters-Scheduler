@@ -10,17 +10,40 @@ $('.selectable').selectize({
     sortField: { field: 'text', direction: 'asc' },
 });
 
-$('.clockpicker').clockpicker({
-    placement: 'right',
-    align: 'bottom',
+var clockpicker_params = {
+    placement: 'bottom',
+    align: 'top',
     type: 'text',
-    value: '1:30',
     autoclose: 'true',
-    'default': 'For how long?',
-});
+};
+$('.clockpicker-disable-am-pm').clockpicker(clockpicker_params);
+
+clockpicker_params['twelvehour'] = 'true';
+$('.clockpicker').clockpicker(clockpicker_params);
+
 
 $(".number-picker").TouchSpin({
     verticalbuttons: true,
     verticalupclass: 'glyphicon glyphicon-chevron-up',
-    verticaldownclass: 'glyphicon glyphicon-chevron-down'
+    verticaldownclass: 'glyphicon glyphicon-chevron-down',
+});
+
+
+$('.single-datepicker').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minDate: moment(),
+});
+
+
+// Forward the click on the tiny calendar icon to the date picker
+$('.click-date').click(function() {
+    $('.single-datepicker').click();
+});
+
+// To make them uneditable, but still looking 'enabled'
+$('.single-datepicker, .clockpicker :input').attr('readonly', true);
+$('.single-datepicker, .clockpicker :input').css({
+    'cursor': 'pointer',
+    'background-color': '#FFFFFF',
 });

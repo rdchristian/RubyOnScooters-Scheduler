@@ -72,6 +72,7 @@
 				'<span class="clockpicker-span-hours text-primary"></span>',
 				' : ',
 				'<span class="clockpicker-span-minutes"></span>',
+				'<span> </span>',
 				'<span class="clockpicker-span-am-pm"></span>',
 			'</div>',
 			'<div class="popover-content">',
@@ -80,7 +81,7 @@
 					'<div class="clockpicker-dial clockpicker-hours"></div>',
 					'<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
 				'</div>',
-				'<span class="clockpicker-am-pm-block">',
+				'<span class="clockpicker-am-pm-block btn-toolbar" data-toggle="buttons">',
 				'</span>',
 			'</div>',
 		'</div>'
@@ -122,10 +123,10 @@
 		if (options.twelvehour) {
 			
 			var  amPmButtonsTemplate = ['<div class="clockpicker-am-pm-block">',
-				'<button type="button" class="btn btn-sm btn-default clockpicker-button clockpicker-am-button">',
-				'AM</button>',
-				'<button type="button" class="btn btn-sm btn-default clockpicker-button clockpicker-pm-button">',
-				'PM</button>',
+				'<input type="radio" class="btn btn-sm btn-default clockpicker-button clockpicker-am-button">',
+				'AM</input>',
+				'<input type="radio" class="btn btn-sm btn-default clockpicker-button clockpicker-pm-button active" checked>',
+				'PM</input>',
 				'</div>'].join('');
 			
 			var amPmButtons = $(amPmButtonsTemplate);
@@ -144,18 +145,20 @@
 			//        $('.clockpicker-span-am-pm').empty().append('PM');
 			//    });
 	
-			$('<button type="button" class="btn btn-sm btn-default clockpicker-button am-button">' + "AM" + '</button>')
+			$('<label type="radio" class="btn btn-sm btn-default clockpicker-button am-button pull-left"><input type="radio" value="AM" />' + "AM" + '</label>')
 				.on("click", function() {
 					self.amOrPm = "AM";
 					$('.clockpicker-span-am-pm').empty().append('AM');
 				}).appendTo(this.amPmBlock);
 				
 				
-			$('<button type="button" class="btn btn-sm btn-default clockpicker-button pm-button">' + "PM" + '</button>')
+			$('<label type="radio" class="btn btn-sm btn-default clockpicker-button pm-button active pull-right" checked><input type="radio" value="PM" />' + "PM" + '</label>')
 				.on("click", function() {
 					self.amOrPm = 'PM';
 					$('.clockpicker-span-am-pm').empty().append('PM');
 				}).appendTo(this.amPmBlock);
+
+			$('.pm-button').toggleClass("active");
 				
 		}
 		
@@ -677,7 +680,7 @@
 		var last = this.input.prop('value'),
 			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
 		if  (this.options.twelvehour) {
-			value = value + this.amOrPm;
+			value = value + ' ' + this.amOrPm;
 		}
 		
 		this.input.prop('value', value);

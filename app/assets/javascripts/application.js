@@ -15,5 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require selectize
+//= require moment
 //= require bootstrap-touchspin/dist/jquery.bootstrap-touchspin
+//= require bootstrap-daterangepicker/daterangepicker
 //= require_tree ../../../vendor/assets/javascripts/.

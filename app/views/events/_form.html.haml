@@ -17,16 +17,31 @@
     
   .row  
     .form-group.col-sm-3
-      = f.label :start, class: 'control-label'
+      = f.label :start, 'Starting date', class: 'control-label'
       .controls
-        = f.text_field :start, class: 'form-control', required: true
+        .input-group
+          = f.text_field :start, class: 'form-control single-datepicker', required: true
+          .input-group-addon.click-date{ :style => 'cursor: pointer'} 
+            .fa.fa-calendar
+
       = error_span(@event[:start])
-    
+    .form-group.col-sm-3
+      = f.label :start, 'Starting time', class: 'control-label'
+      .controls
+        .input-group.clockpicker
+          = f.text_field :start, class: 'form-control', required: true
+          .input-group-addon
+            .fa.fa-clock-o
+      = error_span(@event[:start])
+  
   .row
     .form-group.col-sm-3
-      = f.label :end, class: 'control-label'
+      = f.label :end, 'Duration', class: 'control-label'
       .controls
-        = f.text_field :end, class: 'form-control', required: true
+        .input-group.clockpicker-disable-am-pm
+          = f.text_field :end, class: 'form-control', required: true
+          .input-group-addon
+            .fa.fa-clock-o
       = error_span(@event[:end])
     
   .row  

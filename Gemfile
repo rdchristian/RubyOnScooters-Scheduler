@@ -16,6 +16,9 @@ gem "twitter-bootstrap-rails"
 # Awesome responsive search form
 gem "selectize-rails"
 
+# A lightweight javascript date library for parsing, manipulating, and formatting dates
+gem 'momentjs-rails'
+
 # This ensures that any time you generate a resource, view, or mailer, you'll get Haml templates (instead of ERB)
 gem "haml-rails"
 
