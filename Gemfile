@@ -17,7 +17,10 @@ gem "twitter-bootstrap-rails"
 gem "selectize-rails"
 
 # A lightweight javascript date library for parsing, manipulating, and formatting dates
-gem 'momentjs-rails'
+gem 'momentjs-rails', '>= 2.8.1'
+
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+gem 'bootstrap-timepicker-rails'
 
 # This ensures that any time you generate a resource, view, or mailer, you'll get Haml templates (instead of ERB)
 gem "haml-rails"

@@ -69,6 +69,14 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
+      if !!params[:start]
+        date, time = params[:start_date], params[:start]
+        params[:start] = (date + ' ' + time).to_datetime
+
+        duration = params[:end].to_time
+        params[:end] = params[:start].advance({:hours => duration.hour, :minutes => duration.min})
+      end
+
       params.require(:event).permit(:title, :description, :start, :end, :creator_name, resource_ids: [], facility_ids: [])
     end
 end

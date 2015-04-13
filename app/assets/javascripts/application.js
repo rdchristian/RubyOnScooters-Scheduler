@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require selectize
 //= require moment
+//= require bootstrap-datetimepicker
+//= require bootstrap-timepicker
 //= require bootstrap-touchspin/dist/jquery.bootstrap-touchspin
 //= require bootstrap-daterangepicker/daterangepicker
 //= require_tree ../../../vendor/assets/javascripts/.

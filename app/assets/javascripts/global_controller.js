@@ -28,11 +28,17 @@ $(".number-picker").TouchSpin({
     verticaldownclass: 'glyphicon glyphicon-chevron-down',
 });
 
+$('.timepicker').timepicker({
+    minuteStep: 15,
+    showMeridian: false,
+    defaultTime: false,
+});
 
 $('.single-datepicker').daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
     minDate: moment(),
+    format: 'MMMM D, YYYY',
 });
 
 
@@ -42,8 +48,9 @@ $('.click-date').click(function() {
 });
 
 // To make them uneditable, but still looking 'enabled'
-$('.single-datepicker, .clockpicker :input').attr('readonly', true);
-$('.single-datepicker, .clockpicker :input').css({
+var disabled_text_fields = '.single-datepicker, .clockpicker :input, .clockpicker-disable-am-pm :input';
+$(disabled_text_fields).attr('readonly', true);
+$(disabled_text_fields).css({
     'cursor': 'pointer',
     'background-color': '#FFFFFF',
 });

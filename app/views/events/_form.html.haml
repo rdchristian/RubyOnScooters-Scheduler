@@ -17,10 +17,11 @@
     
   .row  
     .form-group.col-sm-3
-      = f.label :start, 'Starting date', class: 'control-label'
+      = f.label :start_date, 'Starting date', class: 'control-label'
       .controls
         .input-group
-          = f.text_field :start, class: 'form-control single-datepicker', required: true
+          = f.text_field :start_date, class: 'form-control single-datepicker', required: true,
+            value: @event.start.strftime("%B %e, %Y")
           .input-group-addon.click-date{ :style => 'cursor: pointer'} 
             .fa.fa-calendar
 
@@ -29,7 +30,8 @@
       = f.label :start, 'Starting time', class: 'control-label'
       .controls
         .input-group.clockpicker
-          = f.text_field :start, class: 'form-control', required: true
+          = f.text_field :start, class: 'form-control', required: true,
+          value: @event.start.strftime("%I:%M %p")
           .input-group-addon
             .fa.fa-clock-o
       = error_span(@event[:start])
@@ -38,8 +40,9 @@
     .form-group.col-sm-3
       = f.label :end, 'Duration', class: 'control-label'
       .controls
-        .input-group.clockpicker-disable-am-pm
-          = f.text_field :end, class: 'form-control', required: true
+        .input-group.bootstrap-timepicker
+          = f.text_field :end, class: 'form-control timepicker', required: true
+          / value: @event.start.strftime("%k hours and %M mintutes")
           .input-group-addon
             .fa.fa-clock-o
       = error_span(@event[:end])
@@ -73,3 +76,4 @@
   .row-float
     = f.submit nil,class: 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
+

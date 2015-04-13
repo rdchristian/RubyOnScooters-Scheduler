@@ -15,6 +15,8 @@
  *= require selectize
  *= require selectize.bootstrap3
  *= require clockpicker
+ *= require bootstrap-datetimepicker
+ *= require bootstrap-timepicker
  *= require bootstrap-touchspin/dist/jquery.bootstrap-touchspin
  *= require bootstrap-daterangepicker/daterangepicker-bs3
  *= require bootstrap_and_overrides
