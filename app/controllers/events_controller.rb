@@ -19,6 +19,9 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    diff_in_min = ((@event.end - @event.start) / 60).round  # converting difference from seconds to minutes
+    h, m = diff_in_min / 60, diff_in_min % 60
+    @duration = "#{h}:#{m}"
   end
 
   # POST /events
@@ -48,7 +51,6 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
-    logger.info(event_params.inspect)
   end
 
   # DELETE /events/1
@@ -69,14 +71,15 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      if !!params[:start]
-        date, time = params[:start_date], params[:start]
-        params[:start] = (date + ' ' + time).to_datetime
+      form = params[:event]
+      if form[:start]
+        date, time = form[:start_date], form[:start]
+        form[:start] = (date + ' ' + time).to_datetime
 
-        duration = params[:end].to_time
-        params[:end] = params[:start].advance({:hours => duration.hour, :minutes => duration.min})
+        duration = form[:end].to_time
+        form[:end] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
+        params[:event] = form
       end
-
-      params.require(:event).permit(:title, :description, :start, :end, :creator_name, resource_ids: [], facility_ids: [])
+      params.require(:event).permit(:title, :description, :start, :start_date, :end, :creator_name, resource_ids: [], facility_ids: [])
     end
 end

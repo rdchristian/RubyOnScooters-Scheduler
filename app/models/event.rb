@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
-  attr_accessible :title, :description, :start, :end, :creator, :facility_ids, :resource_ids, :creator_name
-  attr_accessor :start_date # virtual attributes
+  attr_accessible :title, :description, :start, :start_date, :end,
+                  :creator, :facility_ids, :resource_ids, :creator_name
+  attr_accessor :start_date # virtual attribute
   
   belongs_to :creator, :class_name => :User, :foreign_key => "user_id"  
   has_and_belongs_to_many :resources

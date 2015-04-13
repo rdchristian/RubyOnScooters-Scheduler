@@ -10,16 +10,13 @@ $('.selectable').selectize({
     sortField: { field: 'text', direction: 'asc' },
 });
 
-var clockpicker_params = {
+$('.clockpicker').clockpicker({
     placement: 'bottom',
     align: 'top',
     type: 'text',
     autoclose: 'true',
-};
-$('.clockpicker-disable-am-pm').clockpicker(clockpicker_params);
-
-clockpicker_params['twelvehour'] = 'true';
-$('.clockpicker').clockpicker(clockpicker_params);
+    twelvehour: 'true',
+});
 
 
 $(".number-picker").TouchSpin({
@@ -32,6 +29,7 @@ $('.timepicker').timepicker({
     minuteStep: 15,
     showMeridian: false,
     defaultTime: false,
+    showInputs: true,
 });
 
 $('.single-datepicker').daterangepicker({
@@ -48,7 +46,7 @@ $('.click-date').click(function() {
 });
 
 // To make them uneditable, but still looking 'enabled'
-var disabled_text_fields = '.single-datepicker, .clockpicker :input, .clockpicker-disable-am-pm :input';
+var disabled_text_fields = '.single-datepicker, .clockpicker :input';
 $(disabled_text_fields).attr('readonly', true);
 $(disabled_text_fields).css({
     'cursor': 'pointer',
