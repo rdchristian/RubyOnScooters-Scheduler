@@ -22,6 +22,10 @@ class EventsController < ApplicationController
     diff_in_min = ((@event.end - @event.start) / 60).round  # converting difference from seconds to minutes
     h, m = diff_in_min / 60, diff_in_min % 60
     @duration = "#{h}:#{m}"
+
+    @start_time = @event.start.strftime("%I:%M %p")
+    @start_date = @event.start.strftime("%B %e, %Y")
+    @end = @event.end.strftime("%B %e, %Y, %I:%M %p")
   end
 
   # POST /events

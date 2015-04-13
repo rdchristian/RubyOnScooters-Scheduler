@@ -18,6 +18,12 @@ $('.clockpicker').clockpicker({
     twelvehour: 'true',
 });
 
+$('.clockpicker-disabled-ampm').clockpicker({
+    placement: 'bottom',
+    align: 'top',
+    type: 'text',
+    autoclose: 'true',
+});
 
 $(".number-picker").TouchSpin({
     verticalbuttons: true,

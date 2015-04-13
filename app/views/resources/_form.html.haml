@@ -30,7 +30,7 @@
       = f.label :max_reserve_time , class: 'control-label'
       .controls
         / = f.select :max_reserve_time, options_for_select(generate_hour_selections), :prompt => "Hours:Minutes", class: 'form-control', required: true
-        .input-group.clockpicker
+        .input-group.clockpicker-disabled-ampm
           = f.text_field :max_reserve_time, class: 'form-control', required: true
           %span.input-group-addon
             %span.fa.fa-clock-o

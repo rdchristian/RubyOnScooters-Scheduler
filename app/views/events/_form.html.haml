@@ -21,7 +21,7 @@
       .controls
         .input-group
           = f.text_field :start_date, class: 'form-control single-datepicker', required: true,
-            value: @event.start.strftime("%B %e, %Y")
+            value: @start_date
           .input-group-addon.click-date{ :style => 'cursor: pointer'} 
             %i.fa.fa-calendar
 
@@ -31,7 +31,7 @@
       .controls
         .input-group.clockpicker
           = f.text_field :start, class: 'form-control', required: true,
-          value: @event.start.strftime("%I:%M %p")
+          value: @start_time
           .input-group-addon
             %i.fa.fa-clock-o
       = error_span(@event[:start])
@@ -48,7 +48,7 @@
 
     .col-sm-3
       %label.control-label End
-      %input.form-control{ :value => @event.end.strftime("%B %e, %Y, %I:%M %p"),
+      %input.form-control{ :value => @end,
                            :readonly => '', :style => 'cursor: auto'}
     
   .row  
