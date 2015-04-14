@@ -19,10 +19,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    diff_in_min = ((@event.end - @event.start) / 60).round  # converting difference from seconds to minutes
-    h, m = diff_in_min / 60, diff_in_min % 60
-    @duration = "#{h}:#{m}"
-
+    @duration = @event.duration.strftime("%I:%M")
     @start_time = @event.start.strftime("%I:%M %p")
     @start_date = @event.start.strftime("%B %e, %Y")
     @end = @event.end.strftime("%B %e, %Y, %I:%M %p")
@@ -80,10 +77,11 @@ class EventsController < ApplicationController
         date, time = form[:start_date], form[:start]
         form[:start] = (date + ' ' + time).to_datetime
 
-        duration = form[:end].to_time
+        duration = form[:duration].to_time
         form[:end] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
         params[:event] = form
       end
-      params.require(:event).permit(:title, :description, :start, :start_date, :end, :creator_name, resource_ids: [], facility_ids: [])
+      params.require(:event).permit(:title, :description, :start, :start_date, :duration,
+                                    :creator_name, resource_ids: [], facility_ids: [])
     end
 end

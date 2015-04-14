@@ -59,4 +59,3 @@ $(disabled_text_fields).css({
     'cursor': 'pointer',
     'background-color': '#FFFFFF',
 });
-‰

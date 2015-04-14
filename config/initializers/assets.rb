@@ -10,7 +10,8 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'co
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( '.woff', '.eot', '.svg', '.ttf' )
+# Rails.application.config.assets.precompile += %w( '.woff', '.eot', '.svg', '.ttf')
 
 # Because I configured for page-specific javascripts (instead of dumping everything into application.js)
-Rails.application.config.assets.precompile += ['events.js', 'global_controller.js']
+# precompile += %w( directory1/* directory2/* file.js )
+Rails.application.config.assets.precompile += %w( page-specific/*)

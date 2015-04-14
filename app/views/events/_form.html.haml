@@ -39,10 +39,10 @@
   
   .row
     .form-group.col-sm-3
-      = f.label :end, 'Duration', class: 'control-label'
+      = f.label :duration, 'Duration', class: 'control-label'
       .controls
         .input-group.bootstrap-timepicker
-          = f.text_field :end, class: 'form-control timepicker', required: true,
+          = f.text_field :duration, class: 'form-control timepicker', required: true,
           value: @duration
           .input-group-addon
             %i.fa.fa-clock-o
@@ -50,6 +50,7 @@
     .col-sm-3
       %label.control-label End
       %input.form-control{ :value => @end,
+                           :name => 'event[end]',
                            :readonly => '', :style => 'cursor: auto'}
     
   .row  
