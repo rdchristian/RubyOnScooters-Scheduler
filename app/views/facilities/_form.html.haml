@@ -1,4 +1,5 @@
 = form_for @facility, html: { class: "form form-horizontal facility" } do |f|
+  =render 'shared/facilities_error_messages'
   .form-group
     = f.label :name, class: 'control-label'
     .controls

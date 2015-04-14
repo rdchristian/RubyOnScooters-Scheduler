@@ -1,8 +1,28 @@
 = form_for @user, html: { class: "form form-horizontal user" } do |f|
-  .form-group
-    = f.label :name, class: 'control-label'
-    .controls
-      = f.text_field :name, class: 'form-control', required: true
-    = error_span(@user[:name])
+  =render 'shared/user_error_messages'
+  .row  
+    .form-group.col-sm-4
+      = f.label :name, class: 'control-label'
+      .controls
+        = f.text_field :name, class: 'form-control', required: true
+      = error_span(@user[:name])
+  .row  
+    .form-group.col-sm-6
+      = f.label :email, class: 'control-label'
+      .controls
+        = f.text_field :email, class: 'form-control', required: true
+      = error_span(@user[:email])
+  .row  
+    .form-group.col-sm-6
+      = f.label :password, class: 'control-label'
+      .controls
+        = f.text_field :password, class: 'form-control', required: true
+      = error_span(@user[:password])    
+  .row  
+    .form-group.col-sm-6
+      = f.label :password_confirmation, class: 'control-label'
+      .controls
+        = f.text_field :password_confirmation, class: 'form-control', required: true
+      = error_span(@user[:password_confirmation])    
   = f.submit nil,class: 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), users_path, :class => 'btn btn-default'
