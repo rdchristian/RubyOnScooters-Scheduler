@@ -1,14 +1,15 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+// Place all the behaviors and hooks related to a controller here.
 
-$('.selectable').selectize({
+var selectable_options = {
     persist: false,
     createOnBlur: true,
     create: false,
     highlight: true,
     maxOptions: 179, // Why 179? Fu, that's why
     sortField: { field: 'text', direction: 'asc' },
-});
+};
+$('.selectable-facility').selectize(selectable_options);
+$('.selectable-resource').selectize(selectable_options);
 
 $('.clockpicker').clockpicker({
     placement: 'bottom',
@@ -58,3 +59,4 @@ $(disabled_text_fields).css({
     'cursor': 'pointer',
     'background-color': '#FFFFFF',
 });
+‰
