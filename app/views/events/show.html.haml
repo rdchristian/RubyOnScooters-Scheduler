@@ -30,7 +30,8 @@
   %strong= model_class.human_attribute_name(:resources) + ':'
   %br
   = @event.resources_list
-
+  = image_tag @event.picture.url if @event.picture?
+  - p @event.picture?
 
 = link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(@event), :class => 'btn btn-default'

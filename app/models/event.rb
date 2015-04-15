@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration,
-                  :creator, :facility_ids, :resource_ids, :creator_name
+                  :creator, :facility_ids, :resource_ids, :creator_name, :picture
   attr_accessor :start_date # virtual attribute
   # :end is set through duration
   
@@ -8,8 +8,12 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :resources
   has_and_belongs_to_many :facilities
 
+  mount_uploader :picture, PictureUploader
+
   accepts_nested_attributes_for :resources
   accepts_nested_attributes_for :facilities
+
+  validate :picture_size
 
   def duration
     diff_in_min = ((self.end - self.start) / 60).round  # converting difference from seconds to minutes
@@ -38,4 +42,11 @@ class Event < ActiveRecord::Base
   def resources_list
     self.resources.all.map(&:name).join(', ')
   end
+
+  private
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB!")
+      end
+    end
 end

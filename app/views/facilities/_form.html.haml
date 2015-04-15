@@ -1,6 +1,6 @@
 - javascript "global_controller"
 
-= form_for @facility, html: { class: "form form-vertical facility" } do |f|
+= form_for @facility, html: { class: "form form-vertical facility", multipart: "true" } do |f|
   =render 'shared/facilities_error_messages'
   .row
     .form-group.col-sm-4
@@ -20,6 +20,9 @@
       .controls
         = f.text_field :capacity, class: 'form-control number-picker', required: true
       = error_span(@facility[:capacity])
+
+  .row-float
+    = f.file_field :picture
 
   .row-float
     = f.submit nil,class: 'btn btn-primary'

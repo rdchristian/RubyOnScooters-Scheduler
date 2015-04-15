@@ -83,6 +83,6 @@ class EventsController < ApplicationController
         params[:event] = form
       end
       params.require(:event).permit(:title, :description, :start, :start_date, :duration,
-                                    :creator_name, resource_ids: [], facility_ids: [])
+                                    :creator_name, :picture, resource_ids: [], facility_ids: [])
     end
 end

@@ -1,7 +1,7 @@
 - javascript "global_controller"
 - javascript "events"
 
-= form_for @event, html: { class: "form form-vertical event" } do |f|
+= form_for @event, html: {class: "form form-vertical event", multipart: "true"} do |f|
   .row  
     .form-group.col-sm-4
       = f.label :title, class: 'control-label'
@@ -80,5 +80,10 @@
       = error_span(@event[:resource_ids])
 
   .row-float
+    = f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'
+
+  .row-float
     = f.submit nil,class: 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
+
+
