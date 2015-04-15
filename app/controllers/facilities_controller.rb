@@ -1,4 +1,5 @@
 class FacilitiesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_facility, only: [:show, :edit, :update, :destroy]
 
   # GET /facilities

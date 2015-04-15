@@ -1,6 +1,7 @@
 - javascript "global_controller"
 
 = form_for @resource, html: { class: "form form-vertical resource" } do |f|
+  =render 'shared/resources_error_messages'
   .row  
     .form-group.col-sm-4
       = f.label :name, class: 'control-label'

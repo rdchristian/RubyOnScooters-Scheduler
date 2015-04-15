@@ -7,11 +7,9 @@
     %title Fellowship Church Scheduler
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
-
     
     -# protects against some kind of cross-site request forgery
     = csrf_meta_tags
-
   %body
     = navbar position: :top do
       .container-float
@@ -20,10 +18,16 @@
             = link_to "#", root_path do
               %i.fa.fa-home
               Home
-        = horizontal do
-          = nav class: 'navbar-right' do
-            = link_to 'Profile', root_path
-            = link_to 'Settings', root_path
+        -if logged_in?
+          = horizontal do
+            = nav class: 'navbar-right' do
+              = link_to 'Profile', root_path
+              = link_to 'Settings', root_path
+              = link_to 'Log Out', logout_path, method: "delete"
+        -else
+          = horizontal do
+            = nav class: 'navbar-right' do
+              = link_to 'Log In', login_path
     .container-float
       .row-float
         .col-sm-8
@@ -35,5 +39,3 @@
             / =link_to image_tag("/images/first_floor.JPG", size: "400x300"), "images/first_floor.JPG", :popup =>["First Floor", "height = 700, width=900"]
           .row-float
             / =link_to image_tag("/images/second_floor.JPG", size: "400x300"), "images/second_floor.JPG", :popup =>["Second Floor", "height = 700, width=900"]
-          
-            

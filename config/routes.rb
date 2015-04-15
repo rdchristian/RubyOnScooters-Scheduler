@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-	
+
+
   resources :users do
     resource :events
   end
@@ -11,5 +12,11 @@ Rails.application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
   resources :facilities
-  root :to => redirect('/facilities')
+  root :to => redirect('/events')
+
+  get    'sessions/new'
+  get    'signup'  => 'users#new'
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 end
