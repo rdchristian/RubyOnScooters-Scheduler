@@ -12,6 +12,16 @@
   %br
   = @user.email
 
+%p
+  %strong= model_class.human_attribute_name(:phone) + ':'
+  %br
+  = @user.phone
+
+%p
+  %strong= model_class.human_attribute_name(:home_group) + ':'
+  %br
+  = @user.home_group
+
 
 = link_to t('.back', :default => t("helpers.links.back")), users_path, :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(@user), :class => 'btn btn-default'
