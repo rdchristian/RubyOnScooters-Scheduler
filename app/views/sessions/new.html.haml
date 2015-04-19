@@ -2,9 +2,10 @@
 %h1 Log in
 - unless flash.blank?
   - flash.each do |type, message|
-    %div{:class => "alert #{bootstrap_class_for(type)} fade in"}
-      %button.close{"data-dismiss" => "alert"} ×
-      = message
+    -if type == 'danger'
+      %div{:class => "alert #{bootstrap_class_for(type)} fade in"}
+        %button.close{"data-dismiss" => "alert"} ×
+        = message
 .row
   .col-md-6.col-md-offset-3
     = form_for(:session, url: login_path) do |f|

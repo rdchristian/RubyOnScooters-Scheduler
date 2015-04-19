@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def authenticate_user!
-	  if not logged_in?
+	  #if not logged_in? && request.env['PATH_INFO'] !~ /.*\/users\/new/
+    if not logged_in?
 	  	redirect_to login_path
 	  end
   end
