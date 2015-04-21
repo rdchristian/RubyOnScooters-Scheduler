@@ -24,7 +24,7 @@ class EventsController < ApplicationController
     @duration = @event.duration.strftime("%I:%M")
     @start_time = @event.start.strftime("%I:%M %p")
     @start_date = @event.start.strftime("%B %e, %Y")
-    @end = @event.end.strftime("%B %e, %Y, %I:%M %p")
+    @end = @event.ending.strftime("%B %e, %Y, %I:%M %p")
   end
 
   # POST /events
@@ -92,7 +92,7 @@ class EventsController < ApplicationController
         form[:start] = (date + ' ' + time).to_datetime
 
         duration = form[:duration].to_time
-        form[:end] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
+        form[:ending] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
         params[:event] = form
       end
       params.require(:event).permit(:title, :description, :start, :start_date, :duration,
