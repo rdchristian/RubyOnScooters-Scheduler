@@ -12,15 +12,15 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :facilities
 
   #Validations
-  validates :title, :start, :ending, :creator, :presence => true
-  validates :ending, date: { after: :start, message: 'must be after start date' }
+  validates :title, :start, :creator, :presence => true
+  validates :start, date: true
   validate :resources_available, :facility_available
 
   def resources_available
     resources.each do |res|
       errors.add(:resources, ': All "' + res.name + '" are taken') if 
         Resource.find(res.id).events.
-                 where("start <= ? and ending >= ?", ending, start).
+                 where("start <= ? and ending >= ?", ending, start).  # Search overlapping timeframes
                  count >= res.numberOf
 
       maxt = res.max_reserve_time
@@ -36,6 +36,7 @@ class Event < ActiveRecord::Base
 
   # Helpers and virtual attributes
   def duration
+    return nil unless ending or start
     diff_in_min = ((ending - start) / 60).round  # converting difference from seconds to minutes
     h, m = diff_in_min / 60, diff_in_min % 60
     "#{h}:#{m}".to_time
@@ -43,7 +44,7 @@ class Event < ActiveRecord::Base
 
   def duration=(d)
     d = d.to_time
-    ending = start.advance({:hours => d.hour, :minutes => d.min})
+    self.ending = start.advance({:hours => d.hour, :minutes => d.min})
   end
 
   def creator_name
@@ -52,7 +53,7 @@ class Event < ActiveRecord::Base
 
   def creator_name=(user_name)
     user = User.where(name: user_name).first
-    if user then creator = user end
+    if user then self.creator = user end
   end
 
   def facilities_list

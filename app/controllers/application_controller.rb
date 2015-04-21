@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 	
   helper_method :is_admin? # To make it accessible in the views
   def is_admin?
-    true
+    false
   end
 
   def footlog(thing)

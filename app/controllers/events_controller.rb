@@ -21,10 +21,6 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @duration = @event.duration.strftime("%I:%M")
-    @start_time = @event.start.strftime("%I:%M %p")
-    @start_date = @event.start.strftime("%B %e, %Y")
-    @end = @event.ending.strftime("%B %e, %Y, %I:%M %p")
   end
 
   # POST /events
@@ -82,6 +78,14 @@ class EventsController < ApplicationController
       else
         is_admin? ? Event : current_user.events
       end
+    end
+
+    helper_method :format_time
+    def format_time
+      @duration = @event.duration.strftime("%I:%M") if @event.duration
+      @start_time = @event.start.strftime("%I:%M %p") if @event.start
+      @start_date = @event.start.strftime("%B %e, %Y") if @event.start
+      @ending = @event.ending.strftime("%B %e, %Y, %I:%M %p") if @event.ending
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
