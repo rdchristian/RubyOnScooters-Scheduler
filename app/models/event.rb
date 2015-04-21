@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
                  where("start <= ? and ending >= ?", ending, start).  # Search overlapping timeframes
                  count >= res.numberOf
 
+      return unless res.max_reserve_time
       maxt = res.max_reserve_time
       max_end_time = start.advance({:hours => maxt.hour, :minutes => maxt.min})
       errors.add(:resources, ': Cannot reserve "' + res.name + '" for this long') if 
@@ -37,6 +38,7 @@ class Event < ActiveRecord::Base
                  where("start <= ? and ending >= ?", ending, start).  # Search overlapping timeframes
                  count > 0
 
+      return unless fac.max_reserve_time
       maxt = fac.max_reserve_time
       max_end_time = start.advance({:hours => maxt.hour, :minutes => maxt.min})
       errors.add(:facilities, ': Cannot reserve "' + fac.name + '" for this long') if 

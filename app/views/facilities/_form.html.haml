@@ -20,6 +20,20 @@
       .controls
         = f.text_field :capacity, class: 'form-control number-picker', required: true
       = error_span(@facility[:capacity])
+  .row
+    .form-group.col-sm-3
+      = f.label :storage_location, class: 'control-label'
+      .controls
+        = f.text_field :storage_location, class: 'form-control', required: true
+      = error_span(@facility[:storage_location])
+  .row
+    .form-group.col-sm-3
+      = f.label :max_reserve_time, 'Duration', class: 'control-label'
+      .controls
+        .input-group.bootstrap-timepicker
+          = f.text_field :max_reserve_time, class: 'form-control timepicker'
+          .input-group-addon
+            %i.fa.fa-clock-o
 
   .row-float
     = f.submit nil,class: 'btn btn-primary'
