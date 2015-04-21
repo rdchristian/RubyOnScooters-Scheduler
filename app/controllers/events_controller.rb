@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
+  before_action :correct_user!
   before_action :determine_scope
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
@@ -69,7 +70,11 @@ class EventsController < ApplicationController
     end
 
     def correct_user?
-      is_admin? or current_user.id == params[:user_id]
+      is_admin? or current_user.id == params[:user_id].to_i
+    end
+
+    def correct_user!
+      redirect_to root_url if params[:user_id] and not correct_user?
     end
 
     def determine_scope
@@ -82,10 +87,10 @@ class EventsController < ApplicationController
 
     helper_method :format_time
     def format_time
-      @duration = @event.duration.strftime("%I:%M") if @event.duration
-      @start_time = @event.start.strftime("%I:%M %p") if @event.start
-      @start_date = @event.start.strftime("%B %e, %Y") if @event.start
-      @ending = @event.ending.strftime("%B %e, %Y, %I:%M %p") if @event.ending
+      params[:duration] = @event.duration.strftime("%I:%M") if @event.duration
+      params[:start_time] = @event.start.strftime("%I:%M %p") if @event.start
+      params[:start_date] = @event.start.strftime("%B %e, %Y") if @event.start
+      params[:ending] = @event.ending.strftime("%B %e, %Y, %I:%M %p") if @event.ending
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

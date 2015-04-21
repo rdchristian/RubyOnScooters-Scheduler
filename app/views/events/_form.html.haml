@@ -1,5 +1,6 @@
 - javascript "global_controller"
 - javascript "events"
+- format_time
 
 = form_for [@event.creator, @event], html: { class: "form form-vertical event" } do |f|
   =render 'shared/events_error_messages'
@@ -23,7 +24,7 @@
       .controls
         .input-group
           = f.text_field :start_date, class: 'form-control single-datepicker', required: true,
-            value: @start_date
+            value: params[:start_date]
           .input-group-addon.click-date{ :style => 'cursor: pointer'} 
             %i.fa.fa-calendar
 
@@ -33,7 +34,7 @@
       .controls
         .input-group.clockpicker
           = f.text_field :start, class: 'form-control', required: true,
-          value: @start_time
+          value: params[:start_time]
           .input-group-addon
             %i.fa.fa-clock-o
       = error_span(@event[:start])
@@ -44,13 +45,13 @@
       .controls
         .input-group.bootstrap-timepicker
           = f.text_field :duration, class: 'form-control timepicker', required: true,
-          value: @duration
+          value: params[:duration]
           .input-group-addon
             %i.fa.fa-clock-o
 
     .col-sm-3
       %label.control-label End
-      %input.form-control{ :value => @ending,
+      %input.form-control{ :value => params[:ending],
                            :name => 'event[ending]',
                            :readonly => '', :style => 'cursor: auto'}
   -if is_admin?  

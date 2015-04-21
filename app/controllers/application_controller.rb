@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     false
   end
 
+  helper_method :footlog
   def footlog(thing)
     flash[:log] || flash[:log] = []
     flash[:log] << thing

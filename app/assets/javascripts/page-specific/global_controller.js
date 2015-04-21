@@ -35,7 +35,7 @@ $(".number-picker").TouchSpin({
 $('.timepicker').timepicker({
     minuteStep: 15,
     showMeridian: false,
-    defaultTime: false,
+    defaultTime: '0:0',
     showInputs: true,
 });
 
