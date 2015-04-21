@@ -13,6 +13,8 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 
+gem "date_validator"
+
 # Awesome responsive search form
 gem "selectize-rails"
 
@@ -73,6 +75,9 @@ group :development, :test do
   gem 'spring'
 
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
+
+  # Pretty printer with awesome capabilities!
+  gem 'awesome_print'
 end
 
 # setup Cucumber, RSpec, autotest support

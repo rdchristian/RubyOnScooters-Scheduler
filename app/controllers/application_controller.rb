@@ -10,4 +10,14 @@ class ApplicationController < ActionController::Base
 	  end
   end
 	
+  helper_method :is_admin? # To make it accessible in the views
+  def is_admin?
+    true
+  end
+
+  def footlog(thing)
+    flash[:log] || flash[:log] = []
+    flash[:log] << thing
+  end
+
 end

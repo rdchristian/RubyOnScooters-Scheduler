@@ -2,10 +2,9 @@ Rails.application.routes.draw do
 
 
   resources :users do
-    resource :events
+    resources :events
   end
-
-  resources :events
+  resources :events, :only => [:index]
 
   resources :resources
 
