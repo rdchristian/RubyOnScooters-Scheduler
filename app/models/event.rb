@@ -25,13 +25,23 @@ class Event < ActiveRecord::Base
 
       maxt = res.max_reserve_time
       max_end_time = start.advance({:hours => maxt.hour, :minutes => maxt.min})
-      errors.add(:resources, ': Cannot reserve ' + res.name + ' for this long') if 
+      errors.add(:resources, ': Cannot reserve "' + res.name + '" for this long') if 
         ending > max_end_time
     end
   end
 
   def facility_available
+    facilities.each do |fac|
+      errors.add(:facilities, ': All "' + fac.name + '" are taken') if 
+        Facility.find(fac.id).events.
+                 where("start <= ? and ending >= ?", ending, start).  # Search overlapping timeframes
+                 count > 0
 
+      maxt = fac.max_reserve_time
+      max_end_time = start.advance({:hours => maxt.hour, :minutes => maxt.min})
+      errors.add(:facilities, ': Cannot reserve "' + fac.name + '" for this long') if 
+        ending > max_end_time
+    end
   end
 
   # Helpers and virtual attributes
