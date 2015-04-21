@@ -24,6 +24,13 @@
       .controls
         = f.text_field :home_group, class: 'form-control', required: true
       = error_span(@user[:home_group])
+  -if current_user.is_admin?
+    .row
+      .form-group.col-sm-6
+        = f.label 'User Level', class: 'control-label'
+        .controls
+          = f.select :user_level, options_for_select([['Regular',0], ['Staff',1], ['Administrator',2]])
+        = error_span(@user[:user_level])
   .row  
     .form-group.col-sm-6
       = f.label :password, class: 'control-label'

@@ -21,7 +21,7 @@
         -if logged_in?
           = horizontal do
             = nav class: 'navbar-right' do
-              = link_to 'Profile', root_path
+              = link_to 'Profile', user_path(current_user.id)
               = link_to 'Settings', root_path
               = link_to 'Log Out', logout_path, method: "delete"
         -else

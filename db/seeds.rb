@@ -13,7 +13,7 @@
 #end
 
 sample_users = [
-	{:name => 'TestUser', :email => 'test@email.com', :password => 'TestPass', :password_confirmation => 'TestPass'}
+	{:name => 'Admin', :email => 'admin@email.com', :password => 'AdminPass', :password_confirmation => 'AdminPass', :user_level => 2}
 ]
 
 sample_users.each do |user|
