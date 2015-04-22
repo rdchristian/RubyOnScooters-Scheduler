@@ -121,7 +121,7 @@ class EventsController < ApplicationController
       # Setting up the recurrence
       if params[:recurrence_checked]
         option = Event.recurrence_options[params[:recurring_option].to_i]
-        rule = @event.get_recurrence_rule(option)
+        rule = Event.get_recurrence_rule(option)
 
         schedule = Schedule.new(form[:start])
         schedule.add_recurrence_rule rule.call(params[:recurring_value].to_i)
