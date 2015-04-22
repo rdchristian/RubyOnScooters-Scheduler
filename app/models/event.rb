@@ -26,11 +26,11 @@ class Event < ActiveRecord::Base
     Schedule.from_hash(recurr) if recurr.present?
   end
 
-  def recurrence_options
+  def self.recurrence_options
     %w( Days Weeks Months )
   end
 
-  def get_recurrence_rule(option)
+  def self.get_recurrence_rule(option)
     { 
       'Days'   => Rule.method(:daily),
       'Weeks'  => Rule.method(:weekly),
