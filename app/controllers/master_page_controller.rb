@@ -1,5 +1,5 @@
-class , :on => :createMasterPageController < ApplicationController
-before_filter :authenticate_user!, :authenticate_admin!
+class MasterPageController < ApplicationController
+before_filter :authenticate_user!, :authenticate_admin!, :on => :create
 
   def new
     @users = User.all
