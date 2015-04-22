@@ -1,15 +1,28 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration, :ending,
-                  :creator, :facility_ids, :resource_ids, :creator_name
+                  :creator, :facility_ids, :resource_ids, :creator_name, :recurrence
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
-  
+
+  #Relationships
   belongs_to :creator, :class_name => :User, :foreign_key => "user_id"  
   has_and_belongs_to_many :resources
   has_and_belongs_to_many :facilities
 
   accepts_nested_attributes_for :resources
   accepts_nested_attributes_for :facilities
+
+  #IceCube - Recurrence management
+  include IceCube
+  serialize :recurrence, Hash
+
+  def recurrence=(recurr)
+    write_attribute(:recurrence, recurr.to_hash)
+  end
+
+  def recurrence
+    Schedule.from_hash(read_attribute(:recurrence))
+  end
 
   #Validations
   validates :title, :start, :creator, :presence => true
@@ -20,7 +33,7 @@ class Event < ActiveRecord::Base
     resources.each do |res|
       errors.add(:resources, ': All "' + res.name + '" are taken') if 
         Resource.find(res.id).events.
-                 where("start <= ? and ending >= ?", ending, start).  # Search overlapping timeframes
+                 where("start <= ? and ending >= ? and id != ?", ending, start, id).  # Search overlapping timeframes
                  count >= res.numberOf
 
       return unless res.max_reserve_time
@@ -35,7 +48,7 @@ class Event < ActiveRecord::Base
     facilities.each do |fac|
       errors.add(:facilities, ': All "' + fac.name + '" are taken') if 
         Facility.find(fac.id).events.
-                 where("start <= ? and ending >= ?", ending, start).  # Search overlapping timeframes
+                 where("start <= ? and ending >= ? and id != ?", ending, start, id).  # Search overlapping timeframes
                  count > 0
 
       return unless fac.max_reserve_time
@@ -46,7 +59,7 @@ class Event < ActiveRecord::Base
     end
   end
 
-  # Helpers and virtual attributes
+  # Getters, setters, helpers, and virtual attributes
   def duration
     return nil unless ending or start
     diff_in_min = ((ending - start) / 60).round  # converting difference from seconds to minutes

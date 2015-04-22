@@ -13,7 +13,10 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 
+# Date validation in the models and ice_cube is a feature-rich recurrence library
 gem "date_validator"
+gem "ice_cube"
+gem 'recurring_select' # ice_cube helpers
 
 # Awesome responsive search form
 gem "selectize-rails"

@@ -1,3 +1,5 @@
+include IceCube
+
 class EventsController < ApplicationController
   before_filter :authenticate_user!
   before_action :correct_user!
@@ -13,6 +15,12 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    schedule = Schedule.new(Time.now)
+    schedule.add_recurrence_rule Rule.daily.month_of_year(:may)
+    footlog(schedule.to_s)
+    @event.recurrence = schedule
+    @event.save
+    footlog(@event.recurrence.to_s)
   end
 
   # GET /events/new

@@ -50,10 +50,11 @@
             %i.fa.fa-clock-o
 
     .col-sm-3
-      %label.control-label End
-      %input.form-control{ :value => params[:ending],
-                           :name => 'event[ending]',
-                           :readonly => '', :style => 'cursor: auto'}
+      = f.label 'End', class: 'control-label'
+      .controls
+        = f.text_field :ending, class: 'form-control', readonly: '', style: 'cursor: auto',
+          value: params[:ending]
+                           
   -if is_admin?  
     .row  
       .form-group.col-sm-3
@@ -63,7 +64,7 @@
           placeholder: current_user.name
         = error_span(@event[:creator_name])
 
-  .row-float  
+  .row-float
     .form-group
       = f.label :facilities, class: 'control-label'
       .controls
@@ -72,7 +73,7 @@
           { class: 'selectable-facility', :multiple => true })
       = error_span(@event[:facility_ids])
 
-  .row-float  
+  .row-float
     .form-group
       = f.label :resources, class: 'control-label'
       .controls
@@ -80,6 +81,23 @@
           { prompt: "Please select your desired resources" },
           { class: 'selectable-resource', :multiple => true })
       = error_span(@event[:resource_ids])
+
+  .row-float
+    .form-group
+      = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
+        = check_box_tag :recurrence_checked
+        Is this a recurring event?
+
+  .row.hide-slide
+    .form-group.col-sm-2
+      = label_tag :recurring_value, class: 'control-label' do
+        .controls
+          = text_field_tag :recurring_value, nil, class: 'form-control number-picker'
+    / .controls
+    /   = f.collection_select(:resource_ids, Resource.all, :id, :name,
+    /     { prompt: "Please select your desired resources" },
+    /     { class: 'selectable-resource', :multiple => true })
+    / = error_span(@event[:resource_ids])
 
   .row-float
     = f.submit nil, class: 'btn btn-primary'
