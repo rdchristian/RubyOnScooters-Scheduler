@@ -102,7 +102,7 @@ class EventsController < ApplicationController
         # Couldn't find a more intuitive way...
         readable_rule = @event.recurrence.to_s
         params[:recurring_value] = readable_rule.scan(/\d/)[0]
-        params[:recurring_option] = @event.recurrence_options.index(readable_rule.split.last.capitalize)
+        params[:recurring_option] = Event.recurrence_options.index(readable_rule.split.last.capitalize)
       end
     end
 
@@ -120,7 +120,7 @@ class EventsController < ApplicationController
 
       # Setting up the recurrence
       if params[:recurrence_checked]
-        option = @event.recurrence_options[params[:recurring_option].to_i]
+        option = Event.recurrence_options[params[:recurring_option].to_i]
         rule = @event.get_recurrence_rule(option)
 
         schedule = Schedule.new(form[:start])

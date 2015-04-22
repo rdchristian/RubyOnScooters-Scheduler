@@ -99,7 +99,7 @@
             'data-min': 1, 'data-max': 365
         .col-md-5.nopadding
           .bfh-selectbox{ 'data-name' => 'recurring_option', 'data-value' => params[:recurring_option] }
-            - @event.recurrence_options.each_with_index do |thing, i|
+            - Event.recurrence_options.each_with_index do |thing, i|
               %div{ 'data-value' => i }= thing
 
   .row-float
