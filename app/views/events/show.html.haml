@@ -31,6 +31,12 @@
   %br
   = @event.resources_list
 
+- if @event.recurrence.present?
+  %p
+    %strong= model_class.human_attribute_name(:recurrence) + ':'
+    %br
+    = @event.recurrence.to_s
+
 
 = link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_event_path(@event.creator, @event), :class => 'btn btn-default'

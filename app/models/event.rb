@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
-  attr_accessible :title, :description, :start, :start_date, :duration, :ending,
-                  :creator, :facility_ids, :resource_ids, :creator_name, :recurrence
+  attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence,
+                  :creator, :facility_ids, :resource_ids, :creator_name
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
 
@@ -17,11 +17,25 @@ class Event < ActiveRecord::Base
   serialize :recurrence, Hash
 
   def recurrence=(recurr)
-    write_attribute(:recurrence, recurr.to_hash)
+    recurr = recurr.blank? ? {} : recurr.to_hash
+    write_attribute(:recurrence, recurr)
   end
 
   def recurrence
-    Schedule.from_hash(read_attribute(:recurrence))
+    recurr = read_attribute(:recurrence)
+    Schedule.from_hash(recurr) if recurr.present?
+  end
+
+  def recurrence_options
+    %w( Days Weeks Months )
+  end
+
+  def get_recurrence_rule(option)
+    { 
+      'Days'   => Rule.method(:daily),
+      'Weeks'  => Rule.method(:weekly),
+      'Months' => Rule.method(:monthly),
+    }[option]
   end
 
   #Validations

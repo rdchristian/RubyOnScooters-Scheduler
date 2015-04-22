@@ -15,12 +15,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    schedule = Schedule.new(Time.now)
-    schedule.add_recurrence_rule Rule.daily.month_of_year(:may)
-    footlog(schedule.to_s)
-    @event.recurrence = schedule
-    @event.save
-    footlog(@event.recurrence.to_s)
   end
 
   # GET /events/new
@@ -93,27 +87,55 @@ class EventsController < ApplicationController
       end
     end
 
-    helper_method :format_time
-    def format_time
+    helper_method :format_fields
+    def format_fields
       params[:duration] = @event.duration.strftime("%I:%M") if @event.duration
       params[:start_time] = @event.start.strftime("%I:%M %p") if @event.start
       params[:start_date] = @event.start.strftime("%B %e, %Y") if @event.start
       params[:ending] = @event.ending.strftime("%B %e, %Y, %I:%M %p") if @event.ending
+
+      params[:recurrence_checked] = false
+      params[:recurring_value] = 1
+      params[:recurring_option] = 0
+      if @event.recurrence.present?
+        params[:recurrence_checked] = true
+        # Couldn't find a more intuitive way...
+        readable_rule = @event.recurrence.to_s
+        params[:recurring_value] = readable_rule.scan(/\d/)[0]
+        params[:recurring_option] = @event.recurrence_options.index(readable_rule.split.last.capitalize)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       form = params[:event]
-      if form[:start]
+      # Setting the proper :start and :ending values
+      if form[:start].is_a? String
         date, time = form[:start_date], form[:start]
         form[:start] = (date + ' ' + time).to_datetime
 
         duration = form[:duration].to_time
         form[:ending] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
-        params[:event] = form
       end
-      params.require(:event).permit(:title, :description, :start, :start_date, :duration,
+
+      # Setting up the recurrence
+      if params[:recurrence_checked]
+        option = @event.recurrence_options[params[:recurring_option].to_i]
+        rule = @event.get_recurrence_rule(option)
+
+        schedule = Schedule.new(form[:start])
+        schedule.add_recurrence_rule rule.call(params[:recurring_value].to_i)
+        form[:recurrence] = schedule
+      else
+        form[:recurrence] = nil
+      end
+      params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence,
                                     :creator_name, resource_ids: [], facility_ids: [])
-    end
+      # Because recurrence is an object, we have to go through this bullshit to permit all its fields
+      params.require(:event).tap do |whitelisted|
+        whitelisted[:recurrence] = params[:event][:recurrence]
+      end
+
+    end # private
 
 end

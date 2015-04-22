@@ -46,6 +46,9 @@ $('.single-datepicker').daterangepicker({
     format: 'MMMM D, YYYY',
 });
 
+$().bfhdatepicker('toggle');
+$().bfhtimepicker('toggle');
+$().bfhselectbox('toggle');
 
 // Forward the click on the tiny calendar icon to the date picker
 $('.click-date').click(function() {

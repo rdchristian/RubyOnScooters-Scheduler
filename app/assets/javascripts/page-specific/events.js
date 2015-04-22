@@ -11,7 +11,7 @@ $("[name='event[start_date]'], [name='event[start]'], [name='event[duration]']")
 	$("[name='event[ending]']").val(ending.format("MMMM D, YYYY, h:mm A"));
 });
 
-// Recurring event forms
+// Recurring event form: sliding up and down depending on its checkbox
 var $form = $('.hide-slide').hide();
 var $checkbox = $('#recurrence_checked');
 $checkbox.change(function(){

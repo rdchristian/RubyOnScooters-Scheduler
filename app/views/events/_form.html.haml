@@ -1,6 +1,6 @@
 - javascript "global_controller"
 - javascript "events"
-- format_time
+- format_fields
 
 = form_for [@event.creator, @event], html: { class: "form form-vertical event" } do |f|
   =render 'shared/events_error_messages'
@@ -43,6 +43,8 @@
     .form-group.col-sm-3
       = f.label :duration, 'Duration', class: 'control-label'
       .controls
+        / .bfh-timepicker{'data-name' => 'event[duration]', 'data-id' => 'event_duration', :required => '',
+        /                 'data-time' => "#{params[:duration]}", 'data-align' => 'right'}
         .input-group.bootstrap-timepicker
           = f.text_field :duration, class: 'form-control timepicker', required: true,
           value: params[:duration]
@@ -85,19 +87,20 @@
   .row-float
     .form-group
       = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
-        = check_box_tag :recurrence_checked
+        = check_box_tag :recurrence_checked, nil, params[:recurrence_checked]
         Is this a recurring event?
 
   .row.hide-slide
-    .form-group.col-sm-2
-      = label_tag :recurring_value, class: 'control-label' do
-        .controls
-          = text_field_tag :recurring_value, nil, class: 'form-control number-picker'
-    / .controls
-    /   = f.collection_select(:resource_ids, Resource.all, :id, :name,
-    /     { prompt: "Please select your desired resources" },
-    /     { class: 'selectable-resource', :multiple => true })
-    / = error_span(@event[:resource_ids])
+    .form-group.col-md-3
+      = label_tag :recurring_value, 'Repeat every ', class: 'control-label'
+      .row-float
+        .col-md-7.nopadding
+          = text_field_tag :recurring_value, params[:recurring_value], class: 'form-control bfh-number',
+            'data-min': 1, 'data-max': 365
+        .col-md-5.nopadding
+          .bfh-selectbox{ 'data-name' => 'recurring_option', 'data-value' => params[:recurring_option] }
+            - @event.recurrence_options.each_with_index do |thing, i|
+              %div{ 'data-value' => i }= thing
 
   .row-float
     = f.submit nil, class: 'btn btn-primary'
