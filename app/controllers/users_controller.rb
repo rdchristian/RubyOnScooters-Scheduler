@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:new, :create]
+  before_filter :authenticate_activation!, :except => [:new, :create]
+  before_filter :skip_password_attribute, only: :update
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -42,7 +44,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(update_user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -70,6 +72,16 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone, :home_group, :user_level)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone, :home_group, :user_level, :activated)
     end
+
+    def update_user_params
+      params.require(:user).permit(:name, :email, :phone, :home_group, :user_level, :activated)
+    end
+
+    def skip_password_attribute
+      if params[:password].blank? && params[:password_confirmation].blank?
+        params.except!(:password, :v)
+      end
+  end
 end

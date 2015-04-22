@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get    'admin'   => 'master_page#new'
+  post   'admin'   => 'master_page#create'
+  
+
 end

@@ -10,5 +10,18 @@ class ApplicationController < ActionController::Base
 	  	redirect_to login_path
 	  end
   end
+
+  def authenticate_admin!
+    if not current_user.is_admin?
+      redirect_to root_path
+    end
+  end
+
+  def authenticate_activation!
+    if !current_user.is_activated?
+      log_out
+      redirect_to login_path
+    end
+  end
 	
 end
