@@ -8,7 +8,11 @@
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:capacity)
-      %th= model_class.human_attribute_name(:created_at)
+      %th= model_class.human_attribute_name(:min_capacity)
+      %th= model_class.human_attribute_name(:priority)
+      %th= model_class.human_attribute_name(:has_proj)
+      %th= model_class.human_attribute_name(:has_tv)                         
+      %th= model_class.human_attribute_name(:has_tables)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @facilities.each do |facility|
@@ -17,6 +21,11 @@
         %td= facility.name
         %td= facility.description
         %td= facility.capacity
+        %td= facility.min_capacity
+        %td= facility.priority
+        %td= facility.has_proj
+        %td= facility.has_tv
+        %td= facility.has_tables
         %td=l facility.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_facility_path(facility), :class => 'btn btn-default btn-xs'

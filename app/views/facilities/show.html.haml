@@ -14,6 +14,27 @@
   %strong= model_class.human_attribute_name(:capacity) + ':'
   %br
   = @facility.capacity
+%p
+  %strong= model_class.human_attribute_name(:min_capacity) + ':'
+  %br
+  = @facility.min_capacity
+%p
+  %strong= model_class.human_attribute_name(:priority) + ':'
+  %br
+  = @facility.priority
+%p
+  %strong= model_class.human_attribute_name(:has_proj) + ':'
+  %br
+  = @facility.has_proj
+%p
+  %strong= model_class.human_attribute_name(:has_tv) + ':'
+  %br
+  = @facility.has_tv
+%p
+  %strong= model_class.human_attribute_name(:has_tables) + ':'
+  %br
+  = @facility.has_tables
+
 
 
 = link_to t('.back', :default => t("helpers.links.back")), facilities_path, :class => 'btn btn-default'
