@@ -4,4 +4,8 @@ class Facility < ActiveRecord::Base
 	has_and_belongs_to_many :events
 
 	validates :name, :presence => true, :uniqueness => true, on: :create
+
+	def self.search(q)
+		Facility.events.where("start_date = ? and (start <= ? or ending >= ?)",q[:start_date],q[:ending],q[:start])
+	end
 end

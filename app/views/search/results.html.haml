@@ -1,0 +1,23 @@
+- model_class = Search
+.page-header
+	%h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+	%thead
+		%tr
+			%th= Facility.human_attribute_name(:id)
+			%th= Facility.human_attribute_name(:name)
+	%tbody
+		- @facilities_results.each do |facility|
+		%tr
+			%td= link_to facility.id, facility_path(facility)
+			%td= facility.name
+%table.table.table-striped
+	%thead
+		%tr
+			%th= Resource.human_attribute_name(:id)
+			%th= Resource.human_attribute_name(:name)
+	%tbody
+		- @resouces_results.each do |resource|
+		%tr
+			%td= link_to resource.id, resource_path(resource)
+			%td= resource.name

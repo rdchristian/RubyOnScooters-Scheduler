@@ -1,0 +1,39 @@
+- javascript "global_controller"
+- javascript "search"
+
+= form_for @search, html: { class: "form form-vertical search"} do |f|
+	=render 'shared/search_error_messages'
+	.row
+		.form-group.col-sm-3
+			= f.label :start_date, 'Starting date', class: 'control-label'
+			.controls
+				.input-group
+					= f.text_field :start_date, class: 'form-control single-datepicker', required: true, value: params[:start_date]
+					.input-group-addon.click-date{ :style => 'cursor: pointer'}
+						%i.fa.fa-calendar
+			= error_span(@search[:start_date])
+
+		.form-group.col-sm-3
+			= f.label :start, 'Starting time', class: 'control-label'
+			.controls
+				.input-group-clockpicker
+					= f.text_field :start, class: 'form-control', required: true, value: params[:start_time]
+					.input-group-addon
+						%i.fa.fa.clock-o
+			=error_span(@search[:start])
+
+	.row
+		.form-group.col-sm-3
+			= f.label :duration, 'Duration', class: 'control-label'
+			.controls
+				/ .bfh-timepicker{'data-name' => 'search[duration]', 'data-id' => 'search', :required => '',
+				/                 'data-time' => "#{params[:duration]}", 'data-align' => 'right'}
+				.input-group.bootstrap-timepicker
+					= f.text_field :duration, class: 'form-control timepicker', required: true, value: params[:duration]
+					.input-group-addon
+						%i.fa.fa-clock-o
+
+		.col-sm-3
+			= f.label 'End', class: 'control-label'
+			.controls
+				= f.text_field :ending, class: 'form-control', readonly: '', style: 'cursor: auto', value: params[:ending]

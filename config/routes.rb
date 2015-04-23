@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'search/index'
+
   resources :users do
     resources :events
   end
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :facilities
   root :to => redirect('/events')
+
+  resources :search
 
   get    'sessions/new'
   get    'signup'  => 'users#new'
