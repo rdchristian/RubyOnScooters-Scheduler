@@ -6,6 +6,8 @@ class Resource < ActiveRecord::Base
 	validates :name, :presence => true, :uniqueness => true, on: :create
 
 	def self.search(q)
-		Resource.events.where("start_date = ? and (start <= ? or ending >= ?)",q[:start_date],q[:ending],q[:start])
+		Resource.all do |res|
+			res.events.where("start_date = ? and (start <= ? or ending >= ?)",q[:start_date],q[:ending],q[:start])
+		end
 	end
 end

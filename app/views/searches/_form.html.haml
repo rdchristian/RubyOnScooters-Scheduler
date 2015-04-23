@@ -1,8 +1,8 @@
 - javascript "global_controller"
-- javascript "search"
+- javascript "searches"
 
 = form_for @search, html: { class: "form form-vertical search"} do |f|
-	=render 'shared/search_error_messages'
+	=render 'shared/searches_error_messages'
 	.row
 		.form-group.col-sm-3
 			= f.label :start_date, 'Starting date', class: 'control-label'
@@ -22,18 +22,14 @@
 						%i.fa.fa.clock-o
 			=error_span(@search[:start])
 
-	.row
 		.form-group.col-sm-3
-			= f.label :duration, 'Duration', class: 'control-label'
+			= f.label :ending, 'Ending time', class: 'control-label'
 			.controls
-				/ .bfh-timepicker{'data-name' => 'search[duration]', 'data-id' => 'search', :required => '',
-				/                 'data-time' => "#{params[:duration]}", 'data-align' => 'right'}
-				.input-group.bootstrap-timepicker
-					= f.text_field :duration, class: 'form-control timepicker', required: true, value: params[:duration]
+				.input-group-clockpicker
+					= f.text_field :ending, class: 'form-control', required: true, value: params[:ending_time]
 					.input-group-addon
-						%i.fa.fa-clock-o
-
-		.col-sm-3
-			= f.label 'End', class: 'control-label'
-			.controls
-				= f.text_field :ending, class: 'form-control', readonly: '', style: 'cursor: auto', value: params[:ending]
+						%i.fa.fa.clock-o
+			=error_span(@search[:ending])
+	.row-float
+		= f.submit nil, class: 'btn btn-primary'
+		= link_to t('.cancel', :default => t("helpers.links.cancel")), searches_path, :class => 'btn btn-default'
