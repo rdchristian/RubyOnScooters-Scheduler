@@ -13,6 +13,11 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 
+# Date validation in the models and ice_cube is a feature-rich recurrence library
+gem "date_validator"
+gem "ice_cube"
+gem 'recurring_select' # ice_cube helpers
+
 # Awesome responsive search form
 gem "selectize-rails"
 
@@ -40,6 +45,7 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks' # fixing issues between them
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -73,6 +79,9 @@ group :development, :test do
   gem 'spring'
 
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
+
+  # Pretty printer with awesome capabilities!
+  gem 'awesome_print'
 end
 
 # setup Cucumber, RSpec, autotest support

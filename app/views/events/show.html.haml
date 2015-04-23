@@ -15,9 +15,9 @@
   %br
   = @event.start
 %p
-  %strong= model_class.human_attribute_name(:end) + ':'
+  %strong= model_class.human_attribute_name(:ending) + ':'
   %br
-  = @event.end
+  = @event.ending
 %p
   %strong= model_class.human_attribute_name(:creator_name) + ':'
   %br
@@ -31,7 +31,13 @@
   %br
   = @event.resources_list
 
+- if @event.recurrence.present?
+  %p
+    %strong= model_class.human_attribute_name(:recurrence) + ':'
+    %br
+    = @event.recurrence.to_s
+
 
 = link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn btn-default'
-= link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(@event), :class => 'btn btn-default'
-= link_to t('.destroy', :default => t("helpers.links.destroy")), event_path(@event), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_user_event_path(@event.creator, @event), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), user_event_path(@event.creator, @event), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

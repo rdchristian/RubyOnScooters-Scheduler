@@ -19,6 +19,7 @@
  *= require bootstrap-touchspin/dist/jquery.bootstrap-touchspin
  *= require bootstrap-daterangepicker/daterangepicker-bs3
  *= require bootstrap-3-timepicker/css/bootstrap-timepicker
+ *= require bootstrapformhelpers/css/bootstrap-formhelpers
  *= require bootstrap_and_overrides
  */
 

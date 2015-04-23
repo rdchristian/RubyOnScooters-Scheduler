@@ -1,7 +1,9 @@
 - javascript "global_controller"
 - javascript "events"
+- format_fields
 
-= form_for @event, html: { class: "form form-vertical event" } do |f|
+= form_for [@event.creator, @event], html: { class: "form form-vertical event" } do |f|
+  =render 'shared/events_error_messages'
   .row  
     .form-group.col-sm-4
       = f.label :title, class: 'control-label'
@@ -22,7 +24,7 @@
       .controls
         .input-group
           = f.text_field :start_date, class: 'form-control single-datepicker', required: true,
-            value: @start_date
+            value: params[:start_date]
           .input-group-addon.click-date{ :style => 'cursor: pointer'} 
             %i.fa.fa-calendar
 
@@ -32,7 +34,7 @@
       .controls
         .input-group.clockpicker
           = f.text_field :start, class: 'form-control', required: true,
-          value: @start_time
+          value: params[:start_time]
           .input-group-addon
             %i.fa.fa-clock-o
       = error_span(@event[:start])
@@ -41,27 +43,30 @@
     .form-group.col-sm-3
       = f.label :duration, 'Duration', class: 'control-label'
       .controls
+        / .bfh-timepicker{'data-name' => 'event[duration]', 'data-id' => 'event_duration', :required => '',
+        /                 'data-time' => "#{params[:duration]}", 'data-align' => 'right'}
         .input-group.bootstrap-timepicker
           = f.text_field :duration, class: 'form-control timepicker', required: true,
-          value: @duration
+          value: params[:duration]
           .input-group-addon
             %i.fa.fa-clock-o
 
     .col-sm-3
-      %label.control-label End
-      %input.form-control{ :value => @end,
-                           :name => 'event[end]',
-                           :readonly => '', :style => 'cursor: auto'}
-    
-  .row  
-    .form-group.col-sm-3
-      = f.label :creator_name, class: 'control-label'
+      = f.label 'End', class: 'control-label'
       .controls
-        = f.text_field :creator_name, class: 'form-control', required: true,
-        placeholder: 'No creator'
-      = error_span(@event[:creator_name])
+        = f.text_field :ending, class: 'form-control', readonly: '', style: 'cursor: auto',
+          value: params[:ending]
+                           
+  -if is_admin?  
+    .row  
+      .form-group.col-sm-3
+        = f.label :creator_name, class: 'control-label'
+        .controls
+          = f.text_field :creator_name, class: 'form-control', required: true,
+          placeholder: current_user.name
+        = error_span(@event[:creator_name])
 
-  .row-float  
+  .row-float
     .form-group
       = f.label :facilities, class: 'control-label'
       .controls
@@ -70,7 +75,7 @@
           { class: 'selectable-facility', :multiple => true })
       = error_span(@event[:facility_ids])
 
-  .row-float  
+  .row-float
     .form-group
       = f.label :resources, class: 'control-label'
       .controls
@@ -80,5 +85,23 @@
       = error_span(@event[:resource_ids])
 
   .row-float
-    = f.submit nil,class: 'btn btn-primary'
+    .form-group
+      = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
+        = check_box_tag :recurrence_checked, nil, params[:recurrence_checked]
+        Is this a recurring event?
+
+  .row.hide-slide
+    .form-group.col-md-3
+      = label_tag :recurring_value, 'Repeat every ', class: 'control-label'
+      .row-float
+        .col-md-7.nopadding
+          = text_field_tag :recurring_value, params[:recurring_value], class: 'form-control bfh-number',
+            'data-min': 1, 'data-max': 365
+        .col-md-5.nopadding
+          .bfh-selectbox{ 'data-name' => 'recurring_option', 'data-value' => params[:recurring_option] }
+            - Event.recurrence_options.each_with_index do |thing, i|
+              %div{ 'data-value' => i }= thing
+
+  .row-float
+    = f.submit nil, class: 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'

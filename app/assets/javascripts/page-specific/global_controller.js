@@ -35,7 +35,7 @@ $(".number-picker").TouchSpin({
 $('.timepicker').timepicker({
     minuteStep: 15,
     showMeridian: false,
-    defaultTime: false,
+    defaultTime: '0:0',
     showInputs: true,
 });
 
@@ -46,6 +46,9 @@ $('.single-datepicker').daterangepicker({
     format: 'MMMM D, YYYY',
 });
 
+$().bfhdatepicker('toggle');
+$().bfhtimepicker('toggle');
+$().bfhselectbox('toggle');
 
 // Forward the click on the tiny calendar icon to the date picker
 $('.click-date').click(function() {
