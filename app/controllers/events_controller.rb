@@ -99,11 +99,9 @@ class EventsController < ApplicationController
       params[:recurring_option] = 0
       if @event.recurrence.present?
         params[:recurrence_checked] = true
-        # Couldn't find a more intuitive way...
-        readable_rule = @event.recurrence.to_s
-        interval = readable_rule.scan(/\d/)[0]
-        params[:recurring_value] = interval.blank? ? 1 : interval
-        params[:recurring_option] = Event.recurrence_options.index(readable_rule.split.last.capitalize)
+        rule = @event.recurrence.to_hash[:rrules][0]
+        params[:recurring_value] = rule[:interval]
+        params[:recurring_option] = Event.recurrence_options.find_index { |k| rule[:rule_type].scan(k[0..1]).present? }
       end
     end
 

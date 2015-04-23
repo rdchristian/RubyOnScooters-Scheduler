@@ -19,9 +19,11 @@ class ApplicationController < ActionController::Base
     end
 
     helper_method :footlog
-    def footlog(thing)
-      flash[:log] || flash[:log] = []
-      flash[:log] << thing
+    def footlog(*thing)
+      thing.each do |t|
+        flash[:log] || flash[:log] = []
+        flash[:log] << t
+      end
     end
 
 end
