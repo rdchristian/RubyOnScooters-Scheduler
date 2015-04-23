@@ -22,14 +22,18 @@
   %strong= model_class.human_attribute_name(:creator_name) + ':'
   %br
   = @event.creator_name
-%p
-  %strong= model_class.human_attribute_name(:facilities) + ':'
-  %br
-  = @event.facilities_list
-%p
-  %strong= model_class.human_attribute_name(:resources) + ':'
-  %br
-  = @event.resources_list
+
+- if @event.facilities_list.present?
+  %p
+    %strong= model_class.human_attribute_name(:facilities) + ':'
+    %br
+    = @event.facilities_list
+
+- if @event.resources_list.present?
+  %p
+    %strong= model_class.human_attribute_name(:resources) + ':'
+    %br
+    = @event.resources_list
 
 - if @event.recurrence.present?
   %p
