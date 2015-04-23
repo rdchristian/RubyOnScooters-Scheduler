@@ -40,18 +40,6 @@
           -else
             =f.select :activated, options_for_select([['Active',true], ['Inactive', false]])
         = error_span(@user[:activated])
-  .row  
-    .form-group.col-sm-6
-      = f.label :password, class: 'control-label'
-      .controls
-        = f.password_field :password, class: 'form-control'
-      = error_span(@user[:password])    
-  .row  
-    .form-group.col-sm-6
-      = f.label :password_confirmation, class: 'control-label'
-      .controls
-        = f.password_field :password_confirmation, class: 'form-control'
-      = error_span(@user[:password_confirmation])    
   .row-float
     = f.submit nil,class: 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), users_path, :class => 'btn btn-default'

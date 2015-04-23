@@ -13,8 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20150422001718) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -74,11 +83,15 @@ ActiveRecord::Schema.define(version: 20150422001718) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
+    t.integer  "phone"
+    t.string   "home_group"
+    t.integer  "user_level",      default: 0
+    t.boolean  "activated",       default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

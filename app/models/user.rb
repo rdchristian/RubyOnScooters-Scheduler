@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :password, :password_confirmation, :phone, :home_group, :user_level
+	attr_accessible :name, :email, :password, :password_confirmation, :phone, :home_group, :user_level, :activated
 	attr_accessor :remember_token
 
   #user_level of 0 means normal user, 1 means staff and 2 means admin
@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
 	has_many :events
 	before_save {self.email = email.downcase}
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :name, :presence => true, on: :create
-	validates :email, :presence => true, :uniqueness => true, format: { with: VALID_EMAIL_REGEX}, on: :create
+	validates :name, :presence => true
+	validates :email, :presence => true, :uniqueness => true, format: { with: VALID_EMAIL_REGEX}
 	has_secure_password
-	validates :password, length: { minimum: 8 }
+	validates :password, length: { minimum: 8 }, :on => :create
 
 
   def User.digest(string)
@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
   #Forget a user
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def is_activated?
+    return activated
+  end
+
+  def activate
+    activated = true
   end
 
   def is_admin?
