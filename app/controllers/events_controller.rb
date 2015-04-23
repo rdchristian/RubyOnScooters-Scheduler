@@ -101,7 +101,8 @@ class EventsController < ApplicationController
         params[:recurrence_checked] = true
         # Couldn't find a more intuitive way...
         readable_rule = @event.recurrence.to_s
-        params[:recurring_value] = readable_rule.scan(/\d/)[0]
+        interval = readable_rule.scan(/\d/)[0]
+        params[:recurring_value] = interval.blank? ? 1 : interval
         params[:recurring_option] = Event.recurrence_options.index(readable_rule.split.last.capitalize)
       end
     end
