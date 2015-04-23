@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20150414223155) do
     t.text     "description"
     t.integer  "capacity"
     t.integer  "min_capacity"
-    t.integer  "priority"
+    t.boolean  "priority"
     t.boolean  "has_tv"
     t.boolean  "has_tables"
     t.boolean  "has_proj"
