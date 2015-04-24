@@ -57,21 +57,19 @@ ActiveRecord::Schema.define(version: 20150424155728) do
     t.string   "name"
     t.text     "description"
     t.integer  "capacity"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "storage_location"
-    t.time     "max_reserve_time"
-  end
-
-  create_table "facilities", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "capacity"
     t.integer  "min_capacity"
     t.boolean  "priority"
     t.boolean  "has_tv"
     t.boolean  "has_tables"
     t.boolean  "has_proj"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "numberOf"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
