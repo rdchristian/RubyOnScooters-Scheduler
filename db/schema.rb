@@ -11,19 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414223155) do
+ActiveRecord::Schema.define(version: 20150422001718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "start"
-    t.datetime "end"
+    t.datetime "ending"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
+    t.text     "recurrence"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -44,12 +53,12 @@ ActiveRecord::Schema.define(version: 20150414223155) do
   add_index "events_resources", ["event_id", "resource_id"], name: "index_events_resources_on_event_id_and_resource_id", using: :btree
   add_index "events_resources", ["resource_id"], name: "index_events_resources_on_resource_id", using: :btree
 
-  create_table "facilities", force: :cascade do |t|
+   create_table "facilities", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "capacity"
     t.integer  "min_capacity"
-    t.integer  "priority"
+    t.boolean  "priority"
     t.boolean  "has_tv"
     t.boolean  "has_tables"
     t.boolean  "has_proj"
@@ -63,10 +72,10 @@ ActiveRecord::Schema.define(version: 20150414223155) do
     t.string   "name"
     t.string   "description"
     t.integer  "numberOf"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -78,9 +87,18 @@ ActiveRecord::Schema.define(version: 20150414223155) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "remember_digest"
+    t.integer  "phone"
+    t.string   "home_group"
+    t.integer  "user_level",      default: 0
+    t.boolean  "activated",       default: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "events", "users"
 end
