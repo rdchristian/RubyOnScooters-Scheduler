@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422001718) do
+ActiveRecord::Schema.define(version: 20150424155728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,17 @@ ActiveRecord::Schema.define(version: 20150422001718) do
   add_index "events_resources", ["event_id", "resource_id"], name: "index_events_resources_on_event_id_and_resource_id", using: :btree
   add_index "events_resources", ["resource_id"], name: "index_events_resources_on_resource_id", using: :btree
 
-   create_table "facilities", force: :cascade do |t|
+  create_table "facilities", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "capacity"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "storage_location"
+    t.time     "max_reserve_time"
+  end
+
+  create_table "facilities", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "capacity"
@@ -66,16 +76,6 @@ ActiveRecord::Schema.define(version: 20150422001718) do
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
-  end
-
-  create_table "resources", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "numberOf"
-    t.string   "storage_location"
-    t.time     "max_reserve_time"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
   end
 
   create_table "rooms", force: :cascade do |t|
