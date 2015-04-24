@@ -7,7 +7,7 @@
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:numberOf)
+      %th= 'Amount Owned'
       %th= model_class.human_attribute_name(:storage_location)
       %th= model_class.human_attribute_name(:max_reserve_time) + " (Hour:Minutes)"
       -if current_user.is_admin?
