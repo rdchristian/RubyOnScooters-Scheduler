@@ -18,7 +18,7 @@
     .form-group.col-sm-2
       = f.label :capacity, class: 'control-label'
       .controls
-        = f.text_field :capacity, class: 'form-control bfh-number', required: true
+        = f.text_field :capacity, class: 'form-control number-picker', required: true
       = error_span(@facility[:capacity])
   .row
     .form-group.col-sm-3

@@ -18,7 +18,7 @@
     .form-group.col-sm-2
       = f.label 'Amount Owned', class: 'control-label'
       .controls
-        = f.text_field :numberOf, class: 'form-control bfh-number', required: true
+        = f.text_field :numberOf, class: 'form-control number-picker', required: true
       = error_span(@resource[:numberOf])
   .row  
     .form-group.col-sm-4
