@@ -13,8 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20150422001718) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -49,20 +58,23 @@ ActiveRecord::Schema.define(version: 20150422001718) do
     t.string   "name"
     t.text     "description"
     t.integer  "capacity"
+    t.integer  "min_capacity"
+    t.boolean  "priority"
+    t.boolean  "has_tv"
+    t.boolean  "has_tables"
+    t.boolean  "has_proj"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "storage_location"
-    t.time     "max_reserve_time"
   end
 
   create_table "resources", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.integer  "numberOf"
-    t.string   "storage_location"
-    t.time     "max_reserve_time"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "storage_location"
+    t.time     "max_reserve_time"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,7 +1,6 @@
 - javascript "global_controller"
 
 = form_for @facility, html: { class: "form form-vertical facility" } do |f|
-  =render 'shared/facilities_error_messages'
   .row
     .form-group.col-sm-4
       = f.label :name, class: 'control-label'
@@ -21,19 +20,35 @@
         = f.text_field :capacity, class: 'form-control number-picker', required: true
       = error_span(@facility[:capacity])
   .row
-    .form-group.col-sm-3
-      = f.label :storage_location, class: 'control-label'
+    .form-group.col-sm-2
+      = f.label :min_capacity, class: 'control-label'
       .controls
-        = f.text_field :storage_location, class: 'form-control', required: true
-      = error_span(@facility[:storage_location])
+        = f.text_field :min_capacity, class: 'form-control number-picker', required: true
+      = error_span(@facility[:min_capacity])
   .row
-    .form-group.col-sm-3
-      = f.label :max_reserve_time, 'Duration', class: 'control-label'
+    .form-group.col-sm-2
+      = f.label :priority, class: 'control-label'
       .controls
-        .input-group.bootstrap-timepicker
-          = f.text_field :max_reserve_time, class: 'form-control timepicker'
-          .input-group-addon
-            %i.fa.fa-clock-o
+        = f.check_box :priority, class: 'form-control check_box', required: false
+      = error_span(@facility[:priority])
+  .row
+    .form-group.col-sm-2
+      = f.label :has_proj, class: 'control-label'
+      .controls
+        = f.check_box :has_proj, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_proj])  
+  .row
+    .form-group.col-sm-2
+      = f.label :has_tables, class: 'control-label'
+      .controls
+        = f.check_box :has_tables, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_tables])  
+  .row
+    .form-group.col-sm-2
+      = f.label :has_tv, class: 'control-label'
+      .controls
+        = f.check_box :has_tv, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_tv])  
 
   .row-float
     = f.submit nil,class: 'btn btn-primary'
