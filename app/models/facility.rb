@@ -7,7 +7,7 @@ class Facility < ActiveRecord::Base
 
 	def self.search(q)
 		Facility.all do |fac|
-			fac.events.where("start_date = ? and (start <= ? or ending >= ?)",q[:start_date],q[:ending],q[:start])
+			fac.events.where("start_date = ? and ((start <= ? and ending <= ?) or (start >= ? and ending >= ?))",q[:start_date],q[:ending],q[:ending],q[:start],q[:start])
 		end
 	end
 end

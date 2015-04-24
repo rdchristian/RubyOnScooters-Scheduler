@@ -1,5 +1,25 @@
 - model_class = Search
 .page-header
 	%h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-= render @search.resources_results
-= render @search.facilities_results
+%table.table.table-striped
+	%thead
+		%tr
+			%th= Facility.human_attribute_name(:id)
+			%th= Facility.human_attribute_name(:name)
+	%tbody
+		- @search.facilities_results
+		- @search.facilities_results.each do |facility|
+			%tr
+				%td= link_to facility.id, facility_path(facility)
+				%td= facility.name
+%table.table.table-striped
+	%thead
+		%tr
+			%th= Resource.human_attribute_name(:id)
+			%th= Resource.human_attribute_name(:name)
+	%tbody
+		- @search.resources_results
+		- @search.resources_results.each do |resource|
+			%tr
+				%td= link_to resource.id, resource_path(resource)
+				%td= resource.name
