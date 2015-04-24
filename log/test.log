@@ -1,0 +1,212 @@
+  [1m[36m (212.9ms)[0m  [1mDROP DATABASE IF EXISTS "scheduler_test"[0m
+  [1m[35m (2.0ms)[0m  CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+PG::InsufficientPrivilege: ERROR:  permission denied to create database
+: CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+  [1m[36m (184.4ms)[0m  [1mDROP DATABASE IF EXISTS "scheduler_test"[0m
+  [1m[35m (1.4ms)[0m  CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+PG::InsufficientPrivilege: ERROR:  permission denied to create database
+: CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+  [1m[36m (276.7ms)[0m  [1mDROP DATABASE IF EXISTS "scheduler_test"[0m
+  [1m[35m (2.2ms)[0m  CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+PG::InsufficientPrivilege: ERROR:  permission denied to create database
+: CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+  [1m[36m (173.8ms)[0m  [1mDROP DATABASE IF EXISTS "scheduler_test"[0m
+  [1m[35m (2.1ms)[0m  CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+PG::InsufficientPrivilege: ERROR:  permission denied to create database
+: CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+  [1m[36m (234.1ms)[0m  [1mDROP DATABASE IF EXISTS "scheduler_test"[0m
+  [1m[35m (799.5ms)[0m  CREATE DATABASE "scheduler_test" ENCODING = 'utf8'
+  [1m[36mSQL (1.4ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (62.8ms)[0m  CREATE TABLE "events" ("id" serial primary key, "title" character varying, "description" text, "start" timestamp, "end" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "user_id" integer) 
+  [1m[36m (7.3ms)[0m  [1mCREATE  INDEX  "index_events_on_user_id" ON "events" USING btree ("user_id")[0m
+  [1m[35m (3.9ms)[0m  CREATE TABLE "events_facilities" ("event_id" integer, "facility_id" integer) 
+  [1m[36m (18.7ms)[0m  [1mCREATE  INDEX  "index_events_facilities_on_event_id_and_facility_id" ON "events_facilities" USING btree ("event_id", "facility_id")[0m
+  [1m[35m (6.3ms)[0m  CREATE  INDEX  "index_events_facilities_on_facility_id" ON "events_facilities" USING btree ("facility_id")
+  [1m[36m (3.4ms)[0m  [1mCREATE TABLE "events_resources" ("event_id" integer, "resource_id" integer) [0m
+  [1m[35m (6.2ms)[0m  CREATE  INDEX  "index_events_resources_on_event_id_and_resource_id" ON "events_resources" USING btree ("event_id", "resource_id")
+  [1m[36m (8.4ms)[0m  [1mCREATE  INDEX  "index_events_resources_on_resource_id" ON "events_resources" USING btree ("resource_id")[0m
+  [1m[35m (12.8ms)[0m  CREATE TABLE "facilities" ("id" serial primary key, "name" character varying, "description" text, "capacity" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (13.5ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (41.2ms)[0m  ALTER TABLE "events" ADD CONSTRAINT "fk_rails_e4518e057a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (25.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (8.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (1.9ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (4.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150402225412')
+  [1m[36m (2.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150402223712')[0m
+  [1m[35m (2.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150402225402')
+  [1m[36m (2.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150402224639')[0m
+  [1m[35m (2.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150331012251')
+  [1m[36m (2.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150402220715')[0m
+  [1m[35m (2.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150402223400')
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+Started GET "/facilities/new" for 127.0.0.1 at 2015-04-08 01:00:56 -0500
+Processing by FacilitiesController#new as HTML
+  Rendered facilities/_form.html.haml (60.0ms)
+  Rendered facilities/new.html.haml within layouts/application (176.8ms)
+Completed 200 OK in 12443ms (Views: 12349.9ms | ActiveRecord: 26.0ms)
+  [1m[36m (2.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  BEGIN
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (3.9ms)[0m  BEGIN
+  [1m[36m (0.7ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  BEGIN
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (0.6ms)[0m  [1mROLLBACK[0m
+  [1m[35m (7.3ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (0.7ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  BEGIN
+  [1m[36m (2.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+Started GET "/facilities/new" for 127.0.0.1 at 2015-04-08 01:15:38 -0500
+Processing by FacilitiesController#new as HTML
+  Rendered facilities/_form.html.haml (89.2ms)
+  Rendered facilities/new.html.haml within layouts/application (193.9ms)
+Completed 200 OK in 599ms (Views: 532.4ms | ActiveRecord: 11.1ms)
+  [1m[36m (1.7ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (5.6ms)[0m  BEGIN
+  [1m[36m (1.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  BEGIN
+Started GET "/facilities/new" for 127.0.0.1 at 2015-04-08 01:31:06 -0500
+Processing by FacilitiesController#new as HTML
+  Rendered facilities/_form.html.haml (49.3ms)
+  Rendered facilities/new.html.haml within layouts/application (121.1ms)
+Completed 200 OK in 545ms (Views: 484.9ms | ActiveRecord: 14.3ms)
+  [1m[36m (1.5ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.9ms)[0m  BEGIN
+  [1m[36m (7.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+Started GET "/facilities/new" for 127.0.0.1 at 2015-04-08 01:43:31 -0500
+Processing by FacilitiesController#new as HTML
+  Rendered facilities/_form.html.haml (49.5ms)
+  Rendered facilities/new.html.haml within layouts/application (118.9ms)
+Completed 200 OK in 687ms (Views: 626.3ms | ActiveRecord: 14.8ms)
+  [1m[36m (17.0ms)[0m  [1mROLLBACK[0m
+  [1m[35m (12.8ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+Started GET "/resources" for 127.0.0.1 at 2015-04-08 01:43:32 -0500
+Processing by ResourcesController#index as HTML
+  [1m[36mResource Load (3.5ms)[0m  [1mSELECT "resources".* FROM "resources"[0m
+PG::UndefinedTable: ERROR:  relation "resources" does not exist
+LINE 1: SELECT "resources".* FROM "resources"
+                                  ^
+: SELECT "resources".* FROM "resources"
+  Rendered resources/index.html.haml within layouts/application (73.0ms)
+Completed 500 Internal Server Error in 267ms
+  [1m[35m (5.0ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (17.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (5.4ms)[0m  BEGIN
+  [1m[36m (2.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (7.4ms)[0m  BEGIN
+Started GET "/facilities/new" for 127.0.0.1 at 2015-04-10 18:32:59 -0500
+Processing by FacilitiesController#new as HTML
+  Rendered facilities/_form.html.haml (140.9ms)
+  Rendered facilities/new.html.haml within layouts/application (334.0ms)
+Completed 200 OK in 1796ms (Views: 1533.1ms | ActiveRecord: 78.3ms)
+  [1m[36m (26.0ms)[0m  [1mROLLBACK[0m
+  [1m[35m (5.6ms)[0m  BEGIN
+  [1m[36m (3.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  BEGIN
+Started GET "/resources" for 127.0.0.1 at 2015-04-10 18:33:02 -0500
+Processing by ResourcesController#index as HTML
+  [1m[36mResource Load (23.3ms)[0m  [1mSELECT "resources".* FROM "resources"[0m
+PG::UndefinedTable: ERROR:  relation "resources" does not exist
+LINE 1: SELECT "resources".* FROM "resources"
+                                  ^
+: SELECT "resources".* FROM "resources"
+  Rendered resources/index.html.haml within layouts/application (162.6ms)
+Completed 500 Internal Server Error in 460ms
+  [1m[35m (36.9ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (6.6ms)[0m  BEGIN
+Started GET "/facilities" for 127.0.0.1 at 2015-04-10 18:55:54 -0500
+Processing by FacilitiesController#index as HTML
+  [1m[36mFacility Load (4.8ms)[0m  [1mSELECT "facilities".* FROM "facilities"[0m
+  Rendered facilities/index.html.haml within layouts/application (52.7ms)
+Completed 200 OK in 446ms (Views: 385.5ms | ActiveRecord: 6.0ms)
+  [1m[35m (7.4ms)[0m  ROLLBACK
+  [1m[36m (15.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (7.9ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+Started GET "/resources" for 127.0.0.1 at 2015-04-10 18:55:55 -0500
+Processing by ResourcesController#index as HTML
+  [1m[35mResource Load (7.4ms)[0m  SELECT "resources".* FROM "resources"
+PG::UndefinedTable: ERROR:  relation "resources" does not exist
+LINE 1: SELECT "resources".* FROM "resources"
+                                  ^
+: SELECT "resources".* FROM "resources"
+  Rendered resources/index.html.haml within layouts/application (50.9ms)
+Completed 500 Internal Server Error in 201ms
+  [1m[36m (0.6ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (8.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.0ms)[0m  BEGIN
+  [1m[36m (1.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+Started GET "/facilities" for 127.0.0.1 at 2015-04-10 19:18:21 -0500
+Processing by FacilitiesController#index as HTML
+  [1m[36mFacility Load (1.4ms)[0m  [1mSELECT "facilities".* FROM "facilities"[0m
+  Rendered facilities/index.html.haml within layouts/application (101.4ms)
+Completed 200 OK in 1002ms (Views: 864.6ms | ActiveRecord: 2.9ms)
+  [1m[35m (21.8ms)[0m  ROLLBACK
+  [1m[36m (6.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (11.1ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+Started GET "/resources" for 127.0.0.1 at 2015-04-10 19:18:22 -0500
+Processing by ResourcesController#index as HTML
+  [1m[35mResource Load (16.9ms)[0m  SELECT "resources".* FROM "resources"
+PG::UndefinedTable: ERROR:  relation "resources" does not exist
+LINE 1: SELECT "resources".* FROM "resources"
+                                  ^
+: SELECT "resources".* FROM "resources"
+  Rendered resources/index.html.haml within layouts/application (96.9ms)
+Completed 500 Internal Server Error in 329ms
+  [1m[36m (29.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (5.4ms)[0m  BEGIN
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (1.1ms)[0m  BEGIN
+Started GET "/facilities" for 127.0.0.1 at 2015-04-10 19:38:23 -0500
+Processing by FacilitiesController#index as HTML
+  [1m[36mFacility Load (6.8ms)[0m  [1mSELECT "facilities".* FROM "facilities"[0m
+  Rendered facilities/index.html.haml within layouts/application (54.3ms)
+Completed 200 OK in 478ms (Views: 418.3ms | ActiveRecord: 11.2ms)
+  [1m[35m (5.0ms)[0m  ROLLBACK
+  [1m[36m (5.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+Started GET "/resources" for 127.0.0.1 at 2015-04-10 19:38:24 -0500
+Processing by ResourcesController#index as HTML
+  [1m[35mResource Load (3.6ms)[0m  SELECT "resources".* FROM "resources"
+PG::UndefinedTable: ERROR:  relation "resources" does not exist
+LINE 1: SELECT "resources".* FROM "resources"
+                                  ^
+: SELECT "resources".* FROM "resources"
+  Rendered resources/index.html.haml within layouts/application (48.4ms)
+Completed 500 Internal Server Error in 171ms
+  [1m[36m (5.4ms)[0m  [1mROLLBACK[0m
