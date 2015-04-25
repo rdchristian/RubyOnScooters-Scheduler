@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   post   'admin'   => 'master_page#create'
   get    '/users/password/:id' => 'users#edit_password'
   patch  '/users/password/:id' => 'users#update_password', as: 'update_password'
+  get    '/users/activate/:id' => 'users#activate', as: 'activate_user'
 
 end

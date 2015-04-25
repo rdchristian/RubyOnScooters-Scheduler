@@ -14,6 +14,7 @@
 
 sample_users = [
 	{:name => 'Admin', :email => 'admin@email.com', :password => 'AdminPass', :password_confirmation => 'AdminPass', :user_level => 2, :activated => true}
+]
 
 sample_facilities = [
   {:name => 'Auditorium', :description => 'Big Room'}
@@ -23,10 +24,6 @@ sample_facilities.each do |facility|
   Facility.create!(facility.merge!( {:capacity => 5} ))
 end
 
-#sample_users = [
-#	{:name => 'TestUser', :email => 'test@email.com', :password => 'TestPass', :password_confirmation => 'TestPass'}
-#]
-
-#sample_users.each do |user|
-#	User.create!(user)
-#end
+sample_users.each do |user|
+	User.create!(user)
+end

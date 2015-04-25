@@ -77,10 +77,17 @@ class UsersController < ApplicationController
         format.json { render :show, status: :ok, location: @user }
   #     UserMailer.account_activation(@user).deliver_now
       else
-        format.html { redirect_to @user, danger: "Unable to change password" }
+        format.html { render :edit_password }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def activate
+    set_user
+    @user.activated = true;
+    @user.save!
+    redirect_to admin_path
   end
 
   private

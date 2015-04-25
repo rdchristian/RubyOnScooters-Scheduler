@@ -10,7 +10,10 @@ class SessionsController < ApplicationController
   		login user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
-  	else
+    elsif user && !user.is_activated?
+      flash.now[:danger] = 'Your account has not yet been activated'
+      render 'new'
+  	elsif !user || (user && !user.authenticate(params[:session][:password]))
   		flash.now[:danger] = 'Invalid email/password combination'
   		render 'new'
   	end
