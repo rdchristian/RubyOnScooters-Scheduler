@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   resources :users do
     resources :events
   end
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   get    'admin'   => 'master_page#new'
   post   'admin'   => 'master_page#create'
-  
+  get    '/users/password/:id' => 'users#edit_password'
+  patch  '/users/password/:id' => 'users#update_password', as: 'update_password'
 
 end

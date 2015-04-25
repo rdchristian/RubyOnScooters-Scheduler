@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def edit_password
+    @user = current_user
+  end
+
   # POST /users
   # POST /users.json
   def create
@@ -49,7 +53,7 @@ class UsersController < ApplicationController
         format.json { render :show, status: :ok, location: @user }
 #        UserMailer.account_activation(@user).deliver_now
       else
-        format.html { render :edit }
+        format.html { redirect_to @user, danger: "Unable to edit user" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -62,6 +66,20 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def update_password
+    @user = User.find_by(email: params[:email])
+    respond_to do |format|
+      if @user.update(password_params)
+        format.html { redirect_to @user, notice: "Password successfully changed" }
+        format.json { render :show, status: :ok, location: @user }
+  #     UserMailer.account_activation(@user).deliver_now
+      else
+        format.html { redirect_to @user, danger: "Unable to change password" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -78,6 +96,10 @@ class UsersController < ApplicationController
 
     def update_user_params
       params.require(:user).permit(:name, :email, :phone, :home_group, :user_level, :activated)
+    end
+
+    def password_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end
 
     def skip_password_attribute
