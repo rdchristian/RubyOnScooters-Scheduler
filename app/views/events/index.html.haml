@@ -1,4 +1,9 @@
 - model_class = Event
+- unless flash.blank?
+  - flash.each do |type, message|
+    %div{:class => "alert #{bootstrap_class_for(type)} fade in"}
+      %button.close{"data-dismiss" => "alert"} ×
+      = message
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
 %table.table.table-striped
@@ -18,11 +23,14 @@
     - @events.each do |event|
       %tr
         %td= link_to event.id, user_event_path(event.creator, event)
-        %td= event.title
+        -if event.is_approved?
+          %td= event.title
+        -else
+          %td= event.title+ '*'
         %td= event.description
         %td= event.start
         %td= event.ending
-        %td= event.creator_name
+        %td= link_to event.creator_name, user_path(User.find_by(name: event.creator_name))
         %td= event.facilities_list
         %td= event.resources_list
         %td=l event.created_at

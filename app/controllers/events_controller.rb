@@ -30,9 +30,16 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = @scope.new(event_params)
+    if !@event.capacity_check || !@event.facility_priority_check
+      @event.approved = false
+    end
     respond_to do |format|
       if @event.save
-        format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully created.' }
+        if @event.is_approved?
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully created.' }
+        else 
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive an email when it is approved or denied.' }
+        end
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -64,6 +71,21 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def approve
+    set_event
+    @event.approved = true;
+    @event.save!
+    redirect_to admin_path
+  end
+
+  def check_in
+    set_event
+    @event.checked_in = true;
+    @event.save!
+    redirect_to ""
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
