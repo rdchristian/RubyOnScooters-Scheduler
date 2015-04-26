@@ -38,6 +38,14 @@
   %strong= model_class.human_attribute_name(:has_tables) + ':'
   %br
   = @facility.has_tables
+%p
+  %strong= model_class.human_attribute_name(:has_chairs) + ':'
+  %br
+  = @facility.has_chairs
+%p
+  %strong= model_class.human_attribute_name(:has_sound) + ':'
+  %br
+  = @facility.has_sound
 
 
 -if current_user.is_admin?

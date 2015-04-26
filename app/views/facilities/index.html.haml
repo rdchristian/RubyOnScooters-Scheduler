@@ -13,6 +13,8 @@
       %th= model_class.human_attribute_name(:has_proj)
       %th= model_class.human_attribute_name(:has_tv)                         
       %th= model_class.human_attribute_name(:has_tables)
+      %th= model_class.human_attribute_name(:has_chairs)
+      %th= model_class.human_attribute_name(:has_sound)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
@@ -27,6 +29,8 @@
         %td= facility.has_proj
         %td= facility.has_tv
         %td= facility.has_tables
+        %td= facility.has_chairs
+        %td= facility.has_sound
         %td=l facility.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_facility_path(facility), :class => 'btn btn-default btn-xs'
