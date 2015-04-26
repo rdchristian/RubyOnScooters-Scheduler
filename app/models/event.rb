@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence,
-                  :creator, :facility_ids, :resource_ids, :creator_name, :approved, :checked_in
+                  :creator, :facility_ids, :resource_ids, :creator_name, :approved, :checked_in, :attendees
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
 
@@ -75,8 +75,12 @@ class Event < ActiveRecord::Base
 
   #methods that will be used to determine if event requires approval
   def capacity_check
-    #fill this in when attendees field exists
-    return false
+    facilities.each do |fac|
+      if fac.capacity < :attendees || fac.min_capacity > :attendees
+        return false
+      end
+    end
+    return true
   end
 
   def facility_priority_check
