@@ -1,16 +1,5 @@
 // Place all the behaviors and hooks related to a controller here.
 
-var selectable_options = {
-    persist: false,
-    createOnBlur: true,
-    create: false,
-    highlight: true,
-    maxOptions: 179, // Why 179? Fu, that's why
-    sortField: { field: 'text', direction: 'asc' },
-};
-$('.selectable-facility').selectize(selectable_options);
-$('.selectable-resource').selectize(selectable_options);
-
 $('.clockpicker').clockpicker({
     placement: 'bottom',
     align: 'top',
@@ -27,6 +16,7 @@ $('.clockpicker-disabled-ampm').clockpicker({
 });
 
 $(".number-picker").TouchSpin({
+    max: 1000,
     verticalbuttons: true,
     verticalupclass: 'glyphicon glyphicon-chevron-up',
     verticaldownclass: 'glyphicon glyphicon-chevron-down',
