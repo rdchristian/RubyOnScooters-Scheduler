@@ -13,7 +13,7 @@
 #end
 
 sample_users = [
-	{:name => 'Admin', :email => 'admin@email.com', :password => 'AdminPass', :password_confirmation => 'AdminPass', :user_level => 2, :activated => true}
+	{:name => 'Admin', :email => 'admin@email.com', :password => 'AdminPass', :phone => '1111111111', :password_confirmation => 'AdminPass', :user_level => 2, :activated => true}
 ]
 
 sample_facilities = [
