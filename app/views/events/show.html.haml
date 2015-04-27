@@ -40,6 +40,11 @@
     %br
     = @event.resources_list
 
+%p
+  %strong= model_class.human_attribute_name(:attendees) + ':'
+  %br
+  = @event.attendees
+
 - if @event.recurrence.present?
   %p
     %strong= model_class.human_attribute_name(:recurrence) + ':'

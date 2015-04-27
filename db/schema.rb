@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426042623) do
+ActiveRecord::Schema.define(version: 20150426235733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20150426042623) do
     t.text     "recurrence"
     t.boolean  "approved",    default: true
     t.boolean  "checked_in",  default: false
+    t.integer  "attendees"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -68,6 +69,8 @@ ActiveRecord::Schema.define(version: 20150426042623) do
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
+    t.boolean  "has_chairs"
+    t.boolean  "has_sound"
   end
 
   create_table "resources", force: :cascade do |t|

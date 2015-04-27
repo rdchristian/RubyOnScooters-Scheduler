@@ -17,6 +17,7 @@
       %th= model_class.human_attribute_name(:creator_name)
       %th= model_class.human_attribute_name(:facilities)
       %th= model_class.human_attribute_name(:resources)
+      %th= model_class.human_attribute_name(:attendees)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
@@ -33,6 +34,7 @@
         %td= link_to event.creator_name, user_path(User.find_by(name: event.creator_name))
         %td= event.facilities_list
         %td= event.resources_list
+        %td= event.attendees
         %td=l event.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_event_path(event.creator, event), :class => 'btn btn-default btn-xs'

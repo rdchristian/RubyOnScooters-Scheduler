@@ -34,6 +34,7 @@
         %th= 'Creator Name'
         %th= 'Facilities'
         %th= 'Resources'
+        %th= 'Attendees'
         %th= 'Created at'
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
@@ -47,6 +48,7 @@
             %td= link_to event.creator_name, user_path(User.find_by(name: event.creator_name))
             %td= event.facilities_list
             %td= event.resources_list
+            %td= event.attendees
             %td=l event.created_at
             %td
               = link_to "Approve", approve_event_path(event), :class => 'btn btn-default btn-xs'

@@ -151,7 +151,7 @@ class EventsController < ApplicationController
         form[:recurrence] = nil
       end
       params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence,
-                                    :creator_name, resource_ids: [], facility_ids: [])
+                                    :creator_name, :attendees, resource_ids: [], facility_ids: [])
       # Because recurrence is an object, we have to go through this bullshit to permit all its fields
       params.require(:event).tap do |whitelisted|
         whitelisted[:recurrence] = params[:event][:recurrence]
