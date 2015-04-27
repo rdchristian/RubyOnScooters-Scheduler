@@ -82,6 +82,8 @@
         = f.collection_select(:resource_ids, Resource.all, :id, :name,
           { prompt: "Please select your desired resources" },
           { class: 'selectable-resource', :multiple => true })
+
+        = f.hidden_field :resource_counts, value: params[:resource_counts]
       = error_span(@event[:resource_ids])
 
   .row-float

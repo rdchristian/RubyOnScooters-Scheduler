@@ -1,4 +1,5 @@
 include IceCube
+require 'json'
 
 class EventsController < ApplicationController
   before_filter :authenticate_user!
@@ -89,11 +90,13 @@ class EventsController < ApplicationController
 
     helper_method :format_fields
     def format_fields
+      # Datetime formatting
       params[:duration] = @event.duration.strftime("%I:%M") if @event.duration
       params[:start_time] = @event.start.strftime("%I:%M %p") if @event.start
       params[:start_date] = @event.start.strftime("%B %e, %Y") if @event.start
       params[:ending] = @event.ending.strftime("%B %e, %Y, %I:%M %p") if @event.ending
 
+      # Recurrence
       params[:recurrence_checked] = false
       params[:recurring_value] = 1
       params[:recurring_option] = 0
@@ -103,15 +106,17 @@ class EventsController < ApplicationController
         params[:recurring_value] = rule[:interval]
         params[:recurring_option] = Event.recurrence_options.find_index { |k| rule[:rule_type].scan(k[0..1]).present? }
       end
+
+      # Count of each resource
+      params[:resource_counts] = @event.resource_counts.to_json if @event.resource_counts
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       form = params[:event]
       # Setting the proper :start and :ending values
       if form[:start].is_a? String
         date, time = form[:start_date], form[:start]
-        form[:start] = (date + ' ' + time).to_datetime
+        form[:start] = Time.zone.parse(date + ' ' + time).to_datetime
 
         duration = form[:duration].to_time
         form[:ending] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
@@ -128,11 +133,19 @@ class EventsController < ApplicationController
       else
         form[:recurrence] = nil
       end
-      params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence,
+
+      # Setting up resource_counts
+      footlog(form, JSON.parse(form[:resource_counts]))
+      form[:resource_counts] = JSON.parse(form[:resource_counts])
+
+      # Strong parameters
+      # Never trust parameters from the scary internet, only allow the white list through.
+      params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence, :resource_counts,
                                     :creator_name, resource_ids: [], facility_ids: [])
-      # Because recurrence is an object, we have to go through this bullshit to permit all its fields
+      # Because recurrence is an object, we have to go through this bullshit to permit all its hash fields
       params.require(:event).tap do |whitelisted|
         whitelisted[:recurrence] = params[:event][:recurrence]
+        whitelisted[:resource_counts] = params[:event][:resource_counts]
       end
 
     end # private

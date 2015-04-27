@@ -33,7 +33,7 @@
   %p
     %strong= model_class.human_attribute_name(:resources) + ':'
     %br
-    = @event.resources_list
+    = @event.resources.collect { |r| r.name + ' (' + @event.resource_counts[r.id].to_s + ')' }.join(', ')
 
 - if @event.recurrence.present?
   %p
