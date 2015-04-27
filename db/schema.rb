@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 20150427152709) do
     t.integer  "user_id"
     t.text     "recurrence"
     t.text     "resource_counts"
+    t.boolean  "approved",    default: true
+    t.boolean  "checked_in",  default: false
+    t.integer  "attendees"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -68,6 +71,8 @@ ActiveRecord::Schema.define(version: 20150427152709) do
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
+    t.boolean  "has_chairs"
+    t.boolean  "has_sound"
   end
 
   create_table "resources", force: :cascade do |t|
@@ -80,7 +85,6 @@ ActiveRecord::Schema.define(version: 20150427152709) do
     t.datetime "updated_at",       null: false
   end
 
-<<<<<<< HEAD
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
     t.integer  "room_number"
@@ -96,8 +100,6 @@ ActiveRecord::Schema.define(version: 20150427152709) do
     t.datetime "updated_at", null: false
   end
 
-=======
->>>>>>> events_multiple_resources
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                      null: false

@@ -1,4 +1,9 @@
 - model_class = Event
+- unless flash.blank?
+  - flash.each do |type, message|
+    %div{:class => "alert #{bootstrap_class_for(type)} fade in"}
+      %button.close{"data-dismiss" => "alert"} ×
+      = message
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
 
@@ -21,7 +26,7 @@
 %p
   %strong= model_class.human_attribute_name(:creator_name) + ':'
   %br
-  = @event.creator_name
+  = link_to @event.creator_name, user_path(User.find_by(name: @event.creator_name))
 
 - if @event.facilities_list.present?
   %p
@@ -35,11 +40,24 @@
     %br
     = @event.resources.collect { |r| r.name + ' (' + @event.resource_counts[r.id].to_s + ')' }.join(', ')
 
+%p
+  %strong= model_class.human_attribute_name(:attendees) + ':'
+  %br
+  = @event.attendees
+
 - if @event.recurrence.present?
   %p
     %strong= model_class.human_attribute_name(:recurrence) + ':'
     %br
     = @event.recurrence.to_s
+
+- if !@event.is_approved?
+  %p
+    %strong Pending Approval
+
+-if !@event.resources_checked_in? && @event.ending < Time.zone.now
+  %p
+    =link_to "Check in resources", check_in_path(@event), :class => 'btn btn-default btn-xs'
 
 
 = link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn btn-default'

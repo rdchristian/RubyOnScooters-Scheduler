@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence,
-                  :creator, :facility_ids, :resource_ids, :resource_counts, :creator_name
+                  :creator, :facility_ids, :resource_ids, :resource_counts, :creator_name,
+                  :approved, :checked_in, :attendees
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
 
@@ -97,6 +98,25 @@ class Event < ActiveRecord::Base
       self.resource_counts.reject! { |key, value| not resources.collect(&:id).include?(key) }
   end
 
+  # Methods that will be used to determine if event requires approval
+  def capacity_check
+    facilities.each do |fac|
+      if fac.capacity < attendees || fac.min_capacity > attendees
+        return false
+      end
+    end
+    return true
+  end
+
+  def facility_priority_check
+    facilities.each do |fac|
+      if !fac.priority
+        return false
+      end
+    end
+    return true
+  end 
+
   # Getters, setters, helpers, and virtual attributes
   def duration
     return nil unless ending or start
@@ -126,4 +146,13 @@ class Event < ActiveRecord::Base
   def resources_list
     resources.all.map(&:name).join(', ')
   end
+
+  def is_approved?
+    return approved
+  end
+
+  def resources_checked_in?
+    return checked_in
+  end
+
 end

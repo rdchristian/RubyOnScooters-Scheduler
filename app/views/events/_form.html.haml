@@ -104,6 +104,13 @@
             - Event.recurrence_options.each_with_index do |thing, i|
               %div{ 'data-value' => i }= thing
 
+  .row
+    .form-group.col-sm-2
+      = f.label :attendees, class: 'control-label'
+      .controls
+        = f.text_field :attendees, class: 'form-control number-picker', required: true
+      = error_span(@event[:attendees])
+
   .row-float
     = f.submit nil, class: 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
