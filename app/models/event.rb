@@ -101,7 +101,7 @@ class Event < ActiveRecord::Base
   # Methods that will be used to determine if event requires approval
   def capacity_check
     facilities.each do |fac|
-      if fac.capacity < attendees || fac.min_capacity > attendees
+      if (fac.capacity and fac.capacity < attendees) or (fac.min_capacity and fac.min_capacity > attendees)
         return false
       end
     end
