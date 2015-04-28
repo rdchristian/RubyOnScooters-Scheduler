@@ -23,7 +23,7 @@
       .form-group.col-sm-6
         = f.label :memo, class: 'control-label'
         .controls
-          = f.text_field :memo, class: 'form-control', required: true,
+          = f.text_field :memo, class: 'form-control',
             placeholder: "Leave a note for administrator's approval"
         = error_span(@event[:memo])
     
@@ -121,5 +121,5 @@
               %div{ 'data-value' => i }= thing
 
   .row-float
-    = f.submit nil, class: 'btn btn-primary'
+    = f.submit nil, class: 'btn btn-primary', data: { disable_with: "Submitting..." }
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
