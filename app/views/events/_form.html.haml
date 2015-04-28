@@ -18,14 +18,13 @@
         = f.text_field :description, class: 'form-control', required: true
       = error_span(@event[:description])
        
-  - if current_page?(action: 'new') or is_admin? 
-    .row  
-      .form-group.col-sm-6
-        = f.label :memo, class: 'control-label'
-        .controls
-          = f.text_field :memo, class: 'form-control', required: true,
-            placeholder: "Leave a note for administrator's approval"
-        = error_span(@event[:memo])
+  .row  
+    .form-group.col-sm-6
+      = f.label :memo, class: 'control-label'
+      .controls
+        = f.text_field :memo, class: 'form-control', required: false,
+          placeholder: "Leave a note for administrator's approval"
+      = error_span(@event[:memo])
     
   .row  
     .form-group.col-sm-3

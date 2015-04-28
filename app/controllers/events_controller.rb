@@ -82,6 +82,20 @@ class EventsController < ApplicationController
     end
   end
 
+  def approve
+    set_event
+    @event.approved = true;
+    @event.save!
+    redirect_to admin_path
+  end
+
+  def check_in
+    set_event
+    @event.checked_in = true;
+    @event.save!
+    redirect_to ""
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -103,20 +117,6 @@ class EventsController < ApplicationController
       else
         is_admin? ? Event : current_user.events
       end
-    end
-
-    def approve
-      set_event
-      @event.approved = true;
-      @event.save!
-      redirect_to admin_path
-    end
-
-    def check_in
-      set_event
-      @event.checked_in = true;
-      @event.save!
-      redirect_to ""
     end
 
     helper_method :format_fields
