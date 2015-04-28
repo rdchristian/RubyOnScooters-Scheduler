@@ -43333,3 +43333,618 @@ Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 
 
 Started GET "/assets/application-77d10f87f53808b78f7990aaed8d8efe.js?body=1" for ::1 at 2015-04-27 18:37:17 -0500
 >>>>>>> Stashed changes
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddMemoToEvents (20150428001114)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (6.3ms)[0m  [1mALTER TABLE "events" ADD "memo" text[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150428001114"]]
+  [1m[36m (3.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (5.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'events'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (4.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'events_facilities'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (4.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'events_resources'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (4.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'facilities'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (4.7ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'resources'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (4.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'searches'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (4.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+
+
+Started GET "/events" for ::1 at 2015-04-27 19:13:44 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by EventsController#index as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mEvent Load (2.7ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Admin"]]
+  [1m[35mFacility Load (1.7ms)[0m  SELECT "facilities".* FROM "facilities" INNER JOIN "events_facilities" ON "facilities"."id" = "events_facilities"."facility_id" WHERE "events_facilities"."event_id" = $1  [["event_id", 2]]
+  [1m[36mResource Load (1.5ms)[0m  [1mSELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1[0m  [["event_id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Admin"]]
+  [1m[35mFacility Load (0.7ms)[0m  SELECT "facilities".* FROM "facilities" INNER JOIN "events_facilities" ON "facilities"."id" = "events_facilities"."facility_id" WHERE "events_facilities"."event_id" = $1  [["event_id", 3]]
+  [1m[36mResource Load (0.6ms)[0m  [1mSELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1[0m  [["event_id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Admin"]]
+  [1m[35mFacility Load (0.7ms)[0m  SELECT "facilities".* FROM "facilities" INNER JOIN "events_facilities" ON "facilities"."id" = "events_facilities"."facility_id" WHERE "events_facilities"."event_id" = $1  [["event_id", 1]]
+  [1m[36mResource Load (0.5ms)[0m  [1mSELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1[0m  [["event_id", 1]]
+  Rendered events/index.html.haml within layouts/application (144.6ms)
+Completed 200 OK in 1044ms (Views: 959.8ms | ActiveRecord: 22.8ms)
+
+
+Started GET "/assets/alerts-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap_and_overrides-12051c387935c3fbe2b83ff44642cec2.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/events-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/facilities-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/resources-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/search-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/searches-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/users-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/application-f7cffd23da368751dfe176d34ab7e6a2.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/selectize-6707ed6730ce9b3b7893a51b5e148e12.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/selectize.bootstrap3-1fbddcc4fa023b121406e9300891fd7d.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/clockpicker-dbfe32fc699f68b7c987b7049c9876c8.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-datetimepicker-912b8de1bdb9718f2b7fb3801f9abcdf.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-touchspin/dist/jquery.bootstrap-touchspin-22922f3f738aa91eefbc7f1178637deb.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-daterangepicker/daterangepicker-bs3-ecb78f10cd037e556fc4900c29ae6311.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-3-timepicker/css/bootstrap-timepicker-adad5519a79e24c17ae223ea3cfa8229.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrapformhelpers/css/bootstrap-formhelpers-310b0cc3e6be3cb236f2d694eea448f8.css?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/jquery.turbolinks-64b1af28e71ef81b90d4eecd3b5128da.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/transition-49c071d4d736acca69daed5bd6c4fdbd.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/alert-4fa131fff2ae05a1d89df662cd4a8531.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/modal-d403efa7333c333fdeecc5daa727c437.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/dropdown-89b3696cc302eaf377aca640fae08632.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy-f3a0e91892e9edb7ccced4ed84ff23ec.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/tab-fab339701c02e2cb7d02570dd26fcf10.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/tooltip-1727c885f6618bb619e6a29ef0496d11.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/popover-c19ae92999a32fa658ffe5d5cc13d195.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/button-dcd83af4b8aa46a9026dec4ea360a003.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/collapse-cfd6f6e5cff9c41e78cc52464a71358b.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/carousel-ac6115504ba6a31f58406c5978a6aa20.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap/affix-745457a96802e8f61e15a7622b54b68f.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/twitter/bootstrap-4a7c8463ef111cbe52eec5efe89f8319.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/selectize-c4519b6bce9c49187b4a042704dfd20f.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/moment-66988874bf5714cb1e4a6f53d733b6e1.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-datetimepicker-207776b276cc4aec32e5f32af8939235.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-3-timepicker/js/bootstrap-timepicker-37e0e07b598c22e484f77c935387deb4.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-touchspin/dist/jquery.bootstrap-touchspin-f578ae7263ca105cdf0a51667121ffdf.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrap-daterangepicker/daterangepicker-10e08dffae2c935a2a04d3eb9847856b.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/bootstrapformhelpers/js/bootstrap-formhelpers-7ee6adbc7b7e74dc88340b6eca696774.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/clockpicker/clockpicker-18fa05012fb994dcb82beab524587413.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/clockpicker/highlight.min-3d2772fa0cc6b868111d29a6918c135f.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/clockpicker/html5shiv-9e98afe2c5014c54f2faa45fb117c066.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/clockpicker/respond.min-5de4bf76f22e6a40db84512e393cdaba.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/assets/application-77d10f87f53808b78f7990aaed8d8efe.js?body=1" for ::1 at 2015-04-27 19:13:46 -0500
+
+
+Started GET "/users/1/events/new" for ::1 at 2015-04-27 19:13:48 -0500
+Processing by EventsController#new as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered shared/_events_error_messages.html.haml (4.9ms)
+  [1m[36mFacility Load (0.4ms)[0m  [1mSELECT "facilities".* FROM "facilities"[0m
+  [1m[35mResource Load (0.3ms)[0m  SELECT "resources".* FROM "resources"
+  Rendered events/_form.html.haml (77.7ms)
+  Rendered events/new.html.haml within layouts/application (89.1ms)
+Completed 200 OK in 537ms (Views: 529.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/page-specific/global_controller-e0785d2c1b1cba5af8b3b6a9141ddd22.js?body=1" for ::1 at 2015-04-27 19:13:48 -0500
+
+
+Started GET "/assets/glyphicons-halflings-regular-4c18eb6f51df3274f7d02dcd79043b73.woff" for ::1 at 2015-04-27 19:13:48 -0500
+
+
+Started GET "/assets/page-specific/events-182e2c93d72bdb5b47887a612e4671a9.js?body=1" for ::1 at 2015-04-27 19:13:48 -0500
+
+
+Started GET "/users/1/events/new" for ::1 at 2015-04-27 19:16:51 -0500
+Processing by EventsController#new as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered shared/_events_error_messages.html.haml (2.3ms)
+  [1m[35mFacility Load (0.5ms)[0m  SELECT "facilities".* FROM "facilities"
+  [1m[36mResource Load (0.4ms)[0m  [1mSELECT "resources".* FROM "resources"[0m
+  Rendered events/_form.html.haml (47.2ms)
+  Rendered events/new.html.haml within layouts/application (53.6ms)
+Completed 200 OK in 542ms (Views: 536.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/alerts-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap_and_overrides-12051c387935c3fbe2b83ff44642cec2.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/events-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/facilities-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/resources-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/searches-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/search-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/users-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/application-f7cffd23da368751dfe176d34ab7e6a2.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/selectize-6707ed6730ce9b3b7893a51b5e148e12.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/selectize.bootstrap3-1fbddcc4fa023b121406e9300891fd7d.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/clockpicker-dbfe32fc699f68b7c987b7049c9876c8.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-datetimepicker-912b8de1bdb9718f2b7fb3801f9abcdf.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-touchspin/dist/jquery.bootstrap-touchspin-22922f3f738aa91eefbc7f1178637deb.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-daterangepicker/daterangepicker-bs3-ecb78f10cd037e556fc4900c29ae6311.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-3-timepicker/css/bootstrap-timepicker-adad5519a79e24c17ae223ea3cfa8229.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrapformhelpers/css/bootstrap-formhelpers-310b0cc3e6be3cb236f2d694eea448f8.css?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/jquery.turbolinks-64b1af28e71ef81b90d4eecd3b5128da.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/transition-49c071d4d736acca69daed5bd6c4fdbd.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/alert-4fa131fff2ae05a1d89df662cd4a8531.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/modal-d403efa7333c333fdeecc5daa727c437.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/dropdown-89b3696cc302eaf377aca640fae08632.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy-f3a0e91892e9edb7ccced4ed84ff23ec.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/tab-fab339701c02e2cb7d02570dd26fcf10.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/tooltip-1727c885f6618bb619e6a29ef0496d11.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/popover-c19ae92999a32fa658ffe5d5cc13d195.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/button-dcd83af4b8aa46a9026dec4ea360a003.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/collapse-cfd6f6e5cff9c41e78cc52464a71358b.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/carousel-ac6115504ba6a31f58406c5978a6aa20.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap/affix-745457a96802e8f61e15a7622b54b68f.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/twitter/bootstrap-4a7c8463ef111cbe52eec5efe89f8319.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/selectize-c4519b6bce9c49187b4a042704dfd20f.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/moment-66988874bf5714cb1e4a6f53d733b6e1.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-datetimepicker-207776b276cc4aec32e5f32af8939235.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-3-timepicker/js/bootstrap-timepicker-37e0e07b598c22e484f77c935387deb4.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-touchspin/dist/jquery.bootstrap-touchspin-f578ae7263ca105cdf0a51667121ffdf.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrap-daterangepicker/daterangepicker-10e08dffae2c935a2a04d3eb9847856b.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/bootstrapformhelpers/js/bootstrap-formhelpers-7ee6adbc7b7e74dc88340b6eca696774.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/clockpicker/clockpicker-18fa05012fb994dcb82beab524587413.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/clockpicker/highlight.min-3d2772fa0cc6b868111d29a6918c135f.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/clockpicker/html5shiv-9e98afe2c5014c54f2faa45fb117c066.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/clockpicker/respond.min-5de4bf76f22e6a40db84512e393cdaba.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/application-77d10f87f53808b78f7990aaed8d8efe.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/page-specific/global_controller-e0785d2c1b1cba5af8b3b6a9141ddd22.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/assets/page-specific/events-182e2c93d72bdb5b47887a612e4671a9.js?body=1" for ::1 at 2015-04-27 19:16:52 -0500
+
+
+Started GET "/users/1/events/" for ::1 at 2015-04-27 19:20:29 -0500
+Processing by EventsController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events" WHERE "events"."user_id" = $1  [["user_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Admin"]]
+  [1m[36mFacility Load (0.8ms)[0m  [1mSELECT "facilities".* FROM "facilities" INNER JOIN "events_facilities" ON "facilities"."id" = "events_facilities"."facility_id" WHERE "events_facilities"."event_id" = $1[0m  [["event_id", 2]]
+  [1m[35mResource Load (0.6ms)[0m  SELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Admin"]]
+  [1m[36mFacility Load (0.7ms)[0m  [1mSELECT "facilities".* FROM "facilities" INNER JOIN "events_facilities" ON "facilities"."id" = "events_facilities"."facility_id" WHERE "events_facilities"."event_id" = $1[0m  [["event_id", 3]]
+  [1m[35mResource Load (0.5ms)[0m  SELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Admin"]]
+  [1m[36mFacility Load (0.7ms)[0m  [1mSELECT "facilities".* FROM "facilities" INNER JOIN "events_facilities" ON "facilities"."id" = "events_facilities"."facility_id" WHERE "events_facilities"."event_id" = $1[0m  [["event_id", 1]]
+  [1m[35mResource Load (0.7ms)[0m  SELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1  [["event_id", 1]]
+  Rendered events/index.html.haml within layouts/application (26.9ms)
+Completed 200 OK in 515ms (Views: 506.7ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/assets/alerts-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap_and_overrides-12051c387935c3fbe2b83ff44642cec2.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/events-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/searches-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/facilities-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/resources-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/search-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/users-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/application-f7cffd23da368751dfe176d34ab7e6a2.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/selectize-6707ed6730ce9b3b7893a51b5e148e12.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/selectize.bootstrap3-1fbddcc4fa023b121406e9300891fd7d.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/clockpicker-dbfe32fc699f68b7c987b7049c9876c8.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-datetimepicker-912b8de1bdb9718f2b7fb3801f9abcdf.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-touchspin/dist/jquery.bootstrap-touchspin-22922f3f738aa91eefbc7f1178637deb.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-daterangepicker/daterangepicker-bs3-ecb78f10cd037e556fc4900c29ae6311.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-3-timepicker/css/bootstrap-timepicker-adad5519a79e24c17ae223ea3cfa8229.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrapformhelpers/css/bootstrap-formhelpers-310b0cc3e6be3cb236f2d694eea448f8.css?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/jquery.turbolinks-64b1af28e71ef81b90d4eecd3b5128da.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/transition-49c071d4d736acca69daed5bd6c4fdbd.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/alert-4fa131fff2ae05a1d89df662cd4a8531.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/modal-d403efa7333c333fdeecc5daa727c437.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/dropdown-89b3696cc302eaf377aca640fae08632.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy-f3a0e91892e9edb7ccced4ed84ff23ec.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/tab-fab339701c02e2cb7d02570dd26fcf10.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/tooltip-1727c885f6618bb619e6a29ef0496d11.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/popover-c19ae92999a32fa658ffe5d5cc13d195.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/button-dcd83af4b8aa46a9026dec4ea360a003.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/collapse-cfd6f6e5cff9c41e78cc52464a71358b.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/carousel-ac6115504ba6a31f58406c5978a6aa20.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap/affix-745457a96802e8f61e15a7622b54b68f.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/twitter/bootstrap-4a7c8463ef111cbe52eec5efe89f8319.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/selectize-c4519b6bce9c49187b4a042704dfd20f.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/moment-66988874bf5714cb1e4a6f53d733b6e1.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-datetimepicker-207776b276cc4aec32e5f32af8939235.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-3-timepicker/js/bootstrap-timepicker-37e0e07b598c22e484f77c935387deb4.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-touchspin/dist/jquery.bootstrap-touchspin-f578ae7263ca105cdf0a51667121ffdf.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrap-daterangepicker/daterangepicker-10e08dffae2c935a2a04d3eb9847856b.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/bootstrapformhelpers/js/bootstrap-formhelpers-7ee6adbc7b7e74dc88340b6eca696774.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/clockpicker/clockpicker-18fa05012fb994dcb82beab524587413.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/clockpicker/highlight.min-3d2772fa0cc6b868111d29a6918c135f.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/clockpicker/html5shiv-9e98afe2c5014c54f2faa45fb117c066.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/clockpicker/respond.min-5de4bf76f22e6a40db84512e393cdaba.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/assets/application-77d10f87f53808b78f7990aaed8d8efe.js?body=1" for ::1 at 2015-04-27 19:20:29 -0500
+
+
+Started GET "/users/1/events/2" for ::1 at 2015-04-27 19:20:35 -0500
+Processing by EventsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."user_id" = $1 AND "events"."id" = $2 LIMIT 1[0m  [["user_id", 1], ["id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Admin"]]
+  [1m[35mFacility Load (0.3ms)[0m  SELECT "facilities".* FROM "facilities" INNER JOIN "events_facilities" ON "facilities"."id" = "events_facilities"."facility_id" WHERE "events_facilities"."event_id" = $1  [["event_id", 2]]
+  [1m[36mResource Load (0.2ms)[0m  [1mSELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1[0m  [["event_id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "resources".* FROM "resources" INNER JOIN "events_resources" ON "resources"."id" = "events_resources"."resource_id" WHERE "events_resources"."event_id" = $1  [["event_id", 2]]
+  Rendered events/show.html.haml within layouts/application (16.5ms)
+Completed 200 OK in 487ms (Views: 482.5ms | ActiveRecord: 1.8ms)

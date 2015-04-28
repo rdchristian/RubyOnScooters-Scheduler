@@ -165,7 +165,7 @@ class EventsController < ApplicationController
       # Strong parameters
       # Never trust parameters from the scary internet, only allow the white list through.
       params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence, :resource_counts,
-                                    :attendees, :creator_name, resource_ids: [], facility_ids: [])
+                                    :attendees, :memo, :creator_name, resource_ids: [], facility_ids: [])
       # Because recurrence is an object, we have to go through this bullshit to permit all its hash fields
       params.require(:event).tap do |whitelisted|
         whitelisted[:recurrence] = params[:event][:recurrence]

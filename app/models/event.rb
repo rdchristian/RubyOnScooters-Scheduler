@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence,
                   :creator, :facility_ids, :resource_ids, :resource_counts, :creator_name,
-                  :approved, :checked_in, :attendees
+                  :approved, :checked_in, :attendees, :memo
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
 
