@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20150428001114) do
     t.boolean  "has_tv"
     t.boolean  "has_tables"
     t.boolean  "has_projector"
+    t.boolean  "has_chairs"
+    t.boolean  "has_sound"
   end
 
   create_table "resources", force: :cascade do |t|
