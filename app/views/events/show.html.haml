@@ -15,6 +15,12 @@
   %strong= model_class.human_attribute_name(:description) + ':'
   %br
   = @event.description
+
+- if is_admin? and @event.memo.present?
+  %p
+    %strong= model_class.human_attribute_name(:memo) + ':'
+    %br
+    = @event.memo
 %p
   %strong= model_class.human_attribute_name(:start) + ':'
   %br

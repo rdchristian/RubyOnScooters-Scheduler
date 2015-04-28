@@ -17,6 +17,15 @@
       .controls
         = f.text_field :description, class: 'form-control', required: true
       = error_span(@event[:description])
+       
+  - if current_page?(action: 'new') or is_admin? 
+    .row  
+      .form-group.col-sm-6
+        = f.label :memo, class: 'control-label'
+        .controls
+          = f.text_field :memo, class: 'form-control', required: true,
+            placeholder: "Leave a note for administrator's approval"
+        = error_span(@event[:memo])
     
   .row  
     .form-group.col-sm-3
@@ -57,7 +66,7 @@
         = f.text_field :ending, class: 'form-control', readonly: '', style: 'cursor: auto',
           value: params[:ending]
                            
-  -if is_admin?  
+  - if is_admin?  
     .row  
       .form-group.col-sm-3
         = f.label :creator_name, class: 'control-label'
@@ -86,6 +95,13 @@
         = f.hidden_field :resource_counts, value: params[:resource_counts]
       = error_span(@event[:resource_ids])
 
+  .row
+    .form-group.col-sm-2
+      = f.label :attendees, class: 'control-label'
+      .controls
+        = f.text_field :attendees, class: 'form-control number-picker', required: true
+      = error_span(@event[:attendees])
+
   .row-float
     .form-group
       = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
@@ -103,13 +119,6 @@
           .bfh-selectbox{ 'data-name' => 'recurring_option', 'data-value' => params[:recurring_option] }
             - Event.recurrence_options.each_with_index do |thing, i|
               %div{ 'data-value' => i }= thing
-
-  .row
-    .form-group.col-sm-2
-      = f.label :attendees, class: 'control-label'
-      .controls
-        = f.text_field :attendees, class: 'form-control number-picker', required: true
-      = error_span(@event[:attendees])
 
   .row-float
     = f.submit nil, class: 'btn btn-primary'

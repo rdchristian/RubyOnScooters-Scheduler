@@ -1,10 +1,13 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence,
                   :creator, :facility_ids, :resource_ids, :resource_counts, :creator_name,
-                  :approved, :checked_in, :attendees
+                  :approved, :checked_in, :attendees, :memo
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
 
+  serialize :resource_counts, Hash # Number of each resource
+  serialize :recurrence, Hash
+  
   # Relationships
   belongs_to :creator, :class_name => :User, :foreign_key => "user_id"  
   has_and_belongs_to_many :resources
@@ -15,7 +18,6 @@ class Event < ActiveRecord::Base
 
   # IceCube - Recurrence management
   include IceCube
-  serialize :recurrence, Hash
 
   def recurrence=(recurr)
     recurr = recurr.blank? ? {} : recurr.to_hash
@@ -42,17 +44,25 @@ class Event < ActiveRecord::Base
   def self.overlapping_events_to_a(start_t, end_t)
     q = self.where("start <= ? and ending >= ?", end_t, start_t).to_a
     q += self.all.collect { |e| e if e.recurrence and e.recurrence.occurring_between?(start_t, end_t) }.compact
-    q ? q : []
   end
-
-  # Number of resources
-  serialize :resource_counts, Hash
-
 
   # Validations
   validates :title, :start, :creator, :presence => true
   validates :start, date: true
   validate  :valid_resource_counts, :resources_available, :facility_available
+
+  def valid_resource_counts
+    # Integerize { '3' => '5' } --> { 3 => 5 } 
+    self.resource_counts = Hash[*resource_counts.to_a.flatten.map(&:to_i)]
+
+    # Every resource has to have a count
+    errors.add(:resource_counts, ': resource does not have a count') if
+      not resources.collect(&:id).all? { |id| resource_counts.has_key?(id) }
+      
+    # Every count has to belong to a resource (silently fix it)
+    logger.debug('Attempting to clean resource_counts hash') if
+      self.resource_counts.reject! { |key, value| not resources.collect(&:id).include?(key) }
+  end
 
   def resources_available
     resources.each do |res|
@@ -83,19 +93,6 @@ class Event < ActiveRecord::Base
       errors.add(:facilities, ': Cannot reserve "' + fac.name + '" for this long') if 
         ending > max_end_time
     end
-  end
-
-  def valid_resource_counts
-    # Integerize { '3' => '5' } --> { 3 => 5 } 
-    self.resource_counts = Hash[*resource_counts.to_a.flatten.map(&:to_i)]
-
-    # Every resource has to have a count
-    errors.add(:resource_counts, ': resource does not have a count') if
-      not resources.collect(&:id).all? { |id| resource_counts.has_key?(id) }
-      
-    # Every count has to belong to a resource (silently fix it)
-    logger.debug('Attempting to clean resource_counts hash') if
-      self.resource_counts.reject! { |key, value| not resources.collect(&:id).include?(key) }
   end
 
   # Methods that will be used to determine if event requires approval
