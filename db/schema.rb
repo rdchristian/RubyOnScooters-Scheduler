@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427234045) do
+  ActiveRecord::Schema.define(version: 20150427234045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20150427234045) do
     t.boolean  "has_tv"
     t.boolean  "has_tables"
     t.boolean  "has_projector"
+    t.boolean  "has_chairs"
+    t.boolean  "has_sound"
   end
 
   create_table "resources", force: :cascade do |t|
