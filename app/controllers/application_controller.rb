@@ -20,9 +20,11 @@ class ApplicationController < ActionController::Base
 
     helper_method :footlog
     def footlog(*thing)
-      thing.each do |t|
-        flash[:log] || flash[:log] = []
-        flash[:log] << t
+      if not Rails.env.production?
+        thing.each do |t|
+          flash[:log] || flash[:log] = []
+          flash[:log] << t
+        end
       end
     end
 
