@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   # POST /users/:id/events.json
   def create
     @event = @scope.new(event_params)
-    if !@event.capacity_check || !@event.facility_priority_check
+    if !@event.capacity_check || !@event.facility_priority_check || !@event.recurring_check || !@event.schedule_time_check
       @event.approved = false
     end
     respond_to do |format|
@@ -56,7 +56,14 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully updated.' }
+        if !@event.capacity_check || !@event.facility_priority_check || !@event.recurring_check || !@event.schedule_time_check
+          @event.approved = false
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive an email when it is approved or denied.' }
+        else
+          @event.approved = true
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully updated.' }
+        end
+        @event.save
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }

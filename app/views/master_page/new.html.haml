@@ -76,3 +76,6 @@
             %td= event.facilities_list
             %td
               = link_to "Dismiss", check_in_path(event), :class => 'btn btn-default btn-xs'
+  %h3='User Type Settings:'
+  %h5='How many days advance can an event be scheduled?'
+  = render :partial => "form"

@@ -110,12 +110,26 @@ class Event < ActiveRecord::Base
 
   def facility_priority_check
     facilities.each do |fac|
-      if !fac.priority
+      if fac.priority
         return false
       end
     end
     return true
   end 
+
+  def recurring_check
+    return recurrence.present?  
+  end
+
+  def schedule_time_check
+    if creator.is_reg? && ((Date.parse(start_date) - Date.today) <= Rails.application.config.REGULAR_SCHEDULE_DAYS || Rails.application.config.REGULAR_SCHEDULE_DAYS == -1)
+      return true
+    elsif (creator.is_staff? || creator.is_admin?) && ((Date.parse(start_date) - Date.today) <= Rails.application.config.STAFF_SCHEDULE_DAYS || Rails.application.config.STAFF_SCHEDULE_DAYS == -1)
+      return true
+    else
+      return false
+    end
+  end
 
   # Getters, setters, helpers, and virtual attributes
   def duration

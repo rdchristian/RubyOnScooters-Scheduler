@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   get    '/users/activate/:id' => 'users#activate', as: 'activate_user'
   get    '/events/approve/:id' => 'events#approve', as: 'approve_event'
   get    '/events/checkin/:id' => 'events#check_in', as: 'check_in'
+  post   '/post/change_schedule_variable' => 'master_page#change_schedule_variable'
 
 end

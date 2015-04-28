@@ -17,6 +17,12 @@ module RubyOnScootersScheduler
     config.time_zone = 'Central Time (US & Canada)'
     config.active_record.default_timezone = :local
 
+    #Global user variables
+    config.REGULAR_SCHEDULE_DAYS = 30         #initially regular users can schedule events for a month in advance
+    config.STAFF_SCHEDULE_DAYS = -1           #initially staff users can schedule events any time into the futre
+
+
+
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
