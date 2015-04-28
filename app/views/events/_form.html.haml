@@ -95,18 +95,18 @@
         = f.hidden_field :resource_counts, value: params[:resource_counts]
       = error_span(@event[:resource_ids])
 
-  .row-float
-    .form-group
-      = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
-        = check_box_tag :recurrence_checked, nil, params[:recurrence_checked]
-        Is this a recurring event?
-
   .row
     .form-group.col-sm-2
       = f.label :attendees, class: 'control-label'
       .controls
         = f.text_field :attendees, class: 'form-control number-picker', required: true
       = error_span(@event[:attendees])
+
+  .row-float
+    .form-group
+      = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
+        = check_box_tag :recurrence_checked, nil, params[:recurrence_checked]
+        Is this a recurring event?
 
   .row.hide-slide
     .form-group.col-md-3
