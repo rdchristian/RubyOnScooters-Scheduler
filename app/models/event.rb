@@ -41,9 +41,16 @@ class Event < ActiveRecord::Base
     }[option]
   end
 
+  def recurrence_conflict?(start_t, end_t)
+    recurrence.occurring_between?(start_t, end_t) or 
+    # to account for end time (recurrence only knows about the start time)
+    recurrence.occurring_between?(start_t - duration_seconds, end_t - duration_seconds)
+  end
+
   def self.overlapping_events_to_a(start_t, end_t)
     q = self.where("start <= ? and ending >= ?", end_t, start_t).to_a
-    q += self.all.collect { |e| e if e.recurrence and e.recurrence.occurring_between?(start_t, end_t) }.compact
+    q += self.where.not(recurrence: nil).
+         collect { |e| e if e.recurrence_conflict?(start_t, end_t) }.compact
   end
 
   # Validations
@@ -95,6 +102,34 @@ class Event < ActiveRecord::Base
     end
   end
 
+  # Called from the controller
+  def calculate_recurrence_exceptions
+    require 'set'
+    exceptions = Set.new
+    same_time_events = 
+      Event.where("start >= ?", recurrence.first.to_time). # Every event in the future of this event
+      where(recurrence: nil).collect { |e|              # Collect conflicts with non-recurring events
+        e if recurrence_conflict?(e.start, e.ending)
+      }.compact
+
+    facilities.each do |fac|
+      exceptions += same_time_events.
+        collect{ |e| recurrence.previous_occurrence(e.ending) if 
+          e.facilities.exists?(fac.id)
+        }.compact
+    end
+
+    resources.each do |res|
+      exceptions += same_time_events.
+        collect{ |e| recurrence.previous_occurrence(e.ending) if
+          same_time_events.map{ |e| e.resource_counts[res.id] }.  # Collect the number of this resource reserved
+          sum + resource_counts[res.id] > res.numberOf
+        }.compact
+    end
+    return exceptions
+  end
+
+
   # Methods that will be used to determine if event requires approval
   def capacity_check
     facilities.each do |fac|
@@ -136,6 +171,11 @@ class Event < ActiveRecord::Base
     diff_in_min = ((ending - start) / 60).round  # converting difference from seconds to minutes
     h, m = diff_in_min / 60, diff_in_min % 60
     "#{h}:#{m}".to_time
+  end
+
+  def duration_seconds
+    return nil unless ending or start
+    (ending - start).seconds
   end
 
   def duration=(d)
