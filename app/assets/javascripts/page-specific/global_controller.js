@@ -29,20 +29,23 @@ $('.timepicker').timepicker({
     showInputs: true,
 });
 
-$('.single-datepicker').daterangepicker({
+var datepicker_params = {
     singleDatePicker: true,
     showDropdowns: true,
     minDate: moment(),
     format: 'MMMM D, YYYY',
-});
+};
+$('.single-datepicker:not(.up-datepicker)').daterangepicker(datepicker_params);
+datepicker_params['drops'] = 'up';
+$('.single-datepicker.up-datepicker').daterangepicker(datepicker_params);
 
 $().bfhdatepicker('toggle');
 $().bfhtimepicker('toggle');
 $().bfhselectbox('toggle');
 
 // Forward the click on the tiny calendar icon to the date picker
-$('.click-date').click(function() {
-    $('.single-datepicker').click();
+$('.click-date').click(function(e) {
+    $(this).siblings('.single-datepicker').click();
 });
 
 // To make them uneditable, but still looking 'enabled'
