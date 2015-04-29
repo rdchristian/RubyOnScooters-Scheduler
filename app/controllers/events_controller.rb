@@ -157,11 +157,14 @@ class EventsController < ApplicationController
       exception_times = []
       flash[:alert] = 'Your event is at a conflict during the following dates:<br>'
       exceptions.each do |exc| 
-        @event.recurrence.add_exception_time(exc)
+        schedule = @event.recurrence
+        schedule.add_exception_time exc
+        @event.recurrence = schedule # write only happens on '=' which is why we need the intermediate schedule variable
         exception_times << exc.strftime("%b %e, %Y")
       end
       flash[:alert] += exception_times.to_sentence
       flash[:alert] += '<br>These dates have been automatically excluded from the schedule.'
+      @event.save
     end
 
     def event_params
