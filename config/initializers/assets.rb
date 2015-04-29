@@ -15,3 +15,8 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'co
 # Because I configured for page-specific javascripts (instead of dumping everything into application.js)
 # precompile += %w( directory1/* directory2/* file.js )
 Rails.application.config.assets.precompile += %w( page-specific/*)
+
+
+# https://github.com/seejohnrun/ice_cube/issues/252
+# bump up icecube version to 12.
+IceCube.compatibility = 12

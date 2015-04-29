@@ -7,10 +7,13 @@ class User < ActiveRecord::Base
 	has_many :events
 	before_save {self.email = email.downcase}
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_PHONE_REGEX = /\A[0-9]{10}\z/
 	validates :name, :presence => true
 	validates :email, :presence => true, :uniqueness => true, format: { with: VALID_EMAIL_REGEX}
+  validates :phone, format: {with: VALID_PHONE_REGEX}
 	has_secure_password
-	validates :password, length: { minimum: 8 }, :on => :create
+  validates :password, length: { minimum: 8 }, :if => :password
+  #password is not saved in db, only changes if there is a user input passowrd (so if user is being created or password is changing)
 
 
   def User.digest(string)
@@ -40,10 +43,6 @@ class User < ActiveRecord::Base
 
   def is_activated?
     return activated
-  end
-
-  def activate
-    activated = true
   end
 
   def is_admin?

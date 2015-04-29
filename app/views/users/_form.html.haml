@@ -17,6 +17,7 @@
       = f.label :phone, class: 'control-label'
       .controls
         = f.text_field :phone, class: 'form-control', required: true
+        = "Please do not include any formatting; just the 9 digits"
       = error_span(@user[:phone])
   .row  
     .form-group.col-sm-6
@@ -24,22 +25,6 @@
       .controls
         = f.text_field :home_group, class: 'form-control', required: true
       = error_span(@user[:home_group])
-  -if current_user != nil && current_user.is_admin?
-    .row
-      .form-group.col-sm-6
-        = f.label 'User Level', class: 'control-label'
-        .controls
-          = f.select :user_level, options_for_select([['Regular',0], ['Staff',1], ['Administrator',2]])
-        = error_span(@user[:user_level])
-    .row
-      .form-group.col-sm-6
-        = f.label 'Status', class: 'control-label'
-        .controls
-          -if @user.is_activated?
-            =f.label "Activated", class: 'form-control'
-          -else
-            =f.select :activated, options_for_select([['Active',true], ['Inactive', false]])
-        = error_span(@user[:activated])
   .row  
     .form-group.col-sm-6
       = f.label :password, class: 'control-label'

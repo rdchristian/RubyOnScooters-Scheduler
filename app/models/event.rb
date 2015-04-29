@@ -1,10 +1,14 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence,
-                  :creator, :facility_ids, :resource_ids, :creator_name
+                  :creator, :facility_ids, :resource_ids, :resource_counts, :creator_name,
+                  :approved, :checked_in, :attendees, :memo
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
 
-  #Relationships
+  serialize :resource_counts, Hash # Number of each resource
+  serialize :recurrence, Hash
+  
+  # Relationships
   belongs_to :creator, :class_name => :User, :foreign_key => "user_id"  
   has_and_belongs_to_many :resources
   has_and_belongs_to_many :facilities
@@ -12,9 +16,8 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :resources
   accepts_nested_attributes_for :facilities
 
-  #IceCube - Recurrence management
+  # IceCube - Recurrence management
   include IceCube
-  serialize :recurrence, Hash
 
   def recurrence=(recurr)
     recurr = recurr.blank? ? {} : recurr.to_hash
@@ -38,17 +41,36 @@ class Event < ActiveRecord::Base
     }[option]
   end
 
-  #Validations
+  def self.overlapping_events_to_a(start_t, end_t)
+    q = self.where("start <= ? and ending >= ?", end_t, start_t).to_a
+    q += self.all.collect { |e| e if e.recurrence and e.recurrence.occurring_between?(start_t, end_t) }.compact
+  end
+
+  # Validations
   validates :title, :start, :creator, :presence => true
   validates :start, date: true
-  validate :resources_available, :facility_available
+  validate  :valid_resource_counts, :resources_available, :facility_available
+
+  def valid_resource_counts
+    # Integerize { '3' => '5' } --> { 3 => 5 } 
+    self.resource_counts = Hash[*resource_counts.to_a.flatten.map(&:to_i)]
+
+    # Every resource has to have a count
+    errors.add(:resource_counts, ': resource does not have a count') if
+      not resources.collect(&:id).all? { |id| resource_counts.has_key?(id) }
+      
+    # Every count has to belong to a resource (silently fix it)
+    logger.debug('Attempting to clean resource_counts hash') if
+      self.resource_counts.reject! { |key, value| not resources.collect(&:id).include?(key) }
+  end
 
   def resources_available
     resources.each do |res|
       errors.add(:resources, ': All "' + res.name + '" are taken') if 
-        Resource.find(res.id).events.
-                 where("start <= ? and ending >= ? and id != ?", ending, start, id).  # Search overlapping timeframes
-                 count >= res.numberOf
+        Resource.find(res.id).events.where.not(id: id).        # Except yourself
+                 overlapping_events_to_a(start, ending).
+                 map{ |e| e.resource_counts[res.id] }.         # Collect the number of this resource reserved
+                 sum + resource_counts[res.id] > res.numberOf
 
       return unless res.max_reserve_time
       maxt = res.max_reserve_time
@@ -60,9 +82,9 @@ class Event < ActiveRecord::Base
 
   def facility_available
     facilities.each do |fac|
-      errors.add(:facilities, ': All "' + fac.name + '" are taken') if 
-        Facility.find(fac.id).events.
-                 where("start <= ? and ending >= ? and id != ?", ending, start, id).  # Search overlapping timeframes
+      errors.add(:facilities, ': "' + fac.name + '" is taken') if 
+        Facility.find(fac.id).events.where.not(id: id).        # Except yourself
+                 overlapping_events_to_a(start, ending).
                  count > 0
 
       return unless fac.max_reserve_time
@@ -70,6 +92,39 @@ class Event < ActiveRecord::Base
       max_end_time = start.advance({:hours => maxt.hour, :minutes => maxt.min})
       errors.add(:facilities, ': Cannot reserve "' + fac.name + '" for this long') if 
         ending > max_end_time
+    end
+  end
+
+  # Methods that will be used to determine if event requires approval
+  def capacity_check
+    facilities.each do |fac|
+      if (fac.capacity and fac.capacity < attendees) or (fac.min_capacity and fac.min_capacity > attendees)
+        return false
+      end
+    end
+    return true
+  end
+
+  def facility_priority_check
+    facilities.each do |fac|
+      if fac.priority
+        return false
+      end
+    end
+    return true
+  end 
+
+  def recurring_check
+    return recurrence.present?  
+  end
+
+  def schedule_time_check
+    if creator.is_reg? && ((Date.parse(start_date) - Date.today) <= Rails.application.config.REGULAR_SCHEDULE_DAYS || Rails.application.config.REGULAR_SCHEDULE_DAYS == -1)
+      return true
+    elsif (creator.is_staff? || creator.is_admin?) && ((Date.parse(start_date) - Date.today) <= Rails.application.config.STAFF_SCHEDULE_DAYS || Rails.application.config.STAFF_SCHEDULE_DAYS == -1)
+      return true
+    else
+      return false
     end
   end
 
@@ -102,4 +157,13 @@ class Event < ActiveRecord::Base
   def resources_list
     resources.all.map(&:name).join(', ')
   end
+
+  def is_approved?
+    return approved
+  end
+
+  def resources_checked_in?
+    return checked_in
+  end
+
 end

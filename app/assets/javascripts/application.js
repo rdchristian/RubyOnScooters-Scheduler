@@ -22,4 +22,6 @@
 //= require bootstrap-daterangepicker/daterangepicker
 //= require bootstrapformhelpers/js/bootstrap-formhelpers
 //= require_tree ../../../vendor/assets/javascripts/.
+//= require loading_spinner
 //= require turbolinks
+//= require turboboost

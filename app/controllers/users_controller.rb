@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def edit_password
+    @user = current_user
+  end
+
   # POST /users
   # POST /users.json
   def create
@@ -31,7 +35,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         login @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'You will receive an email when account is activated.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -49,7 +53,7 @@ class UsersController < ApplicationController
         format.json { render :show, status: :ok, location: @user }
 #        UserMailer.account_activation(@user).deliver_now
       else
-        format.html { render :edit }
+        format.html { redirect_to @user, danger: "Unable to edit user" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -65,6 +69,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_password
+    @user = User.find_by(email: params[:email])
+    respond_to do |format|
+      if @user.update(password_params)
+        format.html { redirect_to @user, notice: "Password successfully changed" }
+        format.json { render :show, status: :ok, location: @user }
+  #     UserMailer.account_activation(@user).deliver_now
+      else
+        format.html { render :edit_password }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def activate
+    set_user
+    @user.activated = true;
+    @user.save!
+    redirect_to admin_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -78,6 +103,10 @@ class UsersController < ApplicationController
 
     def update_user_params
       params.require(:user).permit(:name, :email, :phone, :home_group, :user_level, :activated)
+    end
+
+    def password_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end
 
     def skip_password_attribute

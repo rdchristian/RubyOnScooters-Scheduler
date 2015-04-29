@@ -1,4 +1,5 @@
 include IceCube
+require 'json'
 
 class EventsController < ApplicationController
   before_filter :authenticate_user!
@@ -6,33 +7,42 @@ class EventsController < ApplicationController
   before_action :determine_scope
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  # GET /users/:id/events
+  # GET /users/:id/events.json
   # GET /events
   # GET /events.json
   def index
     @events = @scope.all
   end
 
-  # GET /events/1
-  # GET /events/1.json
+  # GET /users/:id/events/:id
+  # GET /users/:id/events/:id.json
   def show
   end
 
-  # GET /events/new
+  # GET /users/:id/events/new
   def new
     @event = @scope.new
   end
 
-  # GET /events/1/edit
+  # GET /users/:id/events/:id/edit
   def edit
   end
 
-  # POST /events
-  # POST /events.json
+  # POST /users/:id/events
+  # POST /users/:id/events.json
   def create
     @event = @scope.new(event_params)
+    if !@event.capacity_check || !@event.facility_priority_check || !@event.recurring_check || !@event.schedule_time_check
+      @event.approved = false
+    end
     respond_to do |format|
       if @event.save
-        format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully created.' }
+        if @event.is_approved?
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully created.' }
+        else 
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive an email when it is approved or denied.' }
+        end
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -41,12 +51,19 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
+  # PATCH/PUT /users/:id/events/:id
+  # PATCH/PUT /users/:id/events/:id.json
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully updated.' }
+        if !@event.capacity_check || !@event.facility_priority_check || !@event.recurring_check || !@event.schedule_time_check
+          @event.approved = false
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive an email when it is approved or denied.' }
+        else
+          @event.approved = true
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully updated.' }
+        end
+        @event.save
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -55,8 +72,8 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
+  # DELETE /users/:id/events/:id
+  # DELETE /users/:id/events/:id.json
   def destroy
     @event.destroy
     respond_to do |format|
@@ -64,6 +81,21 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def approve
+    set_event
+    @event.approved = true;
+    @event.save!
+    redirect_to admin_path
+  end
+
+  def check_in
+    set_event
+    @event.checked_in = true;
+    @event.save!
+    redirect_to ""
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -89,11 +121,13 @@ class EventsController < ApplicationController
 
     helper_method :format_fields
     def format_fields
+      # Datetime formatting
       params[:duration] = @event.duration.strftime("%I:%M") if @event.duration
       params[:start_time] = @event.start.strftime("%I:%M %p") if @event.start
       params[:start_date] = @event.start.strftime("%B %e, %Y") if @event.start
       params[:ending] = @event.ending.strftime("%B %e, %Y, %I:%M %p") if @event.ending
 
+      # Recurrence
       params[:recurrence_checked] = false
       params[:recurring_value] = 1
       params[:recurring_option] = 0
@@ -103,15 +137,17 @@ class EventsController < ApplicationController
         params[:recurring_value] = rule[:interval]
         params[:recurring_option] = Event.recurrence_options.find_index { |k| rule[:rule_type].scan(k[0..1]).present? }
       end
+
+      # Count of each resource
+      params[:resource_counts] = @event.resource_counts.to_json if @event.resource_counts
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       form = params[:event]
       # Setting the proper :start and :ending values
       if form[:start].is_a? String
         date, time = form[:start_date], form[:start]
-        form[:start] = (date + ' ' + time).to_datetime
+        form[:start] = Time.zone.parse(date + ' ' + time).to_datetime
 
         duration = form[:duration].to_time
         form[:ending] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
@@ -128,11 +164,19 @@ class EventsController < ApplicationController
       else
         form[:recurrence] = nil
       end
-      params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence,
-                                    :creator_name, resource_ids: [], facility_ids: [])
-      # Because recurrence is an object, we have to go through this bullshit to permit all its fields
+
+      # Setting up resource_counts
+      footlog(form, JSON.parse(form[:resource_counts]))
+      form[:resource_counts] = JSON.parse(form[:resource_counts])
+
+      # Strong parameters
+      # Never trust parameters from the scary internet, only allow the white list through.
+      params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence, :resource_counts,
+                                    :attendees, :memo, :creator_name, resource_ids: [], facility_ids: [])
+      # Because recurrence is an object, we have to go through this bullshit to permit all its hash fields
       params.require(:event).tap do |whitelisted|
         whitelisted[:recurrence] = params[:event][:recurrence]
+        whitelisted[:resource_counts] = params[:event][:resource_counts]
       end
 
     end # private

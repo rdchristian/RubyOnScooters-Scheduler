@@ -1,0 +1,40 @@
+- javascript "global_controller"
+
+= form_tag '/post/change_schedule_variable' do
+  .row
+    .form-group.col-sm-2
+      = label_tag 'Regular Users:', nil, class: 'control-label'
+      .controls
+        = text_field_tag 'regular', Rails.application.config.REGULAR_SCHEDULE_DAYS, class: 'form-control number-picker', required: true
+    .form-group.col-sm-2
+      = label_tag 'No limit', nil, class: 'control-label'
+      .controls
+        = check_box_tag 'regular_box', value: 'false', class: 'form-control check_box', required: false
+    .form-group.col-sm-2
+      = label_tag 'Current setting: ', nil, class: 'control-label'
+      -if Rails.application.config.REGULAR_SCHEDULE_DAYS > -1 
+        .controls
+          = label_tag 'current_regular', Rails.application.config.REGULAR_SCHEDULE_DAYS , class: 'control-label'
+      -else
+        .controls
+          = label_tag 'current_regular', 'No limit' , class: 'control-label'
+  .row
+    .form-group.col-sm-2
+      = label_tag 'Staff Users:', nil, class: 'control-label'
+      .controls
+        = text_field_tag 'staff', Rails.application.config.STAFF_SCHEDULE_DAYS, class: 'form-control number-picker', required: true
+    .form-group.col-sm-2
+      = label_tag 'No limit', nil, class: 'control-label'
+      .controls
+        = check_box_tag 'staff_box', value: 'false', class: 'form-control check_box', required: false
+    .form-group.col-sm-2
+      = label_tag 'Current setting: ', nil, class: 'control-label'
+      -if Rails.application.config.STAFF_SCHEDULE_DAYS > -1 
+        .controls
+          = label_tag 'current_staff', Rails.application.config.STAFF_SCHEDULE_DAYS , class: 'control-label'
+      -else
+        .controls
+          = label_tag 'current_staff', 'No limit' , class: 'control-label'
+  .row
+    .form-group.col-sm-2
+      = submit_tag 'Save'

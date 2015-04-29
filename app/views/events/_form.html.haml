@@ -17,6 +17,14 @@
       .controls
         = f.text_field :description, class: 'form-control', required: true
       = error_span(@event[:description])
+       
+  .row  
+    .form-group.col-sm-6
+      = f.label :memo, class: 'control-label'
+      .controls
+        = f.text_field :memo, class: 'form-control',
+          placeholder: "Leave a note for administrator's approval"
+      = error_span(@event[:memo])
     
   .row  
     .form-group.col-sm-3
@@ -57,7 +65,7 @@
         = f.text_field :ending, class: 'form-control', readonly: '', style: 'cursor: auto',
           value: params[:ending]
                            
-  -if is_admin?  
+  - if is_admin?  
     .row  
       .form-group.col-sm-3
         = f.label :creator_name, class: 'control-label'
@@ -82,7 +90,16 @@
         = f.collection_select(:resource_ids, Resource.all, :id, :name,
           { prompt: "Please select your desired resources" },
           { class: 'selectable-resource', :multiple => true })
+
+        = f.hidden_field :resource_counts, value: params[:resource_counts]
       = error_span(@event[:resource_ids])
+
+  .row
+    .form-group.col-sm-2
+      = f.label :attendees, class: 'control-label'
+      .controls
+        = f.text_field :attendees, class: 'form-control number-picker', required: true
+      = error_span(@event[:attendees])
 
   .row-float
     .form-group
@@ -103,5 +120,5 @@
               %div{ 'data-value' => i }= thing
 
   .row-float
-    = f.submit nil, class: 'btn btn-primary'
+    = f.submit nil, class: 'btn btn-primary', data: { disable_with: "Submitting..." }
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'

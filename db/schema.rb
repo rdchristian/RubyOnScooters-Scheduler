@@ -11,20 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150424155728) do
+ActiveRecord::Schema.define(version: 20150428001114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "start"
     t.datetime "ending"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "user_id"
     t.text     "recurrence"
+    t.text     "resource_counts"
+    t.boolean  "approved",        default: true
+    t.boolean  "checked_in",      default: false
+    t.integer  "attendees"
+    t.text     "memo"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -57,7 +70,9 @@ ActiveRecord::Schema.define(version: 20150424155728) do
     t.boolean  "priority"
     t.boolean  "has_tv"
     t.boolean  "has_tables"
-    t.boolean  "had_proj"
+    t.boolean  "has_projector"
+    t.boolean  "has_chairs"
+    t.boolean  "has_sound"
   end
 
   create_table "resources", force: :cascade do |t|
