@@ -38,6 +38,7 @@ class EventsController < ApplicationController
     end
     respond_to do |format|
       if @event.save
+        on_success
         if @event.is_approved?
           format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully created.' }
         else 
@@ -56,6 +57,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
+        on_success
         if !@event.capacity_check || !@event.facility_priority_check || !@event.recurring_check || !@event.schedule_time_check
           @event.approved = false
           format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive an email when it is approved or denied.' }
@@ -142,6 +144,19 @@ class EventsController < ApplicationController
       params[:resource_counts] = @event.resource_counts.to_json if @event.resource_counts
     end
 
+    def on_success
+      exceptions = @event.calculate_recurrence_exceptions if @event.recurrence.present?
+      return if exceptions.blank?
+      exception_times = []
+      flash[:alert] = 'Your event is at a conflict during the following dates:<br>'
+      exceptions.each do |exc| 
+        @event.recurrence.add_exception_time(exc)
+        exception_times << exc.strftime("%b %e, %Y")
+      end
+      flash[:alert] += exception_times.to_sentence
+      flash[:alert] += '<br>These dates have been automatically excluded from the schedule.'
+    end
+
     def event_params
       form = params[:event]
       # Setting the proper :start and :ending values
@@ -166,7 +181,6 @@ class EventsController < ApplicationController
       end
 
       # Setting up resource_counts
-      footlog(form, JSON.parse(form[:resource_counts]))
       form[:resource_counts] = JSON.parse(form[:resource_counts])
 
       # Strong parameters
