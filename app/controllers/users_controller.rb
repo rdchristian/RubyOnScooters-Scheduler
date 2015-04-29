@@ -51,7 +51,6 @@ class UsersController < ApplicationController
       if @user.update(update_user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
-#        UserMailer.account_activation(@user).deliver_now
       else
         format.html { redirect_to @user, danger: "Unable to edit user" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -87,6 +86,7 @@ class UsersController < ApplicationController
     set_user
     @user.activated = true;
     @user.save!
+    UserMailer.account_activation(@user).deliver_now
     redirect_to admin_path
   end
 

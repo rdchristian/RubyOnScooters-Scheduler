@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
 
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   get 'search/index'
 
   resources :users do
@@ -18,6 +22,8 @@ Rails.application.routes.draw do
 
   resources :searches
 
+  resources :password_resets,     only: [:new, :create, :edit, :update]
+
   get    'sessions/new'
   get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
@@ -31,5 +37,6 @@ Rails.application.routes.draw do
   get    '/events/approve/:id' => 'events#approve', as: 'approve_event'
   get    '/events/checkin/:id' => 'events#check_in', as: 'check_in'
   post   '/post/change_schedule_variable' => 'master_page#change_schedule_variable'
+  get    '/events/alert' => 'events#check_in_alert', as: 'check_in_alert'
 
 end
