@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150429133119) do
-=======
 ActiveRecord::Schema.define(version: 20150430155729) do
->>>>>>> improvements to recurrence, adding recurring until field
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
