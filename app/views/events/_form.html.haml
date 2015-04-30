@@ -49,7 +49,7 @@
   
   .row
     .form-group.col-sm-3
-      = f.label :duration, 'Duration', class: 'control-label'
+      = f.label :duration, class: 'control-label'
       .controls
         / .bfh-timepicker{'data-name' => 'event[duration]', 'data-id' => 'event_duration', :required => '',
         /                 'data-time' => "#{params[:duration]}", 'data-align' => 'right'}
@@ -120,11 +120,11 @@
               %div{ 'data-value' => i }= thing
 
     .form-group.col-md-3
-      = label_tag :recurring_until, 'Until', class: 'control-label'
+      = f.label :recur_until, 'Until', class: 'control-label'
       .controls
         .input-group
-          = text_field_tag :recurring_until, params[:recurring_until], class: 'form-control up-datepicker single-datepicker',
-            placeholder: 'Optional'
+          = f.text_field :recur_until, class: 'form-control up-datepicker single-datepicker',
+            value: params[:recur_until], placeholder: 'Optional'
           .input-group-addon.click-date{ :style => 'cursor: pointer'} 
             %i.fa.fa-calendar
   .row-float

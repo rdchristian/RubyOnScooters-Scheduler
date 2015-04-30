@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence,
+  attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence, :recur_until,
                   :creator, :facility_ids, :resource_ids, :resource_counts, :creator_name,
                   :approved, :checked_in, :attendees, :memo
   attr_accessor :start_date # virtual attribute
@@ -42,9 +42,9 @@ class Event < ActiveRecord::Base
   end
 
   def recurrence_conflict?(start_t, end_t)
-    recurrence.occurring_between?(start_t, end_t) or 
+    recurrence.occurring_between?(start_t, end_t) #or 
     # to account for end time (recurrence only knows about the start time)
-    recurrence.occurring_between?(start_t - duration_seconds, end_t - duration_seconds)
+    # recurrence.occurring_between?(start_t - duration_seconds, end_t - duration_seconds)
   end
 
   def self.overlapping_events_to_a(start_t, end_t)
@@ -56,6 +56,7 @@ class Event < ActiveRecord::Base
   # Validations
   validates :title, :start, :creator, :presence => true
   validates :start, date: true
+  validates :recur_until, date: { after: :ending, allow_blank: true }
   validate  :valid_resource_counts, :resources_available, :facility_available
 
   def valid_resource_counts
@@ -104,8 +105,7 @@ class Event < ActiveRecord::Base
 
   # Called from the controller
   def calculate_recurrence_exceptions
-    require 'set'
-    exceptions = Set.new
+    exceptions = []
     same_time_events = 
       Event.where("start >= ?", recurrence.first.to_time). # Every event in the future of this event
       where(recurrence: nil).collect { |e|              # Collect conflicts with non-recurring events
@@ -126,7 +126,7 @@ class Event < ActiveRecord::Base
           sum + resource_counts[res.id] > res.numberOf
         }.compact
     end
-    return exceptions
+    return exceptions.uniq!{ |x| x.hash }
   end
 
 
