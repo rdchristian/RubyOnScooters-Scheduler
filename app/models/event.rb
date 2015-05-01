@@ -56,7 +56,7 @@ class Event < ActiveRecord::Base
   # Validations
   validates :title, :start, :creator, :presence => true
   validates :start, date: true
-  validates :recur_until, date: { after: :ending, allow_blank: true }
+  validates :recur_until, date: { after: :ending, allow_blank: true, message: 'must be after the starting date.' }
   validate  :valid_resource_counts, :resources_available, :facility_available
 
   def valid_resource_counts

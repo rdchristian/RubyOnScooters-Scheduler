@@ -120,14 +120,14 @@
               - Event.recurrence_options.each_with_index do |thing, i|
                 %div{ 'data-value' => i }= thing
 
-    .form-group.col-md-3
-      = f.label :recur_until, 'Until', class: 'control-label'
-      .controls
-        .input-group
-          = f.text_field :recur_until, class: 'form-control up-datepicker single-datepicker',
-            value: params[:recur_until], placeholder: 'Optional'
-          .input-group-addon.click-date{ :style => 'cursor: pointer'} 
-            %i.fa.fa-calendar
+      .form-group.col-md-3
+        = f.label :recur_until, 'Until', class: 'control-label'
+        .controls
+          .input-group
+            = f.text_field :recur_until, class: 'form-control up-datepicker single-datepicker',
+              value: params[:recur_until], placeholder: 'Optional'
+            .input-group-addon.click-date{ :style => 'cursor: pointer'} 
+              %i.fa.fa-calendar
   .row-float
     = f.submit nil, class: 'btn btn-primary', data: { disable_with: "Submitting..." }, autocomplete: 'off'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'
