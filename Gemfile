@@ -63,6 +63,9 @@ gem 'protected_attributes'
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'
 
+ #Scheduling jobs to run automatically
+ gem 'whenever', require: false
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

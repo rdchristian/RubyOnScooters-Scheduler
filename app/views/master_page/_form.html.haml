@@ -37,4 +37,21 @@
           = label_tag 'current_staff', 'No limit' , class: 'control-label'
   .row
     .form-group.col-sm-2
+      = label_tag 'Admin Users:', nil, class: 'control-label'
+      .controls
+        = text_field_tag 'admin', Rails.application.config.ADMIN_SCHEDULE_DAYS, class: 'form-control number-picker', required: true
+    .form-group.col-sm-2
+      = label_tag 'No limit', nil, class: 'control-label'
+      .controls
+        = check_box_tag 'admin_box', value: 'false', class: 'form-control check_box', required: false
+    .form-group.col-sm-2
+      = label_tag 'Current setting: ', nil, class: 'control-label'
+      -if Rails.application.config.ADMIN_SCHEDULE_DAYS > -1 
+        .controls
+          = label_tag 'current_admin', Rails.application.config.ADMIN_SCHEDULE_DAYS , class: 'control-label'
+      -else
+        .controls
+          = label_tag 'current_admin', 'No limit' , class: 'control-label'
+  .row
+    .form-group.col-sm-2
       = submit_tag 'Save'

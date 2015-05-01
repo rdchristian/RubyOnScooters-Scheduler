@@ -31,6 +31,6 @@ class UserMailer < ApplicationMailer
   def check_in_reminder(event)
     @event = event
     @user = event.creator
-    mail to: user.email, subject: "Check-in Reminder"
+    mail to: @user.email, subject: "Check-in Reminder"
   end
 end

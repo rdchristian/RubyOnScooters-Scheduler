@@ -37,6 +37,6 @@ Rails.application.routes.draw do
   get    '/events/approve/:id' => 'events#approve', as: 'approve_event'
   get    '/events/checkin/:id' => 'events#check_in', as: 'check_in'
   post   '/post/change_schedule_variable' => 'master_page#change_schedule_variable'
-  get    '/events/alert' => 'events#check_in_alert', as: 'check_in_alert'
+  get    '/events/alert/:id' => 'events#alert', as: 'alert'
 
 end
