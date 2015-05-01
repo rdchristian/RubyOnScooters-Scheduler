@@ -1,7 +1,20 @@
 - model_class = Search
+- unless flash.blank?
+	- flash.each do |type, message|
+		%div{:class => "alert #{bootstrap_class_for(type)} fade in"}
+			%button.close{"data-dismiss" => "alert"} ×
+			= message
 .page-header
 	%h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%p
+	%br
+	= @search.inspect
+	%br
+	= @search.facilities_results
+	%br
+	= @search.resources_results
 %table.table.table-striped
+	%caption Available Facilities
 	%thead
 		%tr
 			%th= Facility.human_attribute_name(:id)
@@ -13,6 +26,7 @@
 				%td= link_to facility.id, facility_path(facility)
 				%td= facility.name
 %table.table.table-striped
+	%caption Available Resources
 	%thead
 		%tr
 			%th= Resource.human_attribute_name(:id)

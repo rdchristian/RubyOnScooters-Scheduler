@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   root :to => redirect('/events')
 
   resources :searches
+  resources :obj_searches
 
   resources :password_resets,     only: [:new, :create, :edit, :update]
 

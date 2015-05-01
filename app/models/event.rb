@@ -165,5 +165,4 @@ class Event < ActiveRecord::Base
   def resources_checked_in?
     return checked_in
   end
-
 end
