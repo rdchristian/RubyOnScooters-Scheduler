@@ -86,6 +86,7 @@ class EventsController < ApplicationController
     set_event
     @event.approved = true;
     @event.save!
+    UserMailer.event_approved(@event.creator, @event).deliver_now
     redirect_to admin_path
   end
 
@@ -94,6 +95,11 @@ class EventsController < ApplicationController
     @event.checked_in = true;
     @event.save!
     redirect_to ""
+  end
+
+  def check_in_alert
+    set_event
+    UserMailer.check_in_reminder(@event).deliver_now
   end
 
 
