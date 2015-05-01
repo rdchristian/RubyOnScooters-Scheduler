@@ -97,9 +97,10 @@ class EventsController < ApplicationController
     redirect_to ""
   end
 
-  def check_in_alert
+  def alert
     set_event
     UserMailer.check_in_reminder(@event).deliver_now
+    redirect_to admin_path
   end
 
 

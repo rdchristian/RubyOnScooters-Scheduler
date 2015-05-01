@@ -19,8 +19,10 @@ before_filter :authenticate_user!, :authenticate_admin!, :on => :create
   def change_schedule_variable
     regular_days = params[:regular].to_i
     staff_days = params[:staff].to_i
+    admin_days = params[:admin].to_i
     regular_box = params[:regular_box]
     staff_box = params[:staff_box]
+    admin_box = params[:admin_box]
 
     if regular_box
       Rails.application.config.REGULAR_SCHEDULE_DAYS = -1
@@ -32,6 +34,12 @@ before_filter :authenticate_user!, :authenticate_admin!, :on => :create
       Rails.application.config.STAFF_SCHEDULE_DAYS = -1
     elsif staff_days > 0
       Rails.application.config.STAFF_SCHEDULE_DAYS = staff_days
+    end
+
+    if admin_box
+      Rails.application.config.ADMIN_SCHEDULE_DAYS = -1
+    elsif admin_days > 0
+      Rails.application.config.ADMIN_SCHEDULE_DAYS = admin_days
     end
 
     redirect_to admin_path
