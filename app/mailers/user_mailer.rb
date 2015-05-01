@@ -16,9 +16,21 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.password_reset.subject
   #
-  def password_reset
-    @greeting = "Hi"
+  def password_reset(user)
+    @user = user
+    mail to: user.email, subject: "Password reset"
+  end
 
-    mail to: "to@example.org"
+
+  def event_approved(user, event)
+    @user = user
+    @event = event
+    mail to: user.email, subject: "Event Approved"
+  end
+
+  def check_in_reminder(event)
+    @event = event
+    @user = event.creator
+    mail to: @user.email, subject: "Check-in Reminder"
   end
 end

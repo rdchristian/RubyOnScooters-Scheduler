@@ -1,0 +1,33 @@
+- javascript "global_controller"
+- javascript "obj_searches"
+- format_fields
+
+= form_for @obj_search, html: {class: "form form-vertical obj_serach"} do |f|
+	=render 'shared/obj_searches_error_messages'
+	.row
+		.form-group.col-sm-3
+			= f.label :date, 'Date', class: 'control-label'
+			.controls
+				.input-group
+					= f.text_field :date, class: 'form-control single-datepicker', required: true, value: params[:date]
+				.input-group-addon.click-date{ :style => 'cursor: pointer'}
+					%i.fa.fa-calendar
+			= error_span(@obj_search[:date])
+
+	.row-float
+		.form-group
+			= f.label :facilities, class: 'control-label'
+			.controls
+				= f.collection_select(:facility_ids, Facility.all, :id, :name, { prompt: "Please select your desired facilities"}, {class: 'selectable-facility', :multiple => true})
+			= error_span(@obj_search[:facility_ids])
+
+	.row-float
+		.form-group
+			= f.label :resources, class: 'control-label'
+			.controls
+				= f.collection_select(:resource_ids, Resource.all, :id, :name, { prompt: "Please select your desired resources"}, {class: 'selectable-resource', :multiple => true})
+			= error_span(@obj_search[:resource_ids])
+
+	.row-float
+		= f.submit nil, class: 'btn btn-primary', data: {disable_with: "Submitting..."}
+		= link_to t('.cancel', :default => t("helpers.links.cancel")), obj_searches_path, :class => 'btn btn-default'

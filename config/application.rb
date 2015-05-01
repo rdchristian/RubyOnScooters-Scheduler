@@ -19,7 +19,8 @@ module RubyOnScootersScheduler
 
     #Global user variables
     config.REGULAR_SCHEDULE_DAYS = 30         #initially regular users can schedule events for a month in advance
-    config.STAFF_SCHEDULE_DAYS = -1           #initially staff users can schedule events any time into the futre
+    config.STAFF_SCHEDULE_DAYS = 120           #initially staff users can schedule events any time into the future
+    config.ADMIN_SCHEDULE_DAYS = 365           #initially admin users can schedule events any time into the futre
 
 
 

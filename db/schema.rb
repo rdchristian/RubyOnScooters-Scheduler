@@ -68,6 +68,12 @@ ActiveRecord::Schema.define(version: 20150430155729) do
     t.boolean  "has_sound"
   end
 
+  create_table "obj_searches", force: :cascade do |t|
+    t.date     "search_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "resources", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -82,8 +88,9 @@ ActiveRecord::Schema.define(version: 20150430155729) do
     t.date     "start_date"
     t.datetime "start"
     t.datetime "ending"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.date     "ending_date"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,6 +104,8 @@ ActiveRecord::Schema.define(version: 20150430155729) do
     t.string   "home_group"
     t.integer  "user_level",      default: 0
     t.boolean  "activated",       default: false
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

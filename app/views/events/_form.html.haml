@@ -101,23 +101,24 @@
         = f.text_field :attendees, class: 'form-control number-picker', required: true
       = error_span(@event[:attendees])
 
-  .row-float
-    .form-group
-      = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
-        = check_box_tag :recurrence_checked, nil, params[:recurrence_checked]
-        Is this a recurring event?
+  -if(current_user.is_admin? or current_user.is_staff?)
+    .row-float
+      .form-group
+        = label_tag :recurrence_checked, class: "checkbox-inline control-label" do
+          = check_box_tag :recurrence_checked, nil, params[:recurrence_checked]
+          Is this a recurring event?
 
-  .row.hide-slide
-    .form-group.col-md-3
-      = label_tag :recurring_value, 'Repeat every ', class: 'control-label'
-      .row-float
-        .col-md-7.nopadding
-          = text_field_tag :recurring_value, params[:recurring_value], class: 'form-control bfh-number',
-            'data-min': 1, 'data-max': 365
-        .col-md-5.nopadding
-          .bfh-selectbox{ 'data-name' => 'recurring_option', 'data-value' => params[:recurring_option] }
-            - Event.recurrence_options.each_with_index do |thing, i|
-              %div{ 'data-value' => i }= thing
+    .row.hide-slide
+      .form-group.col-md-3
+        = label_tag :recurring_value, 'Repeat every ', class: 'control-label'
+        .row-float
+          .col-md-7.nopadding
+            = text_field_tag :recurring_value, params[:recurring_value], class: 'form-control bfh-number',
+              'data-min': 1, 'data-max': 365
+          .col-md-5.nopadding
+            .bfh-selectbox{ 'data-name' => 'recurring_option', 'data-value' => params[:recurring_option] }
+              - Event.recurrence_options.each_with_index do |thing, i|
+                %div{ 'data-value' => i }= thing
 
     .form-group.col-md-3
       = f.label :recur_until, 'Until', class: 'control-label'
