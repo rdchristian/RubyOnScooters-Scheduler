@@ -41,6 +41,7 @@
 					.input-group-addon
 						%i.fa.fa.clock-o
 			=error_span(@search[:ending])
+
 	.row-float
 		= f.submit nil, class: 'btn btn-primary'
 		= link_to t('.cancel', :default => t("helpers.links.cancel")), searches_path, :class => 'btn btn-default'

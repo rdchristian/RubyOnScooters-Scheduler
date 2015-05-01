@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   root :to => redirect('/events')
 
   resources :searches
+  resources :obj_searches
 
   get    'sessions/new'
   get    'signup'  => 'users#new'
