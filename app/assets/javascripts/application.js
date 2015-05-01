@@ -16,7 +16,9 @@
 //= require twitter/bootstrap
 //= require selectize
 //= require moment
+//= require underscore/underscore
 //= require bootstrap-datetimepicker
+//= require bootstrap-calendar/js/calendar
 //= require bootstrap-3-timepicker/js/bootstrap-timepicker
 //= require bootstrap-touchspin/dist/jquery.bootstrap-touchspin
 //= require bootstrap-daterangepicker/daterangepicker

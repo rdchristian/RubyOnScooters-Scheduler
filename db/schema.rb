@@ -88,9 +88,8 @@ ActiveRecord::Schema.define(version: 20150430155729) do
     t.date     "start_date"
     t.datetime "start"
     t.datetime "ending"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.date     "ending_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
