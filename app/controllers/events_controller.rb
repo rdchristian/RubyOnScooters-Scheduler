@@ -145,6 +145,7 @@ class EventsController < ApplicationController
         rule = @event.recurrence.to_hash[:rrules][0]
         params[:recurring_value] = rule[:interval]
         params[:recurring_option] = Event.recurrence_options.find_index { |k| rule[:rule_type].scan(k[0..1]).present? }
+        params[:recur_until] = @event.recur_until.strftime("%B %e, %Y") if @event.recur_until
       end
 
       # Count of each resource
@@ -172,7 +173,7 @@ class EventsController < ApplicationController
       # Setting the proper :start and :ending values
       if form[:start].is_a? String
         date, time = form[:start_date], form[:start]
-        form[:start] = Time.zone.parse(date + ' ' + time).to_datetime
+        form[:start] = Time.zone.parse(date + ' ' + time)
 
         duration = form[:duration].to_time
         form[:ending] = form[:start].advance({:hours => duration.hour, :minutes => duration.min})
@@ -182,9 +183,13 @@ class EventsController < ApplicationController
       if params[:recurrence_checked]
         option = Event.recurrence_options[params[:recurring_option].to_i]
         rule = Event.get_recurrence_rule(option)
+        rule = rule.call(params[:recurring_value].to_i)
 
-        schedule = Schedule.new(form[:start])
-        schedule.add_recurrence_rule rule.call(params[:recurring_value].to_i)
+        form[:recur_until] = Time.zone.parse(form[:recur_until])
+        rule = rule.until(form[:recur_until]) if form[:recur_until]
+
+        schedule = Schedule.new(form[:start], end_time: form[:ending])
+        schedule.add_recurrence_rule rule
         form[:recurrence] = schedule
       else
         form[:recurrence] = nil
@@ -196,7 +201,7 @@ class EventsController < ApplicationController
       # Strong parameters
       # Never trust parameters from the scary internet, only allow the white list through.
       params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence, :resource_counts,
-                                    :attendees, :memo, :creator_name, resource_ids: [], facility_ids: [])
+                                    :recur_until, :attendees, :memo, :creator_name, resource_ids: [], facility_ids: [])
       # Because recurrence is an object, we have to go through this bullshit to permit all its hash fields
       params.require(:event).tap do |whitelisted|
         whitelisted[:recurrence] = params[:event][:recurrence]

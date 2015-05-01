@@ -1,0 +1,58 @@
+- javascript "calendar"
+
+/ .calendar
+
+/ #events-modal.modal.fade
+/   .modal-dialog
+/     .modal-content
+/       .modal-header
+/         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+/         %h3 Event
+/       .modal-body{:style => "height: 400px"}
+/       .modal-footer
+/         %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+
+.container-float
+  .jumbotron
+    %h1 Bootstrap Calendar Demo
+    %p Bootstrap based full view calendar. Template based.
+   
+    .pull-right.form-inline
+      .btn-group
+        %button.btn.btn-primary{"data-calendar-nav" => "prev"} << Prev
+        %button.btn.btn-default{"data-calendar-nav" => "today"} Today
+        %button.btn.btn-primary{"data-calendar-nav" => "next"} Next >>
+      .btn-group
+        %button.btn.btn-warning{"data-calendar-view" => "year"} Year
+        %button.btn.btn-warning.active{"data-calendar-view" => "month"} Month
+        %button.btn.btn-warning{"data-calendar-view" => "week"} Week
+        %button.btn.btn-warning{"data-calendar-view" => "day"} Day
+    %h3
+    %small To see example with events navigate to march 2013
+  .row
+    .col-md-9
+      #calendar
+    .col-md-3
+      .row
+        %select#first_day.form-control
+          %option{:selected => "selected", :value => ""} First day of week language-dependant
+          %option{:value => "2"} First day of week is Sunday
+          %option{:value => "1"} First day of week is Monday
+        %label.checkbox
+          %input#events-in-modal{:type => "checkbox", :value => "#events-modal"}
+            Open events in modal window
+      %h4 Events
+      %small This list is populated with events dynamically
+      %ul#eventlist.nav.nav-list
+  .clearfix
+  %br
+    %br
+      #events-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %h3.modal-title Event
+            .modal-body{:style => "height: 400px"}
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
