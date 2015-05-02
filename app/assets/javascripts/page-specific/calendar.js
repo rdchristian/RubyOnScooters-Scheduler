@@ -11,12 +11,12 @@
   "use strict";
 
   var options = {
-    events_source: 'events.json.php',
+    events_source: '/assets/bootstrap-calendar/events.json.php',
     view: 'month',
     tmpl_path: '/assets/bootstrap-calendar/tmpls/',
     tmpl_cache: false,
     day: '2013-03-12',
-    modal: true,
+    modal: '#events-modal',
     onAfterEventsLoad: function(events) {
       if(!events) {
         return;
@@ -31,7 +31,7 @@
       });
     },
     onAfterViewLoad: function(view) {
-      $('.page-header h3').text(this.getTitle());
+      $('h3.head-title').text(this.getTitle());
       $('.btn-group button').removeClass('active');
       $('button[data-calendar-view="' + view + '"]').addClass('active');
     },
@@ -73,4 +73,5 @@
     //e.preventDefault();
     //e.stopPropagation();
   });
+
 }(jQuery));

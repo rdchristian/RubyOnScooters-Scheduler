@@ -27,20 +27,12 @@
         %button.btn.btn-warning.active{"data-calendar-view" => "month"} Month
         %button.btn.btn-warning{"data-calendar-view" => "week"} Week
         %button.btn.btn-warning{"data-calendar-view" => "day"} Day
-    %h3
+    %h3.head-title
     %small To see example with events navigate to march 2013
   .row
     .col-md-9
       #calendar
     .col-md-3
-      .row
-        %select#first_day.form-control
-          %option{:selected => "selected", :value => ""} First day of week language-dependant
-          %option{:value => "2"} First day of week is Sunday
-          %option{:value => "1"} First day of week is Monday
-        %label.checkbox
-          %input#events-in-modal{:type => "checkbox", :value => "#events-modal"}
-            Open events in modal window
       %h4 Events
       %small This list is populated with events dynamically
       %ul#eventlist.nav.nav-list
@@ -53,6 +45,6 @@
             .modal-header
               %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
               %h3.modal-title Event
-            .modal-body{:style => "height: 400px"}
+            .modal-body{:style => "height: 300px"}
             .modal-footer
               %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

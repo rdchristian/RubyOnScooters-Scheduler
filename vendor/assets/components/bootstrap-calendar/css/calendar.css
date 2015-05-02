@@ -410,6 +410,7 @@
 .cal-month-box .cal-row-fluid [class*="cal-cell"]:last-child {
   border-right: 0px;
 }
+
 .cal-year-box .row-fluid,
 .cal-month-box .cal-row-fluid {
   border-bottom: 1px solid #e1e1e1;
@@ -512,4 +513,8 @@ a.cal-event-week {
 }
 .badge-important {
   background-color: #b94a48;
+}
+
+.cal-context {
+  padding-left: 70px;
 }
