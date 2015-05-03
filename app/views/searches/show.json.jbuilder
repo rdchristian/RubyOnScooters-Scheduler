@@ -1,1 +1,0 @@
-json.extract! @search, :start_date, :start, :ending_date, :ending

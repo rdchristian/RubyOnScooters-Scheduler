@@ -1,0 +1,11 @@
+/* 
+* @Author: Synix
+* @Date:   2015-05-02 10:01:04
+* @Last Modified by:   Synix
+* @Last Modified time: 2015-05-02 21:15:59
+*/
+
+'use strict';
+
+$("#results").html("<%= escape_javascript(render partial: 'results', locals: { results: @results } ) %>");
+// history.replaceState(null, "", action + "?" + formData);

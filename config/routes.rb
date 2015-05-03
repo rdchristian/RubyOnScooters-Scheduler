@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :events
   end
-  resources :events#, :only => [:index]
+  resources :events, :only => [:index]
 
   resources :resources
 
@@ -20,12 +20,10 @@ Rails.application.routes.draw do
   resources :facilities
   root :to => redirect('/events')
 
-  resources :searches
-  resources :obj_searches
-
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
   get    'sessions/new'
+  get    'search' => 'search#show'
   get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
