@@ -128,6 +128,7 @@
               value: params[:recur_until], placeholder: 'Optional'
             .input-group-addon.click-date{ :style => 'cursor: pointer'} 
               %i.fa.fa-calendar
+              
   .row-float
     = f.submit nil, class: 'btn btn-primary', data: { disable_with: "Submitting..." }, autocomplete: 'off'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'

@@ -30,11 +30,11 @@
               = link_to 'Log In', login_path
     .container-float
       .row-float
-        .col-sm-8
+        .col-sm-9
           #main{ :style => 'overflow: visible' }
             = yield
             = yield :page_specific_js
-        .col-sm-4
+        .col-sm-3
           .row-float
             =link_to image_tag("/images/first_floor.JPG", size: "400x300"), "images/first_floor.JPG", :popup =>["First Floor", "height = 700, width=900"]
           .row-float
