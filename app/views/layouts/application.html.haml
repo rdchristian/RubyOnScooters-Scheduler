@@ -33,14 +33,14 @@
         .col-sm-8
           #main{ :style => 'overflow: visible' }
             = yield
-            = yield(:page_specific_js)
+            = yield :page_specific_js
         .col-sm-4
           .row-float
             =link_to image_tag("/images/first_floor.JPG", size: "400x300"), "images/first_floor.JPG", :popup =>["First Floor", "height = 700, width=900"]
           .row-float
             =link_to image_tag("/images/second_floor.JPG", size: "400x300"), "images/second_floor.JPG", :popup =>["Second Floor", "height = 700, width=900"]
 
-  -if not Rails.env.production?
+  -unless Rails.env.production?
     .container-float
       .col-lg-12
         != ap flash[:log]

@@ -208,6 +208,6 @@ class EventsController < ApplicationController
         whitelisted[:resource_counts] = params[:event][:resource_counts]
       end
 
-    end # private
+    end 
 
 end

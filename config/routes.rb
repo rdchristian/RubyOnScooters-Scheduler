@@ -22,8 +22,12 @@ Rails.application.routes.draw do
 
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
-  get    'sessions/new'
   get    'search' => 'search#show'
+  %w( events resources facilities ).each do |r|
+    get "search/#{r}/" => "search#search_#{r}"
+  end
+
+  get    'sessions/new'
   get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

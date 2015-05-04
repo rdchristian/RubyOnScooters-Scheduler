@@ -1,0 +1,29 @@
+= hidden_field_tag 'active-pane', '#search_events'
+
+.jumbotron
+  = form_tag search_events_path, method: :get, id: '#search_events_form' do
+    .row  
+      .form-group.col-sm-4
+        = label_tag :date_range, 'Date range', class: 'control-label'
+        .controls
+          .input-group
+            = text_field_tag :date_range, params[:date_range], class: 'form-control range-datepicker'
+            .input-group-addon.click-date{ :style => 'cursor: pointer'} 
+              %i.fa.fa-calendar
+
+    .row
+      .form-group.col-sm-6
+        = label_tag :facilities, 'Facilities', class: 'control-label'
+        .controls
+          = select_tag :facility_ids, options_from_collection_for_select(Facility.all, :id, :name),
+            prompt: 'Looking for specific facilities?',
+            class: 'selectable-facility', :multiple => true
+
+      .col-sm-6
+        = label_tag :resources, 'Resources', class: 'control-label'
+        .controls
+          = select_tag :resource_ids, options_from_collection_for_select(Resource.all, :id, :name),
+            prompt: 'Looking for specific resources?',
+            class: 'selectable-resources', :multiple => true
+    = submit_tag 'Search', class: 'btn btn-primary', method: 'get', id: '#search_events_submit',
+      data: { disable_with: "Searching..." }, autocomplete: 'off'

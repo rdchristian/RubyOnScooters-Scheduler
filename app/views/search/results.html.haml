@@ -1,4 +1,3 @@
-%div
-	%h1= 'yo' * 100
-- results.each do |r|
-	%h= r
+%ul
+  - results.each do |r|
+    %li= r.inspect

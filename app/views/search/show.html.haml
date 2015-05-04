@@ -1,37 +1,17 @@
-- javascript "global_controller"
 - javascript "search"
 
-#content
-  %ul#tabs.nav.nav-tabs{"data-tabs" => "tabs"}
-    %li.active
-      %a{"data-toggle" => "tab", :href => "#red"} Red
-    %li
-      %a{"data-toggle" => "tab", :href => "#orange"} Orange
-    %li
-      %a{"data-toggle" => "tab", :href => "#yellow"} Yellow
-    %li
-      %a{"data-toggle" => "tab", :href => "#green"} Green
-    %li
-      %a{"data-toggle" => "tab", :href => "#blue"} Blue
-  #my-tab-content.tab-content
-    #red.tab-pane.active
-      %h1 Red
-      %p red red red red red red
-    #orange.tab-pane
-      %h1 Orange
-      %p orange orange orange orange orange
-      / = render partial: 'results', locals: { results: ['asd', '324edasc', '45' * 3] }
-    #yellow.tab-pane
-      %h1 Yellow
-      %p yellow yellow yellow yellow yellow
-    #green.tab-pane
-      %h1 Green
-      %p green green green green green
-    #blue.tab-pane
-      %h1 Blue
-      %p blue blue blue blue blue
-      
-#search_link
-  = link_to @what, search_path(:results => @what)
+%ul.nav.nav-tabs
+  %li.active
+    %a#search_events{ :href => search_events_path } Events
+  %li
+    %a#search_resources{ :href => search_resources_path } Resources
+  %li
+    %a#search_facilities{ :href => search_facilities_path } Facilities
 
-#results.pjax-container
+.tab-content
+  .tab-pane.active
+  .pjax-nav-content.hide
+    = hidden_field_tag 'active-pane', '#' + params[:action]
+
+%a#BANG{ :href => search_events_path + '?yo=45'} sad
+#results.pjax-results
