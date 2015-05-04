@@ -43,9 +43,6 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Combining ajax + pushstate
-gem 'pjax_rails'
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'jquery-turbolinks' # fixing issues between them
@@ -59,6 +56,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # postgresql
 gem 'pg'
+
+# enhanced querying framework
+gem 'squeel'
 
 # to allow attr_accessible to be used in rails 4 ('cause I'm lazy and don't wanna adapt to change...)
 gem 'protected_attributes'

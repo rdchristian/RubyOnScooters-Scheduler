@@ -1,4 +1,3 @@
-= hidden_field_tag 'active-pane', '#search_events'
 
 .jumbotron
   = form_tag search_events_path, method: :get, id: '#search_events_form' do
@@ -15,15 +14,15 @@
       .form-group.col-sm-6
         = label_tag :facilities, 'Facilities', class: 'control-label'
         .controls
-          = select_tag :facility_ids, options_from_collection_for_select(Facility.all, :id, :name),
-            prompt: 'Looking for specific facilities?',
+          = select_tag :facilities, options_from_collection_for_select(Facility.all, :id, :name, params[:facilities]),
+            prompt: 'Looking for any of these facilities?',
             class: 'selectable-facility', :multiple => true
 
       .col-sm-6
         = label_tag :resources, 'Resources', class: 'control-label'
         .controls
-          = select_tag :resource_ids, options_from_collection_for_select(Resource.all, :id, :name),
-            prompt: 'Looking for specific resources?',
+          = select_tag :resources, options_from_collection_for_select(Resource.all, :id, :name, params[:resources]),
+            prompt: 'Looking for any of these resources?',
             class: 'selectable-resources', :multiple => true
     = submit_tag 'Search', class: 'btn btn-primary', method: 'get', id: '#search_events_submit',
       data: { disable_with: "Searching..." }, autocomplete: 'off'

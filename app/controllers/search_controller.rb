@@ -6,7 +6,12 @@ class SearchController < ApplicationController
   end
 
   def search_events
-    @results = Resource.all
+    search = {}
+    search[:start], search[:end] = params[:date_range].split('-').map!{ |x| Time.zone.parse(x) } if params[:date_range].present?
+    search[:facilities] = params[:facilities].map!(&:to_i) if params[:facilities].present?
+    search[:resources] = params[:resources].map!(&:to_i) if params[:resources].present?
+
+    @results = Search.events(search) if params[:commit]
     render_response
   end
 
@@ -15,24 +20,30 @@ class SearchController < ApplicationController
   end
 
   def search_resources
+    search = {}
+    search[:start], search[:end] = params[:date_range].split('-').map!{ |x| Time.zone.parse(x) } if params[:date_range].present?
+    search[:name] = params[:name] if params[:name].present?
+    # search[:storage] = params[:storage] if params[:storage].present?
+    # search[:reserve_time] = params[:reserve_time].to_time if params[:reserve_time].present?
+    params[:numberOf] = 1 if params[:numberOf].blank?
+    search[:numberOf] = params[:numberOf].to_i
+
+    @results = Search.resources(search) if params[:commit]
     render_response
   end
 
 private
 
   def render_response
-    if params[:yo]
-      render action: 'results', layout: false, locals: { results: @results }
-      return
-    end
-    if pjax_request?
-      render layout: false
-    elsif params[:commit] == 'Search'
-      render action: 'results', layout: false, locals: { results: @results }
-    else
-      respond_to do |format|
-        format.html { render 'show' }
-      end
+    # if params[:commit] == 'Search'
+    #   render partial: 'results', locals: { results: @results }
+    # else
+    #   respond_to do |format|
+    #     format.html { render 'show' }
+    #   end
+    # end
+    respond_to do |format|
+      format.html { render 'show' }
     end
   end
 

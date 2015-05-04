@@ -1,17 +1,21 @@
 - javascript "search"
 
-%ul.nav.nav-tabs
+= hidden_field_tag 'active-pane', '#' + params[:action]
+%ul#tabs.nav.nav-tabs{ 'data-tabs' => 'tabs' }
   %li.active
-    %a#search_events{ :href => search_events_path } Events
+    %a#search_events{ 'data-toggle' => 'tab', href: '#events_t' } Events
   %li
-    %a#search_resources{ :href => search_resources_path } Resources
+    %a#search_resources{ 'data-toggle' => 'tab', href: '#resources_t' } Resources
   %li
-    %a#search_facilities{ :href => search_facilities_path } Facilities
+    %a#search_facilities{ 'data-toggle' => 'tab', href: '#facilities_t' } Facilities
 
 .tab-content
-  .tab-pane.active
-  .pjax-nav-content.hide
-    = hidden_field_tag 'active-pane', '#' + params[:action]
+  .tab-pane.active.fade.in#events_t
+    = render partial: 'search_events'
+  .tab-pane.fade#resources_t
+    = render partial: 'search_resources'
+  .tab-pane.fade#facilities_t
+    = render partial: 'search_facilities'
 
-%a#BANG{ :href => search_events_path + '?yo=45'} sad
-#results.pjax-results
+#search-results
+  = render partial: 'search_results'

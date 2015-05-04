@@ -1,0 +1,33 @@
+
+.jumbotron
+  = form_tag search_facilities_path, method: :get, id: '#search_facilities_form' do
+    .row  
+      .form-group.col-sm-4
+        = label_tag :date_range, 'Date range', class: 'control-label'
+        .controls
+          .input-group
+            = text_field_tag :date_range, params[:date_range], class: 'form-control range-datepicker'
+            .input-group-addon.click-date{ :style => 'cursor: pointer'} 
+              %i.fa.fa-calendar
+
+    .row  
+      .form-group.col-sm-3
+        = label_tag :name, 'Name', class: 'control-label'
+        .controls
+          = text_field_tag :name, params[:name], class: 'form-control', required: true
+
+      .col-sm-3
+        = label_tag :capacity, 'Capacity', class: 'control-label'
+        .controls
+          = text_field_tag :capacity, params[:capacity], class: 'form-control number-picker', required: true
+      
+      / .col-sm-3
+      /   = label_tag :reserve_time, 'Available for', class: 'control-label'
+      /   .controls
+      /     .input-group.clockpicker-disabled-ampm
+      /       = text_field_tag :reserve_time, params[:reserve_time], class: 'form-control'
+      /       %span.input-group-addon
+      /         %span.fa.fa-clock-o'
+
+    = submit_tag 'Search', class: 'btn btn-primary', method: 'get', id: '#search_facilities_submit',
+      data: { disable_with: "Searching..." }, autocomplete: 'off'
