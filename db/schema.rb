@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430155729) do
+ActiveRecord::Schema.define(version: 20150505014522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,12 +68,6 @@ ActiveRecord::Schema.define(version: 20150430155729) do
     t.boolean  "has_sound"
   end
 
-  create_table "obj_searches", force: :cascade do |t|
-    t.date     "search_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "resources", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -82,14 +76,6 @@ ActiveRecord::Schema.define(version: 20150430155729) do
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.date     "start_date"
-    t.datetime "start"
-    t.datetime "ending"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
