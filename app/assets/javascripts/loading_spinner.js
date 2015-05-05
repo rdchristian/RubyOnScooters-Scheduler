@@ -50,12 +50,10 @@ $(document).on('page:fetch', function() {
   return PageSpinner.spin();
 });
 
-$(document).ready(function() {
-  $("form, input, button").submit(function() {
+$(document).on('submit', 'form, input, button', function() {
     // // Change the state of the submit button
     // $("[type='submit']").data('loading-text', 'Submitting...');
     // $("[type='submit']").button('loading');
 
     return PageSpinner.spin();
-  });
 });
