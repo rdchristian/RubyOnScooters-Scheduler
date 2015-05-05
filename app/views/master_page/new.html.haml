@@ -22,7 +22,18 @@
             %td= user.created_at
             %td
               = link_to "Activate", activate_user_path(user), :class => 'btn btn-default btn-xs'
-              = link_to "Deny", t('.destroy', :default => t("helpers.links.destroy")), user_path(user), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+              = link_to "Deny", "#denyMessageUserModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
+              /  "Deny"
+              / Modal
+              #denyMessageUserModal.modal.fade{"data-backdrop" => "static", "aria-hidden" => "true", "aria-labelledby" => "denyMessageUser", :role => "dialog", :tabindex => "-1"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %h4#myModalLabel.modal-title Explanation:
+                    .modal-body
+                      = form_tag deny_user_path(user) do
+                        = text_area_tag :message, nil, :cols => 60, :rows => 10
+                        = submit_tag "Send Email"
   %h3='Events Needing Approval:'
   %table.table.table-striped
     %thead
@@ -52,8 +63,20 @@
             %td=l event.created_at
             %td
               = link_to "Approve", approve_event_path(event), :class => 'btn btn-default btn-xs'
-              = link_to "Deny", t('.destroy', :default => t("helpers.links.destroy")), event_path(event), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
-  %h3='Events Awaiting Resources Check-In:'
+              = link_to "Deny", "#denyMessageModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
+              /  "Deny"
+              / Modal
+              #denyMessageModal.modal.fade{"data-backdrop" => "static", "aria-hidden" => "true", "aria-labelledby" => "denyMessage", :role => "dialog", :tabindex => "-1"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %h4#myModalLabel.modal-title Message for event creator:
+                    .modal-body
+                      = form_tag deny_event_path(event) do
+                        = text_area_tag :message, nil, :cols => 60, :rows => 10
+                        = submit_tag "Send to event creator"
+  /                  .modal-footer
+  /                    %a.button.btn.btn-primary{:type => "submit", :href => deny_event_path(event)} Send to event creator
   %table.table.table-striped
     %thead
       %tr
@@ -76,7 +99,7 @@
             %td= event.facilities_list
             %td
               = link_to "Send Reminder (Email & Text)", alert_path(event), :class => 'btn btn-default btn-xs'
-              = link_to "Dismiss", check_in_path(event), :class => 'btn btn-default btn-xs'
+              = link_to "Dismiss", check_in_path(event), :class => 'btn btn-default btn-xs'          
   %h3='User Type Settings:'
   %h5='How many days advance can an event be scheduled?'
   = render :partial => "form"

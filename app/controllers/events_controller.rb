@@ -90,6 +90,15 @@ class EventsController < ApplicationController
     redirect_to admin_path
   end
 
+  def deny
+    set_event
+    @user = @event.creator
+    set_message
+    UserMailer.event_denied(@event.creator, @event, @message).deliver_now
+    @event.destroy
+    redirect_to admin_path
+  end
+
   def check_in
     set_event
     @event.checked_in = true;
@@ -105,6 +114,10 @@ class EventsController < ApplicationController
 
 
   private
+    def set_message
+      @message = params[:message]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = @scope.find(params[:id])
