@@ -1,16 +1,5 @@
 // Place all the behaviors and hooks related to a controller here.
 
-var selectable_options = {
-    persist: false,
-    createOnBlur: true,
-    create: false,
-    highlight: true,
-    maxOptions: 179, // Why 179? Fu, that's why
-    sortField: { field: 'text', direction: 'asc' },
-};
-$('.selectable-facility').selectize(selectable_options);
-$('.selectable-resource').selectize(selectable_options);
-
 $('.clockpicker').clockpicker({
     placement: 'bottom',
     align: 'top',
@@ -27,6 +16,7 @@ $('.clockpicker-disabled-ampm').clockpicker({
 });
 
 $(".number-picker").TouchSpin({
+    max: 1000,
     verticalbuttons: true,
     verticalupclass: 'glyphicon glyphicon-chevron-up',
     verticaldownclass: 'glyphicon glyphicon-chevron-down',
@@ -35,21 +25,27 @@ $(".number-picker").TouchSpin({
 $('.timepicker').timepicker({
     minuteStep: 15,
     showMeridian: false,
-    defaultTime: false,
+    defaultTime: '0:0',
     showInputs: true,
 });
 
-$('.single-datepicker').daterangepicker({
+var datepicker_params = {
     singleDatePicker: true,
     showDropdowns: true,
     minDate: moment(),
     format: 'MMMM D, YYYY',
-});
+};
+$('.single-datepicker:not(.up-datepicker)').daterangepicker(datepicker_params);
+datepicker_params['drops'] = 'up';
+$('.single-datepicker.up-datepicker').daterangepicker(datepicker_params);
 
+$().bfhdatepicker('toggle');
+$().bfhtimepicker('toggle');
+$().bfhselectbox('toggle');
 
 // Forward the click on the tiny calendar icon to the date picker
-$('.click-date').click(function() {
-    $('.single-datepicker').click();
+$('.click-date').click(function(e) {
+    $(this).siblings('.single-datepicker').click();
 });
 
 // To make them uneditable, but still looking 'enabled'

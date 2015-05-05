@@ -16,7 +16,7 @@
       = error_span(@resource[:description])
   .row  
     .form-group.col-sm-2
-      = f.label :numberOf, class: 'control-label'
+      = f.label 'Amount Owned', class: 'control-label'
       .controls
         = f.text_field :numberOf, class: 'form-control number-picker', required: true
       = error_span(@resource[:numberOf])

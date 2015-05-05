@@ -1,0 +1,105 @@
+.page-header
+  %h1='Administrator Page'
+.page-body
+  %h3='Inactivated Users:'
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= 'Name'
+        %th= 'Email'
+        %th= 'Phone'
+        %th= 'Home Group'
+        %th= 'Created at'
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @users.each do |user|
+        -if !user.is_activated?
+          %tr
+            %td= link_to user.name, user_path(user)
+            %td= user.email
+            %td= user.phone
+            %td= user.home_group
+            %td= user.created_at
+            %td
+              = link_to "Activate", activate_user_path(user), :class => 'btn btn-default btn-xs'
+              = link_to "Deny", "#denyMessageUserModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
+              /  "Deny"
+              / Modal
+              #denyMessageUserModal.modal.fade{"data-backdrop" => "static", "aria-hidden" => "true", "aria-labelledby" => "denyMessageUser", :role => "dialog", :tabindex => "-1"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %h4#myModalLabel.modal-title Explanation:
+                    .modal-body
+                      = form_tag deny_user_path(user) do
+                        = text_area_tag :message, nil, :cols => 60, :rows => 10
+                        = submit_tag "Send Email"
+  %h3='Events Needing Approval:'
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= 'Title'
+        %th= 'Description'
+        %th= 'Start'
+        %th= 'Ending'
+        %th= 'Creator Name'
+        %th= 'Facilities'
+        %th= 'Resources'
+        %th= 'Attendees'
+        %th= 'Created at'
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @events.each do |event|
+        -if !event.is_approved?
+          %tr
+            %td= link_to event.title, user_event_path(event.creator, event)
+            %td= event.description
+            %td= event.start
+            %td= event.ending
+            %td= link_to event.creator_name, user_path(User.find_by(name: event.creator_name))
+            %td= event.facilities_list
+            %td= event.resources_list
+            %td= event.attendees
+            %td=l event.created_at
+            %td
+              = link_to "Approve", approve_event_path(event), :class => 'btn btn-default btn-xs'
+              = link_to "Deny", "#denyMessageModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
+              /  "Deny"
+              / Modal
+              #denyMessageModal.modal.fade{"data-backdrop" => "static", "aria-hidden" => "true", "aria-labelledby" => "denyMessage", :role => "dialog", :tabindex => "-1"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %h4#myModalLabel.modal-title Message for event creator:
+                    .modal-body
+                      = form_tag deny_event_path(event) do
+                        = text_area_tag :message, nil, :cols => 60, :rows => 10
+                        = submit_tag "Send to event creator"
+  /                  .modal-footer
+  /                    %a.button.btn.btn-primary{:type => "submit", :href => deny_event_path(event)} Send to event creator
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= 'Title'
+        %th= 'Description'
+        %th= 'Start'
+        %th= 'Ending'
+        %th= 'Creator Name'
+        %th= 'Resources'
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @events.each do |event|
+        -if !event.resources_checked_in? && event.ending < Time.zone.now
+          %tr
+            %td= link_to event.title, user_event_path(event.creator, event)
+            %td= event.description
+            %td= event.start
+            %td= event.ending
+            %td= link_to event.creator_name, user_path(User.find_by(name: event.creator_name))
+            %td= event.facilities_list
+            %td
+              = link_to "Send Reminder (Email & Text)", alert_path(event), :class => 'btn btn-default btn-xs'
+              = link_to "Dismiss", check_in_path(event), :class => 'btn btn-default btn-xs'          
+  %h3='User Type Settings:'
+  %h5='How many days advance can an event be scheduled?'
+  = render :partial => "form"

@@ -1,7 +1,11 @@
 - javascript "global_controller"
 
+<<<<<<< HEAD
 = form_for @facility, html: { class: "form form-vertical facility", multipart: "true" } do |f|
   =render 'shared/facilities_error_messages'
+=======
+= form_for @facility, html: { class: "form form-vertical facility" } do |f|
+>>>>>>> f219e4cea71f4065e1200954559d384418f45b8f
   .row
     .form-group.col-sm-4
       = f.label :name, class: 'control-label'
@@ -20,6 +24,48 @@
       .controls
         = f.text_field :capacity, class: 'form-control number-picker', required: true
       = error_span(@facility[:capacity])
+  .row
+    .form-group.col-sm-2
+      = f.label :min_capacity, class: 'control-label'
+      .controls
+        = f.text_field :min_capacity, class: 'form-control number-picker', required: true
+      = error_span(@facility[:min_capacity])
+  .row
+    .form-group.col-sm-2
+      = f.label :priority, class: 'control-label'
+      .controls
+        = f.check_box :priority, class: 'form-control check_box', required: false
+      = error_span(@facility[:priority])
+  .row
+    .form-group.col-sm-2
+      = f.label :has_projector, class: 'control-label'
+      .controls
+        = f.check_box :has_projector, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_projector])  
+  .row
+    .form-group.col-sm-2
+      = f.label :has_tables, class: 'control-label'
+      .controls
+        = f.check_box :has_tables, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_tables])  
+  .row
+    .form-group.col-sm-2
+      = f.label :has_tv, class: 'control-label'
+      .controls
+        = f.check_box :has_tv, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_tv])  
+  .row
+    .form-group.col-sm-2
+      = f.label :has_chairs, class: 'control-label'
+      .controls
+        = f.check_box :has_chairs, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_chairs]) 
+  .row
+    .form-group.col-sm-2
+      = f.label :has_sound, class: 'control-label'
+      .controls
+        = f.check_box :has_sound, class: 'form-control check_box', required: false
+      = error_span(@facility[:has_sound]) 
 
   .row-float
     = f.file_field :picture

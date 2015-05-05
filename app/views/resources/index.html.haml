@@ -7,11 +7,11 @@
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:numberOf)
+      %th= 'Amount Owned'
       %th= model_class.human_attribute_name(:storage_location)
       %th= model_class.human_attribute_name(:max_reserve_time) + " (Hour:Minutes)"
-      %th= model_class.human_attribute_name(:created_at)
-      %th=t '.actions', :default => t("helpers.actions")
+      -if current_user.is_admin?
+        %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @resources.each do |resource|
       %tr
@@ -21,11 +21,12 @@
         %td= resource.numberOf
         %td= resource.storage_location
         %td= resource.max_reserve_time.strftime("%k:%M")
-        %td=l resource.created_at
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_resource_path(resource), :class => 'btn btn-default btn-xs'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), resource_path(resource), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+        -if current_user.is_admin?
+          %td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_resource_path(resource), :class => 'btn btn-default btn-xs'
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), resource_path(resource), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_resource_path, :class => 'btn btn-primary'
+-if current_user.is_admin?
+  = link_to t('.new', :default => t("helpers.links.new")), new_resource_path, :class => 'btn btn-primary'
 
 -#-#  %td= (defined? resource.max_reserve_time ? resource.max_reserve_time.strftime("%k:%M") :nil)

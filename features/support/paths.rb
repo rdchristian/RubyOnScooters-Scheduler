@@ -22,7 +22,9 @@ module NavigationHelpers
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
     when /^the facilities page$/
-      new_facility_path
+      '/facilities'
+    when /^the resources page$/
+      '/resources'
     else
       begin
         page_name =~ /^the (.*) page$/
@@ -38,7 +40,7 @@ module NavigationHelpers
   def click_button(button_name)
     case button_name
     when /^Add$/
-      new_facility_path
+      '../new'
     else
       begin
       rescue NoMethodError, ArgumentError

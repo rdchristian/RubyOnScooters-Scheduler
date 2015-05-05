@@ -1,4 +1,5 @@
 - model_class = User
 .page-header
   %h1=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize
+  %h3='After creating your account, you will recieve an email when your account has been activated'
 = render :partial => "form"

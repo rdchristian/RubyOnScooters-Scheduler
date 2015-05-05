@@ -1,38 +1,22 @@
 - model_class = Event
+- unless flash.blank?
+  - flash.each do |type, message|
+    %div{:class => "alert #{bootstrap_class_for(type)} fade in"}
+      %button.close{"data-dismiss" => "alert"} ×
+      = message.html_safe
+      
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
 
-%p
-  %strong= model_class.human_attribute_name(:title) + ':'
-  %br
-  = @event.title
-%p
-  %strong= model_class.human_attribute_name(:description) + ':'
-  %br
-  = @event.description
-%p
-  %strong= model_class.human_attribute_name(:start) + ':'
-  %br
-  = @event.start
-%p
-  %strong= model_class.human_attribute_name(:end) + ':'
-  %br
-  = @event.end
-%p
-  %strong= model_class.human_attribute_name(:creator_name) + ':'
-  %br
-  = @event.creator_name
-%p
-  %strong= model_class.human_attribute_name(:facilities) + ':'
-  %br
-  = @event.facilities_list
-%p
-  %strong= model_class.human_attribute_name(:resources) + ':'
-  %br
-  = @event.resources_list
-  = image_tag @event.picture.url if @event.picture?
+= render partial: 'show'
+= image_tag @event.picture.url if @event.picture?
   - p @event.picture?
 
-= link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn btn-default'
-= link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(@event), :class => 'btn btn-default'
-= link_to t('.destroy', :default => t("helpers.links.destroy")), event_path(@event), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+-if !@event.resources_checked_in? && @event.ending < Time.zone.now
+  %p
+    =link_to "Check in resources", check_in_path(@event), :class => 'btn btn-default btn-xs'
+
+-if current_user.is_admin? || current_user.id == @event.creator.id
+  = link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn btn-default'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_event_path(@event.creator, @event), :class => 'btn btn-default'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), user_event_path(@event.creator, @event), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

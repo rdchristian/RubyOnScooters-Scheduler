@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415112742) do
+ActiveRecord::Schema.define(version: 20150505014522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,18 @@ ActiveRecord::Schema.define(version: 20150415112742) do
     t.string   "title"
     t.text     "description"
     t.datetime "start"
-    t.datetime "end"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "ending"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "user_id"
     t.string   "picture"
+    t.text     "recurrence"
+    t.text     "resource_counts"
+    t.boolean  "approved",        default: true
+    t.boolean  "checked_in",      default: false
+    t.integer  "attendees"
+    t.text     "memo"
+    t.datetime "recur_until"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -54,13 +61,13 @@ ActiveRecord::Schema.define(version: 20150415112742) do
     t.string   "storage_location"
     t.time     "max_reserve_time"
     t.string   "picture"
-  end
-
-  create_table "microposts", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "min_capacity"
+    t.boolean  "priority"
+    t.boolean  "has_tv"
+    t.boolean  "has_tables"
+    t.boolean  "has_projector"
+    t.boolean  "has_chairs"
+    t.boolean  "has_sound"
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
@@ -74,15 +81,39 @@ ActiveRecord::Schema.define(version: 20150415112742) do
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
+<<<<<<< HEAD
+=======
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "room_number"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.date     "start_date"
+    t.datetime "start"
+    t.datetime "ending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> admin-emails
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
+    t.integer  "phone"
+    t.string   "home_group"
+    t.integer  "user_level",      default: 0
+    t.boolean  "activated",       default: false
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

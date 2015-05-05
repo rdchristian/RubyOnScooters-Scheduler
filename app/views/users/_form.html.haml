@@ -14,15 +14,28 @@
       = error_span(@user[:email])
   .row  
     .form-group.col-sm-6
+      = f.label :phone, class: 'control-label'
+      .controls
+        = f.text_field :phone, class: 'form-control', required: true
+        = "Please do not include any formatting; just the 9 digits"
+      = error_span(@user[:phone])
+  .row  
+    .form-group.col-sm-6
+      = f.label :home_group, class: 'control-label'
+      .controls
+        = f.text_field :home_group, class: 'form-control', required: true
+      = error_span(@user[:home_group])
+  .row  
+    .form-group.col-sm-6
       = f.label :password, class: 'control-label'
       .controls
-        = f.text_field :password, class: 'form-control', required: true
+        = f.password_field :password, class: 'form-control'
       = error_span(@user[:password])    
   .row  
     .form-group.col-sm-6
       = f.label :password_confirmation, class: 'control-label'
       .controls
-        = f.text_field :password_confirmation, class: 'form-control', required: true
+        = f.password_field :password_confirmation, class: 'form-control'
       = error_span(@user[:password_confirmation])    
   .row-float
     = f.submit nil,class: 'btn btn-primary'

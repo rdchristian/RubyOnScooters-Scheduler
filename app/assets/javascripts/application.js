@@ -11,13 +11,19 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
 //= require selectize
 //= require moment
+//= require underscore/underscore
 //= require bootstrap-datetimepicker
+//= require bootstrap-calendar/js/calendar
 //= require bootstrap-3-timepicker/js/bootstrap-timepicker
 //= require bootstrap-touchspin/dist/jquery.bootstrap-touchspin
 //= require bootstrap-daterangepicker/daterangepicker
+//= require bootstrapformhelpers/js/bootstrap-formhelpers
 //= require_tree ../../../vendor/assets/javascripts/.
+//= require loading_spinner
+//= require turbolinks
+//= require turboboost

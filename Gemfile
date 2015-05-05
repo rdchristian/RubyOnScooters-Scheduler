@@ -13,6 +13,11 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 
+# Date validation in the models and ice_cube is a feature-rich recurrence library
+gem "date_validator"
+gem "ice_cube"
+gem 'recurring_select' # ice_cube helpers
+
 # Awesome responsive search form
 gem "selectize-rails"
 
@@ -40,6 +45,8 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks' # fixing issues between them
+gem 'turboboost', github: 'waymondo/turboboost'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -50,11 +57,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # postgresql
 gem 'pg'
 
+# enhanced querying framework
+gem 'squeel'
+
 # to allow attr_accessible to be used in rails 4 ('cause I'm lazy and don't wanna adapt to change...)
 gem 'protected_attributes'
 
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'
+
+ #Scheduling jobs to run automatically
+ gem 'whenever', require: false
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -78,6 +91,9 @@ group :development, :test do
   gem 'spring'
 
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
+
+  # Pretty printer with awesome capabilities!
+  gem 'awesome_print'
 end
 
 # setup Cucumber, RSpec, autotest support

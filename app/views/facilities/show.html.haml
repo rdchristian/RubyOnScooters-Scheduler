@@ -1,11 +1,7 @@
 - model_class = Facility
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.titleize
+  %h1=t '.title', :default => @facility.name
 
-%p
-  %strong= model_class.human_attribute_name(:name) + ':'
-  %br
-  = @facility.name
 %p
   %strong= model_class.human_attribute_name(:description) + ':'
   %br
@@ -14,11 +10,51 @@
   %strong= model_class.human_attribute_name(:capacity) + ':'
   %br
   = @facility.capacity
+<<<<<<< HEAD
   %br
   = image_tag @facility.picture.url if @facility.picture?
   - p @facility.picture?
+=======
+%p
+  %strong= model_class.human_attribute_name(:max_reserve_time) + ':'
+  %br
+  = @facility.max_reserve_time or 'Not limited'
+%p
+  %strong= model_class.human_attribute_name(:storage_location) + ':'
+  %br
+  = @facility.storage_location
+%p 
+  %strong= model_class.human_attribute_name(:min_capacity) + ':'
+  %br
+  = @facility.min_capacity
+%p
+  %strong= model_class.human_attribute_name(:priority) + ':'
+  %br
+  = @facility.priority
+%p
+  %strong= model_class.human_attribute_name(:has_projector) + ':'
+  %br
+  = @facility.has_projector
+%p
+  %strong= model_class.human_attribute_name(:has_tv) + ':'
+  %br
+  = @facility.has_tv
+%p
+  %strong= model_class.human_attribute_name(:has_tables) + ':'
+  %br
+  = @facility.has_tables
+%p
+  %strong= model_class.human_attribute_name(:has_chairs) + ':'
+  %br
+  = @facility.has_chairs
+%p
+  %strong= model_class.human_attribute_name(:has_sound) + ':'
+  %br
+  = @facility.has_sound
+>>>>>>> f219e4cea71f4065e1200954559d384418f45b8f
 
 
-= link_to t('.back', :default => t("helpers.links.back")), facilities_path, :class => 'btn btn-default'
-= link_to t('.edit', :default => t("helpers.links.edit")), edit_facility_path(@facility), :class => 'btn btn-default'
-= link_to t('.destroy', :default => t("helpers.links.destroy")), facility_path(@facility), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+-if current_user.is_admin?
+  = link_to t('.back', :default => t("helpers.links.back")), facilities_path, :class => 'btn btn-default'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_facility_path(@facility), :class => 'btn btn-default'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), facility_path(@facility), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
