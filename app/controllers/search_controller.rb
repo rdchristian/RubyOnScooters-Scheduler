@@ -16,6 +16,12 @@ class SearchController < ApplicationController
   end
 
   def search_facilities
+    search = {}
+    search[:start], search[:end] = params[:date_range].split('-').map!{ |x| Time.zone.parse(x) } if params[:date_range].present?
+    search[:name] = params[:name] if params[:name].present?
+    search[:capacity] = params[:capacity].to_i if params[:capacity].present?
+
+    @results = Search.facilities(search) if params[:commit]
     render_response
   end
 

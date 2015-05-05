@@ -18,6 +18,9 @@ class EventsController < ApplicationController
   # GET /users/:id/events/:id
   # GET /users/:id/events/:id.json
   def show
+    if request.xhr?
+      render partial: 'show'
+    end
   end
 
   # GET /users/:id/events/new

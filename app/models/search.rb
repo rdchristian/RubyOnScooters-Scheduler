@@ -2,7 +2,7 @@
 # @Author: Synix
 # @Date:   2015-05-04 04:01:32
 # @Last Modified by:   Synix
-# @Last Modified time: 2015-05-04 17:04:37
+# @Last Modified time: 2015-05-04 20:42:46
 
 class Search
 
@@ -52,6 +52,27 @@ class Search
 	end
 
 	def self.facilities(params)
+		query   = Event
+		query   = query.where('capacity >= ?', params[:capacity]) if params[:capacity]
+		# Find events associated with a facility name
+		facility_ids = []
+		if params[:name]
+			query   = query.joins(:facilities).where("lower(facilities.name) LIKE ?", "%#{params[:name].downcase}%")
+			facility_ids = query.select('facilities.id as id').uniq.ids
+		end
+		# that cross the given time frame
+		if params[:start] and params[:end]
+			query_a = query.overlapping_events_to_a(params[:start], params[:end])
+		else
+			query_a = query.all
+		end
+
+		# See if they leave any facilities for us to take
+		exceptions = []
+		query_a.each do |event|
+			exceptions << event if (facility_ids & event.facilities.ids).present?
+		end
+		return exceptions
 	end
 
 end

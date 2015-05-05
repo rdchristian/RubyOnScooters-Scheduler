@@ -1,4 +1,7 @@
 class CalendarController < ApplicationController
-	def show
-	end
+  before_filter :authenticate_user!
+
+  def show
+  end
+
 end

@@ -11,12 +11,14 @@
   "use strict";
 
   var options = {
-    events_source: '/assets/bootstrap-calendar/events.json.php',
+    events_source: JSON.parse($('#events-array').val()),
     view: 'month',
     tmpl_path: '/assets/bootstrap-calendar/tmpls/',
     tmpl_cache: false,
-    day: '2013-03-12',
+    day: $('#starting-date').val(),
     modal: '#events-modal',
+    modal_type: 'ajax',
+    modal_title: function(event) { return event.title },
     onAfterEventsLoad: function(events) {
       if(!events) {
         return;
@@ -73,5 +75,6 @@
     //e.preventDefault();
     //e.stopPropagation();
   });
+
 
 }(jQuery));

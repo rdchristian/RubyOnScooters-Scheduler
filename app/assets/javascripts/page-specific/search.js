@@ -2,7 +2,7 @@
 * @Author: Synix
 * @Date:   2015-05-02 22:03:44
 * @Last Modified by:   Synix
-* @Last Modified time: 2015-05-04 17:17:51
+* @Last Modified time: 2015-05-04 17:50:32
 */
 
 'use strict';
@@ -81,6 +81,7 @@ function search_facilities() {
 // document.ready
 $(function() {
   search_events(); search_facilities(); search_resources();
+  var init = true;
 
   $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
     $(e.target).css('background-color', '#EEE');           // newly activated tab
@@ -89,10 +90,8 @@ $(function() {
     // Save the active tab in browser history so we can go back to it with the browser back button
     var action = $(e.target).attr('id');
     var url = '/' + action.replace('_','/');
-    // Don't delete the query string if a tab change isn't happening
-    if($(e.target).attr('id') == action)
-      url += window.location.search;
-    history.pushState(action, null, url);
+    if(init) init = false;
+    else history.pushState(action, null, url);
   });
   $(getAction()).trigger('click').css('background-color', '#EEE');
 
