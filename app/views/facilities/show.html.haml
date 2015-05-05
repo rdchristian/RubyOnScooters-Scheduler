@@ -10,11 +10,6 @@
   %strong= model_class.human_attribute_name(:capacity) + ':'
   %br
   = @facility.capacity
-<<<<<<< HEAD
-  %br
-  = image_tag @facility.picture.url if @facility.picture?
-  - p @facility.picture?
-=======
 %p
   %strong= model_class.human_attribute_name(:max_reserve_time) + ':'
   %br
@@ -51,7 +46,9 @@
   %strong= model_class.human_attribute_name(:has_sound) + ':'
   %br
   = @facility.has_sound
->>>>>>> f219e4cea71f4065e1200954559d384418f45b8f
+  %br
+  = image_tag @facility.picture.url if @facility.picture?
+  - p @facility.picture?
 
 
 -if current_user.is_admin?
