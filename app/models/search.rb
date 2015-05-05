@@ -2,7 +2,7 @@
 # @Author: Synix
 # @Date:   2015-05-04 04:01:32
 # @Last Modified by:   Synix
-# @Last Modified time: 2015-05-04 20:42:46
+# @Last Modified time: 2015-05-04 21:06:30
 
 class Search
 
@@ -17,8 +17,8 @@ class Search
 		# For now, multiple resource conditions are OR'ed, and facilities and resources are AND'ed
 		# E.g. Look for Events that have (chairs OR pencils) AND are in a classroom
 		# & is Array intersection (common elements)
-		query_a.select! { |event| (event.resources.ids & params[:resources]).present? } if params[:resources]
-		query_a.select! { |event| (event.facilities.ids & params[:facilities]).present? } if params[:facilities]
+		query_a = query_a.select { |event| (event.resources.ids & params[:resources]).present? } if params[:resources]
+		query_a = query_a.select { |event| (event.facilities.ids & params[:facilities]).present? } if params[:facilities]
 
 		return query_a
 	end
