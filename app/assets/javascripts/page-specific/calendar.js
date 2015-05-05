@@ -13,7 +13,7 @@
   var options = {
     events_source: JSON.parse($('#events-array').val()),
     view: 'month',
-    tmpl_path: '/assets/bootstrap-calendar/tmpls/',
+    tmpl_path: '/assets/tmpls/',
     tmpl_cache: false,
     day: $('#starting-date').val(),
     modal: '#events-modal',
