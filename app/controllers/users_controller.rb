@@ -90,10 +90,22 @@ class UsersController < ApplicationController
     redirect_to admin_path
   end
 
+   def deny
+    set_user
+    set_message
+    UserMailer.account_denied(@user, @message).deliver_now
+    @user.destroy
+    redirect_to admin_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_message
+      @message = params[:message]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

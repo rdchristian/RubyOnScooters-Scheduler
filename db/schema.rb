@@ -78,6 +78,24 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.time     "max_reserve_time"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "rooms", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "room_number"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.date     "start_date"
+    t.datetime "start"
+    t.datetime "ending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> admin-emails
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                      null: false
