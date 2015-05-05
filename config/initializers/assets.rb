@@ -14,7 +14,7 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'co
 
 # Because I configured for page-specific javascripts (instead of dumping everything into application.js)
 # precompile += %w( directory1/* directory2/* file.js )
-Rails.application.config.assets.precompile += %w( page-specific/*)
+Rails.application.config.assets.precompile += %w( page-specific/* tmpls/*)
 
 
 # https://github.com/seejohnrun/ice_cube/issues/252
