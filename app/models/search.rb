@@ -2,7 +2,7 @@
 # @Author: Synix
 # @Date:   2015-05-04 04:01:32
 # @Last Modified by:   Synix
-# @Last Modified time: 2015-05-06 18:36:26
+# @Last Modified time: 2015-05-06 18:43:15
 
 class Search
 
@@ -49,6 +49,7 @@ class Search
       query   = query.joins(:resources).where("lower(resources.name) LIKE ?", "%#{params[:name].downcase}%")
       resource_ids = query.select('resources.id as id').uniq.ids
     end
+    Rails.logger.info(query)
     # that cross the given time frame
     if params[:start] and params[:end]
       query_a = query.overlapping_events_to_a(params[:start], params[:end])
@@ -57,7 +58,7 @@ class Search
       params[:end] = Time.zone.now + Search.limit if params[:end].blank?
       query_a = query.all
     end
-    Rails.logger.info(params)
+    Rails.logger.info([params, query_a, resource_ids)
     # See if they leave any resources for us to take
     exceptions = []
     query_a.each do |event|
@@ -68,7 +69,7 @@ class Search
           occurrences_between(params[:start], params[:end]).each do |t|
             exceptions << [event, t] if 
               common_resources.any? do |res_id|
-                event.num_of_resource_reserved_at_time(res_id, params[:start], params[:end]) + 
+                event.num_of_resource_reserved_at_time(res_id, t, event.recurrence.duration + t) + 
                   params[:numberOf] > Resource.find(res_id).numberOf
               end
           end #occurrences
