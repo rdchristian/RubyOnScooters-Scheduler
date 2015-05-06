@@ -44,5 +44,6 @@ Rails.application.routes.draw do
   get    '/events/checkin/:id' => 'events#check_in', as: 'check_in'
   post   '/post/change_schedule_variable' => 'master_page#change_schedule_variable'
   get    '/events/alert/:id' => 'events#alert', as: 'alert'
+  get    '/notifications/check_in_reminder/:id' => 'notifications#check_in_reminder', as: 'check_in_text'
 
 end
