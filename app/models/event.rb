@@ -131,7 +131,6 @@ class Event < ActiveRecord::Base
           e.facilities.exists?(fac.id)
         }.compact
     end
-
     resources.each do |res|
       exceptions += same_time_events.
         collect{ |e| recurrence.previous_occurrence(e.ending) if
@@ -139,7 +138,7 @@ class Event < ActiveRecord::Base
           sum + resource_counts[res.id] > res.numberOf
         }.compact
     end
-    return exceptions.uniq!{ |x| x.hash }
+    return exceptions.uniq{ |x| x.hash }
   end
 
 
