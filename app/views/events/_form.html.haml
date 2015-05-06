@@ -2,7 +2,7 @@
 - javascript "events"
 - format_fields
 
-= form_for [@event.creator, @event], html: { class: "form form-vertical event" } do |f|
+= form_for [@event.creator, @event], html: { class: "form form-vertical event", multipart: "true" } do |f|
   =render 'shared/events_error_messages'
   .row  
     .form-group.col-sm-4
@@ -129,6 +129,9 @@
             .input-group-addon.click-date{ :style => 'cursor: pointer'} 
               %i.fa.fa-calendar
               
+  .row-float
+    = f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'
+
   .row-float
     = f.submit nil, class: 'btn btn-primary', data: { disable_with: "Submitting..." }, autocomplete: 'off'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), events_path, :class => 'btn btn-default'

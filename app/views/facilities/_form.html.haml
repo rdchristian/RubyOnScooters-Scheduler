@@ -1,6 +1,8 @@
 - javascript "global_controller"
 
-= form_for @facility, html: { class: "form form-vertical facility" } do |f|
+= form_for @facility, html: { class: "form form-vertical facility", multipart: "true" } do |f|
+  =render 'shared/facilities_error_messages'
+  
   .row
     .form-group.col-sm-4
       = f.label :name, class: 'control-label'
@@ -61,6 +63,9 @@
       .controls
         = f.check_box :has_sound, class: 'form-control check_box', required: false
       = error_span(@facility[:has_sound]) 
+
+  .row-float
+    = f.file_field :picture
 
   .row-float
     = f.submit nil,class: 'btn btn-primary'

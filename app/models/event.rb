@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :description, :start, :start_date, :duration, :ending, :recurrence, :recur_until,
                   :creator, :facility_ids, :resource_ids, :resource_counts, :creator_name,
-                  :approved, :checked_in, :attendees, :memo
+                  :approved, :checked_in, :attendees, :memo, :picture
   attr_accessor :start_date # virtual attribute
   # :ending is set through duration
 
@@ -12,6 +12,8 @@ class Event < ActiveRecord::Base
   belongs_to :creator, :class_name => :User, :foreign_key => "user_id"  
   has_and_belongs_to_many :resources
   has_and_belongs_to_many :facilities
+
+  mount_uploader :picture, PictureUploader
 
   accepts_nested_attributes_for :resources
   accepts_nested_attributes_for :facilities
@@ -58,7 +60,7 @@ class Event < ActiveRecord::Base
   validates :title, :start, :creator, :presence => true
   validates :start, date: true
   validates :recur_until, date: { after: :ending, allow_blank: true, message: 'must be after the starting date.' }
-  validate  :valid_resource_counts, :resources_available, :facility_available
+  validate  :valid_resource_counts, :resources_available, :facility_available, :picture_size
 
   def valid_resource_counts
     # Integerize { '3' => '5' } --> { 3 => 5 } 
@@ -216,4 +218,11 @@ class Event < ActiveRecord::Base
   def resources_checked_in?
     return checked_in
   end
+
+  private
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB!")
+      end
+    end
 end

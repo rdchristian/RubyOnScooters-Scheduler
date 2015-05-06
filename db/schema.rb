@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.integer  "attendees"
     t.text     "memo"
     t.datetime "recur_until"
+    t.string   "picture"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.boolean  "has_projector"
     t.boolean  "has_chairs"
     t.boolean  "has_sound"
+    t.string   "picture"
   end
 
   create_table "resources", force: :cascade do |t|

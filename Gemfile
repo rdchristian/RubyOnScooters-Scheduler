@@ -72,6 +72,11 @@ gem 'protected_attributes'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+# Image uploader and resizing gems
+gem 'carrierwave','~> 0.10.0'
+gem 'mini_magick','~> 3.8.0'
+gem 'fog','~>1.23.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

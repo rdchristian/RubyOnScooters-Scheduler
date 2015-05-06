@@ -95,6 +95,15 @@ class EventsController < ApplicationController
     redirect_to admin_path
   end
 
+  def deny
+    set_event
+    @user = @event.creator
+    set_message
+    UserMailer.event_denied(@event.creator, @event, @message).deliver_now
+    @event.destroy
+    redirect_to admin_path
+  end
+
   def check_in
     set_event
     @event.checked_in = true;
@@ -110,6 +119,10 @@ class EventsController < ApplicationController
 
 
   private
+    def set_message
+      @message = params[:message]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = @scope.find(params[:id])
@@ -204,7 +217,7 @@ class EventsController < ApplicationController
       # Strong parameters
       # Never trust parameters from the scary internet, only allow the white list through.
       params.require(:event).permit(:title, :description, :start, :start_date, :duration, :recurrence, :resource_counts,
-                                    :recur_until, :attendees, :memo, :creator_name, resource_ids: [], facility_ids: [])
+                                    :recur_until, :attendees, :memo, :creator_name, :picture, resource_ids: [], facility_ids: [])
       # Because recurrence is an object, we have to go through this bullshit to permit all its hash fields
       params.require(:event).tap do |whitelisted|
         whitelisted[:recurrence] = params[:event][:recurrence]
@@ -212,5 +225,4 @@ class EventsController < ApplicationController
       end
 
     end 
-
 end

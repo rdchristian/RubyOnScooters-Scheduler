@@ -46,6 +46,9 @@
   %strong= model_class.human_attribute_name(:has_sound) + ':'
   %br
   = @facility.has_sound
+  %br
+  = image_tag @facility.picture.url if @facility.picture?
+  - p @facility.picture?
 
 
 -if current_user.is_admin?
