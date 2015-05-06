@@ -2,7 +2,7 @@
 # @Author: Synix
 # @Date:   2015-05-04 04:01:32
 # @Last Modified by:   Synix
-# @Last Modified time: 2015-05-06 18:43:15
+# @Last Modified time: 2015-05-06 18:44:49
 
 class Search
 
@@ -58,7 +58,7 @@ class Search
       params[:end] = Time.zone.now + Search.limit if params[:end].blank?
       query_a = query.all
     end
-    Rails.logger.info([params, query_a, resource_ids)
+    Rails.logger.info([params, query_a, resource_ids])
     # See if they leave any resources for us to take
     exceptions = []
     query_a.each do |event|
