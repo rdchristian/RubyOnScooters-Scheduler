@@ -1,4 +1,5 @@
-desc 'send admin email'
-task send_admin_email :environment do
-	UserMailer.admin_email.deliver!
+namespace :send do
+	desc 'Sending admin email'
+	task admin_email :environment do
+		UserMailer.admin_email.deliver!
 end
