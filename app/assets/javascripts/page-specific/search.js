@@ -2,7 +2,7 @@
 * @Author: Synix
 * @Date:   2015-05-02 22:03:44
 * @Last Modified by:   Synix
-* @Last Modified time: 2015-05-06 13:32:38
+* @Last Modified time: 2015-05-06 15:18:16
 */
 
 'use strict';
@@ -51,8 +51,8 @@ function search_events() {
     maxOptions: 179, // Why 179? Fu, that's why
     sortField: { field: 'text', direction: 'asc' },
   };
-  $('.selectable-facility').selectize(selectable_options);
-  $('.selectable-resources').selectize(selectable_options);
+  $('.selectable-facility-search').selectize(selectable_options);
+  $('.selectable-resources-search').selectize(selectable_options);
 }
 
 function search_resources() {

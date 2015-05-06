@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   before_filter :authenticate_user!
 
   def show
-    redirect_to search_events_path # default search
+    # redirect_to search_events_path # default search
   end
 
   def search_events
