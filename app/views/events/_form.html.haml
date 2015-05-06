@@ -2,7 +2,8 @@
 - javascript "events"
 - format_fields
 
-= form_for [@event.creator, @event], html: { class: "form form-vertical event", multipart: "true" } do |f|
+
+= form_for [@event.creator, @event], html: { class: "form form-vertical " } do |f|
   =render 'shared/events_error_messages'
   .row  
     .form-group.col-sm-4

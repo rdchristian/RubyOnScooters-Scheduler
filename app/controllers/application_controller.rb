@@ -42,16 +42,26 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :events_to_calendar_format
-  def events_to_calendar_format(events)
+  def events_to_calendar_format(results)
   styles = %w( important warning info success inverse special ).map{ |s| 'event-' + s }
-  events.each_with_index.collect do |event, i|
+  recurring_styles = {}
+  results.each_with_index.collect do |result, i|
+    event, time = result
+    if event.recurrence.present?
+      ending = time + event.recurrence.duration
+      recurring_styles[event.id] ||= styles[i % styles.length]
+      style = recurring_styles[event.id]
+    else
+      ending = event.ending
+      style = styles[i % styles.length]
+    end
     {
       id:      event.id,
       title:   event.title,
       url:     user_event_path(event.creator, event),
-      start:   event.start.to_datetime.strftime('%Q'),
-      'end':   event.ending.to_datetime.strftime('%Q'),
-      'class': styles[i % styles.length]
+      start:   time.to_datetime.strftime('%Q'),
+      'end':   ending.to_datetime.strftime('%Q'),
+      'class': style
     }
   end
 end

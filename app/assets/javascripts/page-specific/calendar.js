@@ -25,8 +25,12 @@
       }
       var list = $('#eventlist');
       list.html('');
+      var uniqs = {};
 
       $.each(events, function(key, val) {
+        if(val.id in uniqs) return true;
+        uniqs[val.id] = true;
+        
         $(document.createElement('li'))
           .html('<a href="' + val.url + '">' + val.title + '</a>')
           .appendTo(list);

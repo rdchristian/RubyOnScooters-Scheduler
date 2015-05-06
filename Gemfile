@@ -69,6 +69,9 @@ gem 'protected_attributes'
  #Scheduling jobs to run automatically
  gem 'whenever', require: false
 
+ #For sending text messages
+ gem 'twilio-ruby'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

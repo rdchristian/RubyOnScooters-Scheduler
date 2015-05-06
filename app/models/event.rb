@@ -52,7 +52,7 @@ class Event < ActiveRecord::Base
   def self.overlapping_events_to_a(start_t, end_t)
     q =  self.where("start <= ? and ending >= ?", end_t, start_t).to_a
     q += self.where.not(recurrence: nil).
-              where("recur_until IS NOT NULL OR recur_until <= ?", start_t).
+              where("recur_until IS NULL OR recur_until <= ?", start_t).
          select { |e| e.recurrence_conflict?(start_t, end_t) }
   end
 
@@ -75,17 +75,21 @@ class Event < ActiveRecord::Base
       self.resource_counts.reject! { |key, value| not resources.collect(&:id).include?(key) }
   end
 
-  def num_of_resources_reserved_at_my_time(resource_id)
+  def num_of_resource_reserved_at_time(resource_id, start_t, end_t)
     Resource.find(resource_id).events.where.not(id: id).      # Except yourself
-             overlapping_events_to_a(start, ending).
+             overlapping_events_to_a(start_t, end_t).
              map{ |e| e.resource_counts[resource_id] }.       # Collect the number of this resource reserved
              sum + resource_counts[resource_id]               # Now count yourself in
+  end
+
+  def num_of_resource_reserved_at_my_time(resource_id)
+    num_of_resource_reserved_at_time(resource_id, start, ending)
   end
 
   def resources_available
     resources.each do |res|
       errors.add(:resources, ': All "' + res.name + '" are taken') if 
-        num_of_resources_reserved_at_my_time(res.id) > res.numberOf
+        num_of_resource_reserved_at_my_time(res.id) > res.numberOf
 
       return unless res.max_reserve_time
       maxt = res.max_reserve_time
