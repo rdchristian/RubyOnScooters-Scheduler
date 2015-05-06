@@ -376,11 +376,11 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    subexec (0.2.3)
     squeel (1.2.3)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       polyamorous (~> 1.1.0)
+    subexec (0.2.3)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref

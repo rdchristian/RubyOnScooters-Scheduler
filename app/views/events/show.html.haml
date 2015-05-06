@@ -10,7 +10,6 @@
 
 = render partial: 'show'
 = image_tag @event.picture.url if @event.picture?
-  - p @event.picture?
 
 -if !@event.resources_checked_in? && @event.ending < Time.zone.now
   %p

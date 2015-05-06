@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "user_id"
-    t.string   "picture"
     t.text     "recurrence"
     t.text     "resource_counts"
     t.boolean  "approved",        default: true
@@ -32,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.integer  "attendees"
     t.text     "memo"
     t.datetime "recur_until"
+    t.string   "picture"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
-    t.string   "picture"
     t.integer  "min_capacity"
     t.boolean  "priority"
     t.boolean  "has_tv"
@@ -68,10 +67,8 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.boolean  "has_projector"
     t.boolean  "has_chairs"
     t.boolean  "has_sound"
+    t.string   "picture"
   end
-
-  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
-  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
 
   create_table "resources", force: :cascade do |t|
     t.string   "name"
@@ -81,26 +78,8 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.datetime "updated_at",       null: false
     t.string   "storage_location"
     t.time     "max_reserve_time"
-<<<<<<< HEAD
-=======
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "room_number"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.date     "start_date"
-    t.datetime "start"
-    t.datetime "ending"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
->>>>>>> admin-emails
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                      null: false
@@ -119,5 +98,4 @@ ActiveRecord::Schema.define(version: 20150505014522) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "events", "users"
-  add_foreign_key "microposts", "users"
 end
