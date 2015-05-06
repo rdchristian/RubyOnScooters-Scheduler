@@ -67,7 +67,7 @@ gem 'protected_attributes'
  gem 'bcrypt', '~> 3.1.7'
 
  #Scheduling jobs to run automatically
- gem 'whenever', require: false
+ gem 'whenever'
 
  #For sending text messages
  gem 'twilio-ruby'
