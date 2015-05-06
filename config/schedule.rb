@@ -22,3 +22,11 @@
 every 1.day, :at => '8:00 am' do
 	rake "delete:old_events"
 end
+
+every 1.day, :at => '9:00 am' do
+	rake "send_admin_email"
+end
+
+every 1.day, :at => '5:00 pm' do
+	rake "send_admin_email"
+end
