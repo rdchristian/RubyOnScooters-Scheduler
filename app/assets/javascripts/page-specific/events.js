@@ -1,7 +1,7 @@
 // Place all the behaviors and hooks related to the events controller here.
 
-$(document).ready(function() {
-
+$(function() {
+	
 // Dynamic Ending datetime calculation using moment.js
 $("[name='event[start_date]'], [name='event[start]'], [name='event[duration]']").change(function() {
 	// Update the ending date field = event[ending]
