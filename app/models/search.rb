@@ -2,7 +2,7 @@
 # @Author: Synix
 # @Date:   2015-05-04 04:01:32
 # @Last Modified by:   Synix
-# @Last Modified time: 2015-05-06 17:14:16
+# @Last Modified time: 2015-05-06 18:36:26
 
 class Search
 
@@ -57,11 +57,11 @@ class Search
       params[:end] = Time.zone.now + Search.limit if params[:end].blank?
       query_a = query.all
     end
-    logger.info(params)
+    Rails.logger.info(params)
     # See if they leave any resources for us to take
     exceptions = []
     query_a.each do |event|
-      logger.info(exceptions)
+      Rails.logger.info(exceptions)
       common_resources = resource_ids & event.resources.ids
       if event.recurrence.present?
         event.recurrence.
@@ -80,7 +80,7 @@ class Search
           end
       end
     end
-    logger.info(exceptions)
+    Rails.logger.info(exceptions)
     return exceptions
   end
 
