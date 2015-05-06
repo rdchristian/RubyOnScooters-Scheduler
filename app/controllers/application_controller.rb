@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
     {
       id:      event.id,
       title:   event.title,
-      url:     user_event_path(current_user, event),
+      url:     user_event_path(event.creator, event),
       start:   event.start.to_datetime.strftime('%Q'),
       'end':   event.ending.to_datetime.strftime('%Q'),
       'class': styles[i % styles.length]
