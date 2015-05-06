@@ -1,0 +1,15 @@
+- javascript "calendar"
+
+/ .calendar
+
+/ #events-modal.modal.fade
+/   .modal-dialog
+/     .modal-content
+/       .modal-header
+/         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+/         %h3 Event
+/       .modal-body{:style => "height: 400px"}
+/       .modal-footer
+/         %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+
+= render partial: 'calendar', locals: { starting_date: 'now', events_array: Event.all }

@@ -57,6 +57,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # postgresql
 gem 'pg'
 
+# enhanced querying framework
+gem 'squeel'
+
 # to allow attr_accessible to be used in rails 4 ('cause I'm lazy and don't wanna adapt to change...)
 gem 'protected_attributes'
 

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :events
   end
-  resources :events#, :only => [:index]
+  resources :events, :only => [:index]
 
   resources :resources
 
@@ -20,12 +20,15 @@ Rails.application.routes.draw do
   resources :facilities
   root :to => redirect('/events')
 
-  resources :searches
-  resources :obj_searches
-
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
+  get    'search' => 'search#show'
+  %w( events resources facilities ).each do |r|
+    get "search/#{r}/" => "search#search_#{r}"
+  end
+
   get    'sessions/new'
+  get    'calendar'  => 'calendar#show'
   get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

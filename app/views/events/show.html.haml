@@ -3,63 +3,12 @@
   - flash.each do |type, message|
     %div{:class => "alert #{bootstrap_class_for(type)} fade in"}
       %button.close{"data-dismiss" => "alert"} ×
-      = message
+      = message.html_safe
+      
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
 
-%p
-  %strong= model_class.human_attribute_name(:title) + ':'
-  %br
-  = @event.title
-%p
-  %strong= model_class.human_attribute_name(:description) + ':'
-  %br
-  = @event.description
-
-- if is_admin? and @event.memo.present?
-  %p
-    %strong= model_class.human_attribute_name(:memo) + ':'
-    %br
-    = @event.memo
-%p
-  %strong= model_class.human_attribute_name(:start) + ':'
-  %br
-  = @event.start
-%p
-  %strong= model_class.human_attribute_name(:ending) + ':'
-  %br
-  = @event.ending
-%p
-  %strong= model_class.human_attribute_name(:creator_name) + ':'
-  %br
-  = link_to @event.creator_name, user_path(User.find_by(name: @event.creator_name))
-
-- if @event.facilities_list.present?
-  %p
-    %strong= model_class.human_attribute_name(:facilities) + ':'
-    %br
-    = @event.facilities_list
-
-- if @event.resources_list.present?
-  %p
-    %strong= model_class.human_attribute_name(:resources) + ':'
-    %br
-    = @event.resources.collect { |r| r.name + ' (' + @event.resource_counts[r.id].to_s + ')' }.join(', ')
-
-%p
-  %strong= model_class.human_attribute_name(:attendees) + ':'
-  %br
-  = @event.attendees
-
-- if @event.recurrence.present?
-  %p
-    %strong= model_class.human_attribute_name(:recurrence) + ':'
-    %br
-    = @event.recurrence.to_s
-
-- if !@event.is_approved?
-  %p
-    %strong Pending Approval
+= render partial: 'show'
 
 -if !@event.resources_checked_in? && @event.ending < Time.zone.now
   %p
