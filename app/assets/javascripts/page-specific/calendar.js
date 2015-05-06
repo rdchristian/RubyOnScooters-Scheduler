@@ -10,6 +10,14 @@
 
   "use strict";
 
+  // We fucked up somewhere and calendar.js might get executed twice, so this prevents it
+  if($('#weird_fix').val() != 'nil') {
+    if($('#weird_fix').val() == 1)
+      return true;
+    else
+      $('#weird_fix').val(1);
+  }
+
   var options = {
     events_source: JSON.parse($('#events-array').val()),
     view: 'month',

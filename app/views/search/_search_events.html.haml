@@ -16,13 +16,13 @@
         .controls
           = select_tag :facilities, options_from_collection_for_select(Facility.all, :id, :name, params[:facilities]),
             prompt: 'Looking for any of these facilities?',
-            class: 'selectable-facility', :multiple => true
+            class: 'selectable-facility-search', :multiple => true
 
       .col-sm-6
         = label_tag :resources, 'Resources', class: 'control-label'
         .controls
           = select_tag :resources, options_from_collection_for_select(Resource.all, :id, :name, params[:resources]),
             prompt: 'Looking for any of these resources?',
-            class: 'selectable-resources', :multiple => true
+            class: 'selectable-resources-search', :multiple => true
     = submit_tag 'Search', class: 'btn btn-primary', method: 'get', id: '#search_events_submit',
       data: { disable_with: "Searching..." }, autocomplete: 'off'

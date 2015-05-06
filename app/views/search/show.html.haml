@@ -2,7 +2,7 @@
 
 = hidden_field_tag 'active-pane', '#' + params[:action]
 %ul#tabs.nav.nav-tabs{ 'data-tabs' => 'tabs' }
-  %li.active
+  %li
     %a#search_events{ 'data-toggle' => 'tab', href: '#events_t' } Events
   %li
     %a#search_resources{ 'data-toggle' => 'tab', href: '#resources_t' } Resources
@@ -10,7 +10,7 @@
     %a#search_facilities{ 'data-toggle' => 'tab', href: '#facilities_t' } Facilities
 
 .tab-content
-  .tab-pane.active.fade.in#events_t
+  .tab-pane.fade#events_t
     = render partial: 'search_events'
   .tab-pane.fade#resources_t
     = render partial: 'search_resources'
@@ -19,6 +19,6 @@
 
 #search-results
   - if @results.present?
-    = render partial: 'calendar/calendar', locals: { starting_date: (params[:start] or 'now'), events_array: @results }
+    = render partial: 'calendar/calendar', locals: { starting_date: (params[:start] or 'now'), events_array: @results, weird: 'nil' }
   - elsif params[:commit].present?
     %h3 No results found.
