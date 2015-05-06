@@ -23,6 +23,9 @@ module RubyOnScootersScheduler
     config.ADMIN_SCHEDULE_DAYS = 365           #initially admin users can schedule events any time into the futre
 
 
+    config.TWILIO_PHONE = '+19793832682'        #Phone number from which twilio texts will be sent
+
+
 
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
