@@ -86,14 +86,14 @@ class UsersController < ApplicationController
     set_user
     @user.activated = true;
     @user.save!
-    UserMailer.account_activation(@user).deliver_now
+    # UserMailer.account_activation(@user).deliver_now
     redirect_to admin_path
   end
 
    def deny
     set_user
     set_message
-    UserMailer.account_denied(@user, @message).deliver_now
+    # UserMailer.account_denied(@user, @message).deliver_now
     @user.destroy
     redirect_to admin_path
   end

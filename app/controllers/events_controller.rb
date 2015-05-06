@@ -91,7 +91,7 @@ class EventsController < ApplicationController
     set_event
     @event.approved = true;
     @event.save!
-    UserMailer.event_approved(@event.creator, @event).deliver_now
+    # UserMailer.event_approved(@event.creator, @event).deliver_now
     redirect_to admin_path
   end
 
@@ -99,7 +99,7 @@ class EventsController < ApplicationController
     set_event
     @user = @event.creator
     set_message
-    UserMailer.event_denied(@event.creator, @event, @message).deliver_now
+    # UserMailer.event_denied(@event.creator, @event, @message).deliver_now
     @event.destroy
     redirect_to admin_path
   end
@@ -113,7 +113,7 @@ class EventsController < ApplicationController
 
   def alert
     set_event
-    UserMailer.check_in_reminder(@event).deliver_now
+    # UserMailer.check_in_reminder(@event).deliver_now
     redirect_to check_in_text_path(@event.creator)
   end
 
