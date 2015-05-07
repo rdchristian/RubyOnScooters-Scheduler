@@ -27,3 +27,8 @@
 //= require loading_spinner
 //= require turbolinks
 //= require turboboost
+
+// Pretty much a hack to make the sidebar work with bh
+$(function() {
+	$('.nav-sidebar').removeClass('nav-tabs');
+});

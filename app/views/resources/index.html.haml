@@ -4,23 +4,25 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
+      / %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
       %th= 'Amount Owned'
       %th= model_class.human_attribute_name(:storage_location)
-      %th= model_class.human_attribute_name(:max_reserve_time) + " (Hour:Minutes)"
+      %th= 'Maximum reserve time'
       -if current_user.is_admin?
         %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @resources.each do |resource|
       %tr
-        %td= link_to resource.id, resource_path(resource)
-        %td= resource.name
+        %td= link_to resource.name, resource_path(resource)
+        / %td= resource.name
         %td= resource.description
         %td= resource.numberOf
         %td= resource.storage_location
-        %td= resource.max_reserve_time.strftime("%k:%M")
+        %td
+          = resource.max_reserve_time.strftime("%k hours")
+          = resource.max_reserve_time.strftime(" and %M minutes") if resource.max_reserve_time.min != 0
         -if current_user.is_admin?
           %td
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_resource_path(resource), :class => 'btn btn-default btn-xs'

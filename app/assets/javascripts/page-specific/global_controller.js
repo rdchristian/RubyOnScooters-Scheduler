@@ -1,5 +1,7 @@
 // Place all the behaviors and hooks related to a controller here.
 
+// $(function() {
+
 $('.clockpicker').clockpicker({
     placement: 'bottom',
     align: 'top',
@@ -55,3 +57,5 @@ $(disabled_text_fields).css({
     'cursor': 'pointer',
     'background-color': '#FFFFFF',
 });
+
+// });

@@ -4,7 +4,10 @@
 %p
   %strong= model_class.human_attribute_name(:title) + ':'
   %br
-  = @event.title
+  - if request.xhr?
+    = link_to @event.title, user_event_path(@event.creator, @event)
+  - else
+    = @event.title
 %p
   %strong= model_class.human_attribute_name(:description) + ':'
   %br

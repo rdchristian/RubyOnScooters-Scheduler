@@ -1,13 +1,14 @@
 - javascript "search"
 
+.page-header
+  %h1=t '.title', :default => 'Search'
+
 = hidden_field_tag 'active-pane', '#' + params[:action]
-%ul#tabs.nav.nav-tabs{ 'data-tabs' => 'tabs' }
-  %li
-    %a#search_events{ 'data-toggle' => 'tab', href: '#events_t' } Events
-  %li
-    %a#search_resources{ 'data-toggle' => 'tab', href: '#resources_t' } Resources
-  %li
-    %a#search_facilities{ 'data-toggle' => 'tab', href: '#facilities_t' } Facilities
+= nav layout: :pills do
+  = link_to 'Events',     '#events_t',     id: 'search_events',     'data-toggle': 'tab'
+  = link_to 'Resources',  '#resources_t',  id: 'search_resources',  'data-toggle': 'tab'
+  = link_to 'Facilities', '#facilities_t', id: 'search_facilities', 'data-toggle': 'tab'
+
 
 .tab-content
   .tab-pane.fade#events_t
@@ -19,6 +20,6 @@
 
 #search-results
   - if @results.present?
-    = render partial: 'calendar/calendar', locals: { starting_date: (params[:start] or 'now'), events_array: @results, weird: 'nil' }
+    = render partial: 'calendar/calendar', locals: { starting_date: (params[:start] or 'now'), events_array: @results }
   - elsif params[:commit].present?
     %h3 No results found.

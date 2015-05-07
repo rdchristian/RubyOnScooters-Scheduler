@@ -4,7 +4,7 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
+      / %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:capacity)
@@ -20,8 +20,8 @@
   %tbody
     - @facilities.each do |facility|
       %tr
-        %td= link_to facility.id, facility_path(facility)
-        %td= facility.name
+        %td= link_to facility.name, facility_path(facility)
+        / %td= facility.name
         %td= facility.description
         %td= facility.capacity
         %td= facility.min_capacity

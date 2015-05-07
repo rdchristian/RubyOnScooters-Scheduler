@@ -21,7 +21,7 @@
           %td= user.phone
           %td= user.home_group
           %td= user.level_string
-          %td= user.created_at
+          %td=l user.created_at
           -if current_user.is_admin?
             %td
               = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(user), :class => 'btn btn-default btn-xs'

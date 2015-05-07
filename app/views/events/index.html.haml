@@ -9,7 +9,6 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:start)
@@ -23,17 +22,21 @@
   %tbody
     - @events.each do |event|
       %tr
-        %td= link_to event.id, user_event_path(event.creator, event)
-        -if event.is_approved?
-          %td= event.title
-        -else
-          %td= event.title+ '*'
+        %td
+          = link_to user_event_path(event.creator, event) do
+            - if event.is_approved?
+              = event.title
+            - else
+              = event.title+ '*'
         %td= event.description
         %td= event.start
         %td= event.ending
         %td= link_to event.creator_name, user_path(User.find_by(name: event.creator_name))
         %td= event.facilities_list
-        %td= event.resources_list
+        %td
+          - event.resources.collect do |r|
+            %span.label.label-default<
+              = r.name + ' (' + event.resource_counts[r.id].to_s + ')'
         %td= event.attendees
         %td=l event.created_at
         %td

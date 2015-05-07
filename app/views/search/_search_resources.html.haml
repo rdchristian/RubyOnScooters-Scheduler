@@ -1,6 +1,6 @@
 
 .jumbotron
-  = form_tag search_resources_path, method: :get, id: '#search_resources_form' do
+  = form_tag search_resources_path(anchor: 'search-results'), method: :get, id: '#search_resources_form' do
     .row  
       .form-group.col-sm-4
         = label_tag :date_range, 'Date range', class: 'control-label'

@@ -1,6 +1,6 @@
 // Place all the behaviors and hooks related to the events controller here.
 
-$(function() {
+// $(function() {
 	
 // Dynamic Ending datetime calculation using moment.js
 $("[name='event[start_date]'], [name='event[start]'], [name='event[duration]']").change(function() {
@@ -83,6 +83,7 @@ $(document).on('click', 'div.selectize-input div.item', function(e) {
  	// $(this).addClass('active');
 });
 
+alert('hellow world');
 
+// }); // document.ready
 
-}); // document.ready

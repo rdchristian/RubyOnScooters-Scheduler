@@ -20,9 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-   #helpers:
-   #     label: 
-   #         resources:
-   #             max_reserve_time: Hours:Minutes
-  hello: "Hello world"
-
+  time:
+    formats:
+      default: "%B %e, %Y, %I:%M %p"
