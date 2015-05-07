@@ -2,7 +2,7 @@
 # @Author: Synix
 # @Date:   2015-05-04 04:01:32
 # @Last Modified by:   Synix
-# @Last Modified time: 2015-05-06 18:44:49
+# @Last Modified time: 2015-05-06 19:04:02
 
 class Search
 
@@ -47,7 +47,7 @@ class Search
     resource_ids = []
     if params[:name]
       query   = query.joins(:resources).where("lower(resources.name) LIKE ?", "%#{params[:name].downcase}%")
-      resource_ids = query.select('resources.id as id').uniq.ids
+      resource_ids = query.select('resources.id as id').uniq.collect(&:id) # Watch out, 'ids' might not work here
     end
     Rails.logger.info(query)
     # that cross the given time frame
@@ -92,7 +92,7 @@ class Search
     facility_ids = []
     if params[:name]
       query   = query.joins(:facilities).where("lower(facilities.name) LIKE ?", "%#{params[:name].downcase}%")
-      facility_ids = query.select('facilities.id as id').uniq.ids
+      facility_ids = query.select('facilities.id as id').uniq.collect(&:id) # Watch out, 'ids' might not work here
     end
     # that cross the given time frame
     if params[:start] and params[:end]
