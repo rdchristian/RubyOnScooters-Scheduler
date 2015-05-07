@@ -2,7 +2,7 @@
 # @Author: Synix
 # @Date:   2015-05-04 04:01:32
 # @Last Modified by:   Synix
-# @Last Modified time: 2015-05-06 19:04:02
+# @Last Modified time: 2015-05-06 21:10:14
 
 class Search
 
@@ -67,15 +67,16 @@ class Search
       if event.recurrence.present?
         event.recurrence.
           occurrences_between(params[:start], params[:end]).each do |t|
+            t = t.to_time
             exceptions << [event, t] if 
               common_resources.any? do |res_id|
-                event.num_of_resource_reserved_at_time(res_id, t, event.recurrence.duration + t) + 
+                event.num_of_resource_reserved_at_time(res_id, t, t + event.recurrence.duration) + 
                   params[:numberOf] > Resource.find(res_id).numberOf
               end
           end #occurrences
 
       else # no recurrence
-        exceptions << [event, event.start] if 
+        exceptions << [event, event.start] if
           common_resources.any? do |res_id|
             event.num_of_resource_reserved_at_my_time(res_id) + params[:numberOf] > Resource.find(res_id).numberOf
           end
