@@ -49,8 +49,8 @@
             = link_to 'Calendar', calendar_path
             = link_to 'Facility Map', '', 'data-toggle': 'modal', 'data-target': '#map-modal'
         / .col-sm-3.col-lg-2
-        .col-sm-10.col-sm-offset-2.pre-scrollable
-          #main{ style: 'overflow: visible; max-height: none;' }
+        .col-sm-10.col-sm-offset-2.pre-scrollable{ style: 'max-height: none !important;' }
+          #main{ style: 'overflow: visible;' }
             = yield
             = yield :page_specific_js
         /   .row-float
