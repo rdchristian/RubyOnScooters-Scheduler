@@ -17,6 +17,8 @@
   //   else
   //     $('#weird_fix').val(1);
   // }
+  if($('.cal-row-fluid').length)
+    return;
 
   var options = {
     events_source: JSON.parse($('#events-array').val()),
