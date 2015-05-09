@@ -28,7 +28,30 @@
 //= require turbolinks
 //= require turboboost
 
-// Pretty much a hack to make the sidebar work with bh
+
+// For loading the site images in the modal
+function imageLoader(img_name, $element) {
+  var img = $("<img />").attr('src', '/images/' + img_name)
+      .load(function() {
+          if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+              console.log('broken image!');
+          } else {
+              $element.html(img);
+          }
+      }).addClass('img-responsive');
+}
+
 $(function() {
-	$('.nav-sidebar').removeClass('nav-tabs');
+
+// Pretty much a hack to make the sidebar work with bh
+$('.nav-sidebar').removeClass('nav-tabs');
+
+
+$('#map-modal').on('shown.bs.modal', function() {
+  // debugger;
+  imageLoader('first_floor.JPG',  $('#image-map1'));
+  imageLoader('second_floor.JPG', $('#image-map2'));
+})
+  
 });
+

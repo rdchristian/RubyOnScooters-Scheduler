@@ -5,7 +5,7 @@
 // Dynamic Ending datetime calculation using moment.js
 $("[name='event[start_date]'], [name='event[start]'], [name='event[duration]']").change(function() {
 	// Update the ending date field = event[ending]
-	var start = moment($("[name='event[start_date]']").val() + $("[name='event[start]']").val(), "MMMM DD, YYYYHH:mm");
+	var start = moment($("[name='event[start_date]']").val() + $("[name='event[start]']").val(), "MMMM DD, YYYYHH:mm A");
 	var duration = moment.duration($("[name='event[duration]']").val());
 	var ending = start.add(duration);
 	$("[name='event[ending]']").val(ending.format("MMMM D, YYYY, h:mm A"));
@@ -82,8 +82,6 @@ $(document).on('click', 'div.selectize-input div.item', function(e) {
   // $(this).find('input').focus();
  	// $(this).addClass('active');
 });
-
-alert('hellow world');
 
 // }); // document.ready
 

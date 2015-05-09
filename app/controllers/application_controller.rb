@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     
     helper_method :is_admin? # To make it accessible in the views
     def is_admin?
-      current_user.is_admin?
+      current_user and current_user.is_admin?
     end
 
     helper_method :footlog

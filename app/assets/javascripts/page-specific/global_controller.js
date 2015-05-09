@@ -2,19 +2,30 @@
 
 // $(function() {
 
+// To update the time when clicking outside the clockpicker, instead of selecting minutes
+clockpicker_afterHide = function($clockpicker) {
+    return function() {
+        hours = $('.clockpicker-span-hours').html();
+        mins  = $('.clockpicker-span-minutes').html();
+        am_pm = $('.clockpicker-span-am-pm').html();
+        $clockpicker.find('input').val(hours + ':' + mins + ' ' + am_pm);
+    }
+};
+
 $('.clockpicker').clockpicker({
     placement: 'bottom',
     align: 'top',
     type: 'text',
     autoclose: 'true',
     twelvehour: 'true',
+    afterHide: clockpicker_afterHide($('.clockpicker')),
 });
-
 $('.clockpicker-disabled-ampm').clockpicker({
     placement: 'bottom',
     align: 'top',
     type: 'text',
     autoclose: 'true',
+    afterHide: clockpicker_afterHide($('.clockpicker-disabled-ampm')),
 });
 
 $(".number-picker").TouchSpin({

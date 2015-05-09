@@ -19,42 +19,67 @@
             = link_to (is_admin? ? admin_path : root_path) do
               %i.fa.fa-home
               Home
-        -if logged_in?
-          = horizontal do
-            = nav class: 'navbar-right' do
+        = horizontal do
+          = nav class: 'navbar-right' do
+            -if logged_in?
               = link_to 'Profile', user_path(current_user.id)
-              -if is_admin?
-                =link_to 'Admin Page', admin_path
-                =link_to 'Users', users_path
+              = link_to 'Admin Page', admin_path if is_admin?
+
+              / Sidebar elements that appear in the collapsible toggle when the sidebar disappears
+              = link_to 'Resources',  resources_path,  class: 'visible-xs-block'
+              = link_to 'Facilities', facilities_path, class: 'visible-xs-block'
+              = link_to 'Events',     events_path,     class: 'visible-xs-block'
+              = link_to 'Search',     search_path,     class: 'visible-xs-block'
+              = link_to 'Calendar',   calendar_path,   class: 'visible-xs-block'
+              = link_to 'Facility Map', '', 'data-toggle': 'modal', 'data-target': '#map-modal', class: 'visible-xs-block'
+
+              = link_to 'Users', users_path if is_admin?
               = link_to 'Logout', logout_path, method: "delete"
-              / = link_to 'Resources', resources_path
-              / = link_to 'Facilities', facilities_path 
-              / = link_to 'Events', events_path
-              / = link_to 'Search', search_path
-              / = link_to 'Calendar', calendar_path
-              / = link_to 'Settings', root_path
-        -else
-          = horizontal do
-            = nav class: 'navbar-right' do
+
+            -else # not logged_in
               = link_to 'Log In', login_path
     .container-float
       .row-float
-        .sidebar.col-sm-3.col-md-2
+        .sidebar.col-sm-2.hidden-xs
           = nav class: 'nav-sidebar', layout: :stacked do
             = link_to 'Resources', resources_path
             = link_to 'Facilities', facilities_path 
             = link_to 'Events', events_path
             = link_to 'Search', search_path
             = link_to 'Calendar', calendar_path
+            = link_to 'Facility Map', '', 'data-toggle': 'modal', 'data-target': '#map-modal'
         / .col-sm-3.col-lg-2
-        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
-          #main{ :style => 'overflow: auto' }
+        .col-sm-10.col-sm-offset-2
+          #main{ :style => 'overflow: visible' }
             = yield
             = yield :page_specific_js
         /   .row-float
         /     =link_to image_tag("/images/first_floor.JPG", size: "400x300"), "images/first_floor.JPG", :popup =>["First Floor", "height = 700, width=900"]
         /   .row-float
         /     =link_to image_tag("/images/second_floor.JPG", size: "400x300"), "images/second_floor.JPG", :popup =>["Second Floor", "height = 700, width=900"]
+
+    .modal.fade#map-modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{ 'data-dismiss': 'modal', type: 'button' } &times;
+            %h3.modal-title Facility Map
+          / .modal-body{:style => "height: auto; overflow: scroll;"}
+          .modal-body
+            .row
+              .col-md-6
+                = link_to '/images/first_floor.JPG', class: 'thumbnail', style: 'color: inherit;' do
+                  #image-map1{ style: 'text-align: center;' }
+                    .fa.fa-spinner.fa-spin.fa-fw.fa-3x
+                  .caption{ style: 'text-align: center;' }
+                    %h4 First floor
+              .col-md-6
+                = link_to '/images/second_floor.JPG', class: 'thumbnail', style: 'color: inherit;' do
+                  #image-map2{ style: 'text-align: center;' }
+                    .fa.fa-spinner.fa-spin.fa-fw.fa-3x
+                  .caption{ style: 'text-align: center;' }
+                    %h4 Second floor
+
 
   -unless true #Rails.env.production?
     .container-float

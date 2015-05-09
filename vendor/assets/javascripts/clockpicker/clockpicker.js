@@ -457,7 +457,7 @@
 		}
 
 		// Get the time
-		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
+		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(/\s+|:/);
 		if (value[0] === 'now') {
 			var now = new Date(+ new Date() + this.options.fromnow);
 			value = [
@@ -467,9 +467,10 @@
 		}
 		this.hours = + value[0] || 0;
 		this.minutes = + value[1] || 0;
+		this.amOrPm = value[2] || ''
 		this.spanHours.html(leadingZero(this.hours));
 		this.spanMinutes.html(leadingZero(this.minutes));
-
+		this.spanAmPm.html(this.amOrPm);
 		// Toggle to hours view
 		this.toggleView('hours');
 

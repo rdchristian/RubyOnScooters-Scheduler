@@ -22,4 +22,4 @@
 en:
   time:
     formats:
-      default: "%B %e, %Y, %I:%M %p"
+      default: "%B %-d, %Y, %-l:%M %p"

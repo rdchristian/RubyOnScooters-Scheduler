@@ -148,9 +148,9 @@ class EventsController < ApplicationController
     def format_fields
       # Datetime formatting
       params[:duration] = @event.duration.strftime("%I:%M") if @event.duration
-      params[:start_time] = @event.start.strftime("%I:%M %p") if @event.start
-      params[:start_date] = @event.start.strftime("%B %e, %Y") if @event.start
-      params[:ending] = @event.ending.strftime("%B %e, %Y, %I:%M %p") if @event.ending
+      params[:start_time] = @event.start.strftime("%-l:%M %p") if @event.start
+      params[:start_date] = @event.start.strftime("%B %-d, %Y") if @event.start
+      params[:ending] = @event.ending.strftime("%B %-d, %Y, %-l:%M %p") if @event.ending
 
       # Recurrence
       params[:recurrence_checked] = false
@@ -161,7 +161,7 @@ class EventsController < ApplicationController
         rule = @event.recurrence.to_hash[:rrules][0]
         params[:recurring_value] = rule[:interval]
         params[:recurring_option] = Event.recurrence_options.find_index { |k| rule[:rule_type].scan(k[0..1]).present? }
-        params[:recur_until] = @event.recur_until.strftime("%B %e, %Y") if @event.recur_until
+        params[:recur_until] = @event.recur_until.strftime("%B %-d, %Y") if @event.recur_until
       end
 
       # Count of each resource
@@ -177,7 +177,7 @@ class EventsController < ApplicationController
         schedule = @event.recurrence
         schedule.add_exception_time exc
         @event.recurrence = schedule # write only happens on '=' which is why we need the intermediate schedule variable
-        exception_times << exc.strftime("%b %e, %Y")
+        exception_times << exc.strftime("%b %-d, %Y")
       end
       flash[:alert] += exception_times.to_sentence
       flash[:alert] += '<br>These dates have been automatically excluded from the schedule.'
