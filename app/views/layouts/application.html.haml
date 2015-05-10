@@ -30,7 +30,7 @@
               = link_to 'Facilities', facilities_path, class: 'visible-xs-block'
               = link_to 'Events',     events_path,     class: 'visible-xs-block'
               = link_to 'Search',     search_path,     class: 'visible-xs-block'
-              = link_to 'Calendar',   calendar_path,   class: 'visible-xs-block'
+              = link_to 'Calendar',   calendar_path,   class: 'visible-xs-block', 'data-no-turbolink': true
               = link_to 'Facility Map', '', 'data-toggle': 'modal', 'data-target': '#map-modal', class: 'visible-xs-block'
 
               = link_to 'Users', users_path if is_admin?
@@ -46,7 +46,7 @@
             = link_to 'Facilities', facilities_path 
             = link_to 'Events', events_path
             = link_to 'Search', search_path
-            = link_to 'Calendar', calendar_path
+            = link_to 'Calendar', calendar_path, 'data-no-turbolink': true
             = link_to 'Facility Map', '', 'data-toggle': 'modal', 'data-target': '#map-modal'
         / .col-sm-3.col-lg-2
         .col-sm-10.col-sm-offset-2.pre-scrollable{ style: 'max-height: none !important;' }
