@@ -127,18 +127,18 @@ class Event < ActiveRecord::Base
 
     facilities.each do |fac|
       exceptions += same_time_events.
-        collect{ |e| recurrence.previous_occurrence(e.ending) if 
+        collect{ |e| [recurrence.previous_occurrence(e.ending), e] if 
           e.facilities.exists?(fac.id)
         }.compact
     end
     resources.each do |res|
       exceptions += same_time_events.
-        collect{ |e| recurrence.previous_occurrence(e.ending) if
+        collect{ |e| [recurrence.previous_occurrence(e.ending), e] if
           same_time_events.map{ |e| e.resource_counts[res.id] }.  # Collect the number of this resource reserved
           sum + resource_counts[res.id] > res.numberOf
         }.compact
     end
-    return exceptions.uniq{ |x| x.hash }
+    return exceptions.uniq{ |x| x[0].hash }
   end
 
 
