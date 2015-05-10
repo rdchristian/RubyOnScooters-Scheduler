@@ -178,7 +178,7 @@ class EventsController < ApplicationController
         schedule = @event.recurrence
         schedule.add_exception_time exc
         @event.recurrence = schedule # write only happens on '=' which is why we need the intermediate schedule variable
-        exception_times << exc.strftime("%b %-d, %Y") + " <a href=#{user_event_path(event.creator, event)}>#{event.title}</a>"
+        exception_times << "<a href=#{user_event_path(event.creator, event)}>" + exc.strftime("%b %-d, %Y") + '</a>'
       end
       flash[:alert] += exception_times.to_sentence
       flash[:alert] += '<br>These dates have been automatically excluded from the schedule.'
