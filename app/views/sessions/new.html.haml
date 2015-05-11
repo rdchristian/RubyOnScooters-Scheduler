@@ -15,7 +15,6 @@
     .form-group.col-md-5
       = f.label :password, class: 'control-label'
       = f.password_field :password, class: 'form-control'
-      =f.label "Please contact a site administrator if you forgot password"
   .row-float
     .form-group
       = f.label :remember_me, class: "checkbox-inline control-label" do
@@ -23,5 +22,18 @@
         Remember me
   .row-float
     = f.submit "Log in", class: "btn btn-primary"
-    %p
-      New user? #{link_to "Sign up now!", signup_path}
+%p
+  New user? #{link_to "Sign up now!", signup_path}
+%p
+  = link_to "Forgot Password", "#forgotPasswordUserModal", "data-toggle" => "modal"
+  /Forgot password
+  #forgotPasswordUserModal.modal.fade{"data-backdrop" => "static", "aria-hidden" => "true", "aria-labelledby" => "forgotPasswordUser", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %h4#myModalLabel.modal-title Email:
+        .modal-body
+          = form_tag reset_password_path do
+            .form-group
+              = email_field_tag :email, nil, :class => 'form-control'
+            = submit_tag "Request New Password", class: 'btn btn-primary'

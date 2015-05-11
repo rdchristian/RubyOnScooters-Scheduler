@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:new, :create]
-  before_filter :authenticate_activation!, :except => [:new, :create]
+  before_filter :authenticate_user!, :except => [:new, :create, :forgot_password]
+  before_filter :authenticate_activation!, :except => [:new, :create, :forgot_password]
   before_filter :skip_password_attribute, only: :update
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -90,12 +90,31 @@ class UsersController < ApplicationController
     redirect_to admin_path
   end
 
-   def deny
+  def deny
     set_user
     set_message
     # UserMailer.account_denied(@user, @message).deliver_now
     @user.destroy
     redirect_to admin_path
+  end
+
+  def forgot_password 
+    @user = User.find_by(email: params[:email])
+    if @user == nil 
+      flash[:danger] = "There are no accounts with that email address"
+      redirect_to login_path
+      return
+    end
+    @new_password = (0...8).map { (65 + rand(26)).chr }.join
+    @user.password = @new_password
+    @user.password_confirmation = @new_password
+      if @user.save!
+        flash[:notice] = "Please check your email for your new password" 
+    #    UserMailer.new_password(@user, @new_password).deliver_now
+      else
+        flash[:danger] = "Unable to change password. Please contact site admin for assistance." 
+      end
+      redirect_to login_path
   end
 
   private
