@@ -10,42 +10,33 @@
   %strong= model_class.human_attribute_name(:capacity) + ':'
   %br
   = @facility.capacity
-%p
-  %strong= model_class.human_attribute_name(:max_reserve_time) + ':'
-  %br
-  = @facility.max_reserve_time or 'Not limited'
-%p
-  %strong= model_class.human_attribute_name(:storage_location) + ':'
-  %br
-  = @facility.storage_location
 %p 
   %strong= model_class.human_attribute_name(:min_capacity) + ':'
   %br
   = @facility.min_capacity
 %p
-  %strong= model_class.human_attribute_name(:priority) + ':'
+  %strong= "Resources in facility"
   %br
-  = @facility.priority
-%p
-  %strong= model_class.human_attribute_name(:has_projector) + ':'
-  %br
-  = @facility.has_projector
-%p
-  %strong= model_class.human_attribute_name(:has_tv) + ':'
-  %br
-  = @facility.has_tv
-%p
-  %strong= model_class.human_attribute_name(:has_tables) + ':'
-  %br
-  = @facility.has_tables
-%p
-  %strong= model_class.human_attribute_name(:has_chairs) + ':'
-  %br
-  = @facility.has_chairs
-%p
-  %strong= model_class.human_attribute_name(:has_sound) + ':'
-  %br
-  = @facility.has_sound
+  -if @facility.has_projector
+    ="-Projector"
+    %br
+  -if @facility.has_tv
+    ="-TV"
+    %br
+  -if @facility.has_tables
+    ="-Tables"
+    %br
+  -if @facility.has_chairs
+    ="-Chairs"
+    %br
+  -if @facility.has_sound
+    ="-Sound System"
+    %br
+
+-if @facility.priority
+  %p
+    %br
+    %strong="This room requires admin approval to use."
 
 
 -if current_user.is_admin?

@@ -114,7 +114,7 @@ class EventsController < ApplicationController
   def alert
     set_event
     # UserMailer.check_in_reminder(@event).deliver_now
-    redirect_to check_in_text_path(@event.creator)
+    redirect_to admin_path
   end
 
 
@@ -169,15 +169,16 @@ class EventsController < ApplicationController
     end
 
     def on_success
+      # array of [exception_time, event]
       exceptions = @event.calculate_recurrence_exceptions if @event.recurrence.present?
       return if exceptions.blank?
       exception_times = []
       flash[:alert] = 'Your event is at a conflict during the following dates:<br>'
-      exceptions.each do |exc| 
+      exceptions.each do |exc, event|
         schedule = @event.recurrence
         schedule.add_exception_time exc
         @event.recurrence = schedule # write only happens on '=' which is why we need the intermediate schedule variable
-        exception_times << exc.strftime("%b %-d, %Y")
+        exception_times << "<a href=#{user_event_path(event.creator, event)}>" + exc.strftime("%b %-d, %Y") + '</a>'
       end
       flash[:alert] += exception_times.to_sentence
       flash[:alert] += '<br>These dates have been automatically excluded from the schedule.'

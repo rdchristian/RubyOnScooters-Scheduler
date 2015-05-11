@@ -72,4 +72,11 @@ class UserMailer < ApplicationMailer
       end
     end
   end
+
+def new_password(user, new_password)
+  @user = user
+  @password = new_password
+  mail to: @user.email, subject: "Facilities Scheduler: Temporary Password"
+end
+
 end
