@@ -7,7 +7,7 @@ this.PageSpinner = {
     this.spinner = setTimeout((function() {
       return _this.add_spinner();
     }), ms);
-    return $(document).on('page:update', function() {
+    return $(document).on('page:update page:receive page:change', function() {
       return _this.remove_spinner();
     });
   },
