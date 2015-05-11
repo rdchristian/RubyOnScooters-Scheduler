@@ -2,7 +2,7 @@
 * @Author: Synix
 * @Date:   2015-05-02 22:03:44
 * @Last Modified by:   Synix
-* @Last Modified time: 2015-05-07 13:57:32
+* @Last Modified time: 2015-05-10 21:14:56
 */
 
 'use strict';
@@ -88,9 +88,9 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
   $(e.relatedTarget).css('background-color', 'inherit'); // previous tab
 
   // Save the active tab in browser history so we can go back to it with the browser back button
-  var action = $(e.target).attr('id');                      // #search_events
-  var url = '/' + action.replace('_','/').substr(1);        // /search/events
-  $(action.replace('search_', '') + '_t').addClass('fade in');  // #events_t
+  var action = $(e.target).attr('id');                      //  search_events
+  var url = '/' + action.replace('_','/');                  // /search/events
+  $('#' + action.replace('search_', '') + '_t').addClass('fade in');  // #events_t
   if(init) init = false;
   else {
     $('#search-results').addClass('hide');  // Hide the previous search results

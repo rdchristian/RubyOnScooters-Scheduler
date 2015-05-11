@@ -30,7 +30,8 @@ this.PageSpinner = {
   ',
   spinner: null,
   add_spinner: function() {
-    if($('.modal').length) return;
+    if($('#page-spinner').length) return;
+    if($('.modal').is(':visible')) return;
     $('body').append(this.spinner_html);
     return $('body div#page-spinner').modal({
       backdrop: 'static',
@@ -51,9 +52,9 @@ $(document).on('page:fetch', function() {
 });
 
 $(document).on('submit', 'form, input, button', function() {
-    // // Change the state of the submit button
-    // $("[type='submit']").data('loading-text', 'Submitting...');
-    // $("[type='submit']").button('loading');
-
+    return PageSpinner.spin();
+});
+// spinner for nav links
+$(document).on('click', '.navbar li a, .sidebar li a', function() {
     return PageSpinner.spin();
 });
