@@ -7,7 +7,7 @@ this.PageSpinner = {
     this.spinner = setTimeout((function() {
       return _this.add_spinner();
     }), ms);
-    return $(document).on('page:update page:receive page:change', function() {
+    return $(document).on('page:change', function() {
       return _this.remove_spinner();
     });
   },
@@ -55,6 +55,6 @@ $(document).on('submit', 'form, input, button', function() {
     return PageSpinner.spin();
 });
 // spinner for nav links
-$(document).on('click', '.navbar li a, .sidebar li a', function() {
-    return PageSpinner.spin();
-});
+// $(document).on('click', '.navbar li a, .sidebar li a', function() {
+//     return PageSpinner.spin();
+// });
