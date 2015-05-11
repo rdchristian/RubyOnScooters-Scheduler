@@ -30,8 +30,8 @@ this.PageSpinner = {
   ',
   spinner: null,
   add_spinner: function() {
-    if($('#page-spinner').length) return;
-    if($('.modal').is(':visible')) return;
+    if($('#page-spinner').length) return this.spinner;
+    if($('.modal').is(':visible')) return this.spinner;
     $('body').append(this.spinner_html);
     return $('body div#page-spinner').modal({
       backdrop: 'static',
