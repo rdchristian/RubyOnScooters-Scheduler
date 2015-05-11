@@ -6,6 +6,7 @@
   %head
     %title Fellowship Church Scheduler
     %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport' }
+    = favicon_link_tag '/images/favicon.png'
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     
@@ -17,8 +18,10 @@
         = vertical do
           = nav do
             = link_to (is_admin? ? admin_path : root_path) do
-              %i.fa.fa-home
-              Home
+              = image_tag '/images/FC Logo Transparent-nopadding.png', class: 'desktop-brand'
+              = image_tag '/images/favicon.png', class: 'mobile-brand'
+              / %i.fa.fa-home
+              / Home
         = horizontal do
           = nav class: 'navbar-right' do
             -if logged_in?
@@ -42,7 +45,6 @@
       .row-float
         .sidebar.col-sm-2.hidden-xs
           = nav class: 'nav-sidebar', layout: :stacked do
-            = image_tag '/images/FC Logo Transparent.png', size: '200x65'
             = link_to 'Resources', resources_path
             = link_to 'Facilities', facilities_path 
             = link_to 'Events', events_path
