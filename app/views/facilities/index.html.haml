@@ -4,34 +4,36 @@
 %table.table.table-striped
   %thead
     %tr
-      / %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:capacity)
       %th= model_class.human_attribute_name(:min_capacity)
-      %th= model_class.human_attribute_name(:priority)
-      %th= model_class.human_attribute_name(:has_projector)
-      %th= model_class.human_attribute_name(:has_tv)                         
-      %th= model_class.human_attribute_name(:has_tables)
-      %th= model_class.human_attribute_name(:has_chairs)
-      %th= model_class.human_attribute_name(:has_sound)
-      %th= model_class.human_attribute_name(:created_at)
+      %th= "Requires admin approval?"
+      %th= "Contains"
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @facilities.each do |facility|
       %tr
         %td= link_to facility.name, facility_path(facility)
-        / %td= facility.name
         %td= facility.description
         %td= facility.capacity
         %td= facility.min_capacity
-        %td= facility.priority
-        %td= facility.has_projector
-        %td= facility.has_tv
-        %td= facility.has_tables
-        %td= facility.has_chairs
-        %td= facility.has_sound
-        %td=l facility.created_at
+        -if facility.priority
+          %td= "Yes"
+        -else
+          %td= "No"
+        - resources = ""
+        -if facility.has_projector
+          -resources += "-Projector\n"
+        -if facility.has_tv
+          -resources += "-TV\n"
+        -if facility.has_tables
+          -resources += "-Tables\n"
+        -if facility.has_chairs
+          -resources += "-Chairs\n"
+        -if facility.has_sound
+          -resources += "-Sound System\n"
+        %td= resources
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_facility_path(facility), :class => 'btn btn-default btn-xs'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), facility_path(facility), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'

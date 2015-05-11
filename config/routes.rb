@@ -2,9 +2,6 @@ Rails.application.routes.draw do
 
 
 
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
 
   get 'search/index'
 
@@ -45,5 +42,6 @@ Rails.application.routes.draw do
   post   '/post/change_schedule_variable' => 'master_page#change_schedule_variable'
   get    '/events/alert/:id' => 'events#alert', as: 'alert'
   get    '/notifications/check_in_reminder/:id' => 'notifications#check_in_reminder', as: 'check_in_text'
+  post   '/users/password/reset' => 'users#forgot_password', as: 'reset_password'
 
 end

@@ -42,6 +42,7 @@
       .row-float
         .sidebar.col-sm-2.hidden-xs
           = nav class: 'nav-sidebar', layout: :stacked do
+            = image_tag '/images/FC Logo Transparent.png', size: '200x65'
             = link_to 'Resources', resources_path
             = link_to 'Facilities', facilities_path 
             = link_to 'Events', events_path
@@ -68,13 +69,13 @@
           .modal-body
             .row
               .col-md-6
-                = link_to '/images/first_floor.JPG', class: 'thumbnail', style: 'color: inherit;' do
+                = link_to '/images/Fellowship First Floor Plan.pdf', class: 'thumbnail', style: 'color: inherit;' do
                   #image-map1{ style: 'text-align: center;' }
                     .fa.fa-spinner.fa-spin.fa-fw.fa-3x
                   .caption{ style: 'text-align: center;' }
                     %h4 First floor
               .col-md-6
-                = link_to '/images/second_floor.JPG', class: 'thumbnail', style: 'color: inherit;' do
+                = link_to '/images/Fellowship Second Floor Plan.pdf', class: 'thumbnail', style: 'color: inherit;' do
                   #image-map2{ style: 'text-align: center;' }
                     .fa.fa-spinner.fa-spin.fa-fw.fa-3x
                   .caption{ style: 'text-align: center;' }
