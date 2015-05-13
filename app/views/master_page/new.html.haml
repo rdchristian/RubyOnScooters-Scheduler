@@ -27,11 +27,24 @@
               %td= user.home_group
               %td=l user.created_at
               %td
-                = link_to "Activate", activate_user_path(user), :class => 'btn btn-default btn-xs'
+                = link_to "Activate", "#activateUserModal", :class => 'btn btn-default btn-xs', "data-toggle" => "modal"
+                /  "activate"
+                / Modal
+                #activateUserModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "activateUser", :role => "dialog", :tabindex => "-1"}
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        %h4#myModalLabel.modal-title How to notify user:
+                      .modal-body
+                        = link_to "Via email", activate_user_email_path(user), :class => 'btn btn-default btn-xs'
+                        = link_to "Via text", activate_user_text_path(user), :class => 'btn btn-default btn-xs'
+                        = link_to "Via text and email", activate_user_text_and_email_path(user), :class => 'btn btn-default btn-xs'
+                        = link_to "No notification", activate_user_path(user), :class => 'btn btn-default btn-xs'
+                        
                 = link_to "Deny", "#denyMessageUserModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
                 /  "Deny"
                 / Modal
-                #denyMessageUserModal.modal.fade{"data-backdrop" => "static", "aria-hidden" => "true", "aria-labelledby" => "denyMessageUser", :role => "dialog", :tabindex => "-1"}
+                #denyMessageUserModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "denyMessageUser", :role => "dialog"}
                   .modal-dialog
                     .modal-content
                       .modal-header
@@ -40,7 +53,10 @@
                         = form_tag deny_user_path(user) do
                           .form-group
                             = text_area_tag :message, nil, :class => 'form-control', :size => '60x10'
-                          = submit_tag "Send Email", class: 'btn btn-primary'
+                          = submit_tag "Send email to denied user", class: 'btn btn-primary', name: "submit", value: "Send Email"
+                          = submit_tag "Send text to denied user", class: 'btn btn-primary', name: "submit", value: "Send Text"
+                          = submit_tag "Send text and email to denied user", class: 'btn btn-primary', name: "submit", value: "Send Both"
+                          = submit_tag "Don't send notification", class: 'btn btn-primary', name: "submit", value: "No Notification"
   - if @events.any?{ |e| !e.is_approved? }
     %h3='Events Needing Approval:'
     %table.table.table-striped
@@ -70,11 +86,24 @@
               %td= event.attendees
               %td=l event.created_at
               %td
-                = link_to "Approve", approve_event_path(event), :class => 'btn btn-default btn-xs'
+                = link_to "Approve", "#approveEventModal", :class => 'btn btn-default btn-xs', "data-toggle" => "modal"
+                /  "approve"
+                / Modal
+                #approveEventModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "approveEvent", :role => "dialog", :tabindex => "-1"}
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        %h4#myModalLabel.modal-title How to notify user:
+                      .modal-body
+                        = link_to "Via email", approve_event_email_path(event), :class => 'btn btn-default btn-xs'
+                        = link_to "Via text", approve_event_text_path(event), :class => 'btn btn-default btn-xs'
+                        = link_to "Via text and email", approve_event_text_and_email_path(event), :class => 'btn btn-default btn-xs'
+                        = link_to "No notification", approve_event_path(event), :class => 'btn btn-default btn-xs'
+
                 = link_to "Deny", "#denyMessageModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
                 /  "Deny"
                 / Modal
-                #denyMessageModal.modal.fade{"data-backdrop" => "static", "aria-hidden" => "true", "aria-labelledby" => "denyMessage", :role => "dialog", :tabindex => "-1"}
+                #denyMessageModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "denyMessage", :role => "dialog"}
                   .modal-dialog
                     .modal-content
                       .modal-header
@@ -83,9 +112,11 @@
                         = form_tag deny_event_path(event) do
                           .form-group
                             = text_area_tag :message, nil, :class => 'form-control', :size => '60x10'
-                          = submit_tag "Send to event creator", class: 'btn btn-primary'
-    /                  .modal-footer
-    /                    %a.button.btn.btn-primary{:type => "submit", :href => deny_event_path(event)} Send to event creator
+                          = submit_tag "Send email to event creator", class: 'btn btn-primary', name: "submit", value: "Send Email"
+                          = submit_tag "Send text event creator", class: 'btn btn-primary', name: "submit", value: "Send Text"
+                          = submit_tag "Send text and email to event creator", class: 'btn btn-primary', name: "submit", value: "Send Both"
+                          = submit_tag "Don't send notification", class: 'btn btn-primary', name: "submit", value: "No Notification"
+                
   - if @events.any?{ |e| !e.resources_checked_in? && e.ending < Time.zone.now }
     %h3='Events Not Checked In:'
     %table.table.table-striped
