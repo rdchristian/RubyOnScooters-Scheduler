@@ -74,7 +74,7 @@ class UsersController < ApplicationController
       if @user.update(password_params)
         format.html { redirect_to @user, notice: "Password successfully changed" }
         format.json { render :show, status: :ok, location: @user }
-  #     UserMailer.account_activation(@user).deliver_now
+        UserMailer.account_activation(@user).deliver_now
       else
         format.html { render :edit_password }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
     set_user
     @user.activated = true;
     @user.save!
-    # UserMailer.account_activation(@user).deliver_now
+    UserMailer.account_activation(@user).deliver_now
     flash[:notice] = "Email Sent"
     redirect_to admin_path
   end
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
     set_user
     @user.activated = true;
     @user.save!
-   # UserMailer.account_activation(@user).deliver_now
+    UserMailer.account_activation(@user).deliver_now
     flash[:notice] = "Email and Text Sent"
     redirect_to account_activated_text_path(@user)
   end
@@ -123,13 +123,13 @@ class UsersController < ApplicationController
     @user.destroy
     if @alert == "Send Email"
       flash[:notice] = "Email Sent"
-    #  UserMailer.account_denied(@user, @message).deliver_now
+      UserMailer.account_denied(@user, @message).deliver_now
       redirect_to admin_path
     elsif @alert == "Send Text" 
       flash[:notice] = "Text Sent"
       redirect_to account_denied_text_path(@user, :message => @message)
     elsif @alert == "Send Both"
-    #  UserMailer.account_denied(@user, @message).deliver_now
+      UserMailer.account_denied(@user, @message).deliver_now
       flash[:notice] = "Email and Text Sent"
       redirect_to account_denied_text_path(@user, :message => @message)
     elsif @alert == "No Notification" 
@@ -153,7 +153,7 @@ class UsersController < ApplicationController
     @user.password_confirmation = @new_password
       if @user.save!
         flash[:notice] = "Please check your email for your new password" 
-    #    UserMailer.new_password(@user, @new_password).deliver_now
+        UserMailer.new_password(@user, @new_password).deliver_now
       else
         flash[:danger] = "Unable to change password. Please contact site admin for assistance." 
       end
