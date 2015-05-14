@@ -85,7 +85,7 @@ Rails.application.configure do
   ActionMailer::Base.raise_delivery_errors = true
   #Email Stuff
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.mandrill.net',
+    :address        => 'smtp.mandrill.com',
     :port           => '587',
     :authentication => :plain,
     :user_name      => ENV['MANDRILL_USERNAME'],
