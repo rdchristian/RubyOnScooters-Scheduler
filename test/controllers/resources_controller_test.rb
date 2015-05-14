@@ -1,14 +1,17 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class ResourcesControllerTest < ActionController::TestCase
+  include SessionsHelper
+
   setup do
     @resource = resources(:one)
+    @user = users(:one)
+    login @user
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:resources)
   end
 
   test "should get new" do

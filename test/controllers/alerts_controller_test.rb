@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class AlertsControllerTest < ActionController::TestCase
   test "should get new" do

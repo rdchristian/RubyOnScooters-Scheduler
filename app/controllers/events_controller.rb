@@ -45,7 +45,7 @@ class EventsController < ApplicationController
         if @event.is_approved?
           format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully created.' }
         else 
-          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive an email when it is approved or denied.' }
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive a notification when it is approved or denied.' }
         end
         format.json { render :show, status: :created, location: @event }
       else
@@ -63,7 +63,7 @@ class EventsController < ApplicationController
         on_success
         if !@event.capacity_check || !@event.facility_priority_check || !@event.recurring_check || !@event.schedule_time_check
           @event.approved = false
-          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive an email when it is approved or denied.' }
+          format.html { redirect_to ([@event.creator, @event]), notice: 'Your event will be reviewed by an administrator and you will receive a notification when it is approved or denied.' }
         else
           @event.approved = true
           format.html { redirect_to ([@event.creator, @event]), notice: 'Event was successfully updated.' }
@@ -91,17 +91,60 @@ class EventsController < ApplicationController
     set_event
     @event.approved = true;
     @event.save!
-    # UserMailer.event_approved(@event.creator, @event).deliver_now
+    flash[:notice] = "Event Approved"
     redirect_to admin_path
+  end
+
+  def approve_email
+    set_event
+    @event.approved = true;
+    @event.save!
+    flash[:notice] = "Email Sent"
+    UserMailer.event_approved(@event.creator, @event).deliver_now
+    redirect_to admin_path
+  end
+
+  def approve_text
+    set_event
+    @event.approved = true;
+    @event.save!
+    flash[:notice] = "Message Sent"
+    redirect_to event_approved_text_path(@event)
+  end
+
+  def approve_text_and_email
+    set_event
+    @event.approved = true;
+    @event.save!
+    flash[:notice] = "Email and Text Sent"
+    UserMailer.event_approved(@event.creator, @event).deliver_now
+    redirect_to event_approved_text_path(@event)
   end
 
   def deny
     set_event
+    set_alert
     @user = @event.creator
     set_message
-    # UserMailer.event_denied(@event.creator, @event, @message).deliver_now
     @event.destroy
-    redirect_to admin_path
+    if @alert == "Send Email"
+      flash[:notice] = "Email Sent"
+      UserMailer.event_denied(@event.creator, @event, @message).deliver_now
+      redirect_to admin_path
+    elsif @alert == "Send Text" 
+      flash[:notice] = "Text Sent"
+      redirect_to event_denied_text_path(@event, :message => @message)
+    elsif @alert == "Send Both"
+      UserMailer.event_denied(@event.creator, @event, @message).deliver_now
+      flash[:notice] = "Email and Text Sent"
+      redirect_to event_denied_text_path(@event, :message => @message)
+    elsif @alert == "No Notification" 
+      flash[:notice] = "Event Denied"
+      redirect_to admin_path
+    else
+      flash[:danger] = "Error: Unable to notify user"
+      redirect_to admin_path
+    end
   end
 
   def check_in
@@ -119,6 +162,10 @@ class EventsController < ApplicationController
 
 
   private
+    def set_alert
+      @alert = params[:submit]
+    end
+
     def set_message
       @message = params[:message]
     end

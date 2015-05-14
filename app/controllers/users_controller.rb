@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         login @user
-        format.html { redirect_to @user, notice: 'You will receive an email when account is activated.' }
+        format.html { redirect_to @user, notice: 'You will receive an alert when account is activated.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -86,16 +86,59 @@ class UsersController < ApplicationController
     set_user
     @user.activated = true;
     @user.save!
-    # UserMailer.account_activation(@user).deliver_now
+    flash[:notice] = "User Activated"
     redirect_to admin_path
   end
 
-  def deny
+  def activate_email
     set_user
-    set_message
-    # UserMailer.account_denied(@user, @message).deliver_now
-    @user.destroy
+    @user.activated = true;
+    @user.save!
+    # UserMailer.account_activation(@user).deliver_now
+    flash[:notice] = "Email Sent"
     redirect_to admin_path
+  end
+
+  def activate_text
+    set_user
+    @user.activated = true;
+    @user.save!
+    flash[:notice] = "Message Sent"
+    redirect_to account_activated_text_path(@user)
+  end
+
+  def activate_text_and_email
+    set_user
+    @user.activated = true;
+    @user.save!
+   # UserMailer.account_activation(@user).deliver_now
+    flash[:notice] = "Email and Text Sent"
+    redirect_to account_activated_text_path(@user)
+  end
+
+   def deny
+    set_user
+    set_alert
+    set_message
+    @user.destroy
+    if @alert == "Send Email"
+      flash[:notice] = "Email Sent"
+    #  UserMailer.account_denied(@user, @message).deliver_now
+      redirect_to admin_path
+    elsif @alert == "Send Text" 
+      flash[:notice] = "Text Sent"
+      redirect_to account_denied_text_path(@user, :message => @message)
+    elsif @alert == "Send Both"
+    #  UserMailer.account_denied(@user, @message).deliver_now
+      flash[:notice] = "Email and Text Sent"
+      redirect_to account_denied_text_path(@user, :message => @message)
+    elsif @alert == "No Notification" 
+      flash[:notice] = "User Denied"
+      redirect_to admin_path
+    else
+      flash[:danger] = "Error: Unable to notify user"
+      redirect_to admin_path
+    end
   end
 
   def forgot_password 
@@ -118,6 +161,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def set_alert
+      @alert = params[:submit]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
