@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
   resources :facilities
-  root :to => redirect('/search')
+  root :to => redirect('/calendar')
 
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
