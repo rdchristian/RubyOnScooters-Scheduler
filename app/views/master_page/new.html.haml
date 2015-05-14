@@ -27,10 +27,10 @@
               %td= user.home_group
               %td=l user.created_at
               %td
-                = link_to "Activate", "#activateUserModal", :class => 'btn btn-default btn-xs', "data-toggle" => "modal"
+                = link_to "Activate", "#activateUserModal", :class => 'btn btn-default btn-xs', "data-toggle" => "modal", "data-target" => "##{dom_id(user, :user_activate)}"
                 /  "activate"
                 / Modal
-                #activateUserModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "activateUser", :role => "dialog", :tabindex => "-1"}
+                .modal.fade{:id => dom_id(user, :user_activate), "aria-hidden" => "true", "aria-labelledby" => "activateUser", :role => "dialog", :tabindex => "-1"}
                   .modal-dialog
                     .modal-content
                       .modal-header
@@ -41,10 +41,10 @@
                         = link_to "Via text and email", activate_user_text_and_email_path(user), :class => 'btn btn-default btn-xs'
                         = link_to "No notification", activate_user_path(user), :class => 'btn btn-default btn-xs'
                         
-                = link_to "Deny", "#denyMessageUserModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
+                = link_to "Deny", "#denyMessageUserModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal", "data-target" => "##{dom_id(user, :user_deny)}"
                 /  "Deny"
                 / Modal
-                #denyMessageUserModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "denyMessageUser", :role => "dialog"}
+                .modal.fade{:id => dom_id(user, :user_deny), "aria-hidden" => "true", "aria-labelledby" => "denyMessageUser", :role => "dialog"}
                   .modal-dialog
                     .modal-content
                       .modal-header
@@ -86,10 +86,10 @@
               %td= event.attendees
               %td=l event.created_at
               %td
-                = link_to "Approve", "#approveEventModal", :class => 'btn btn-default btn-xs', "data-toggle" => "modal"
+                = link_to "Approve", "#approveEventModal", :class => 'btn btn-default btn-xs', "data-toggle" => "modal", "data-target" => "##{dom_id(event, :event_approve)}"
                 /  "approve"
                 / Modal
-                #approveEventModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "approveEvent", :role => "dialog", :tabindex => "-1"}
+                .modal.fade{:id => dom_id(event, :event_approve), "aria-hidden" => "true", "aria-labelledby" => "approveEvent", :role => "dialog", :tabindex => "-1"}
                   .modal-dialog
                     .modal-content
                       .modal-header
@@ -99,11 +99,10 @@
                         = link_to "Via text", approve_event_text_path(event), :class => 'btn btn-default btn-xs'
                         = link_to "Via text and email", approve_event_text_and_email_path(event), :class => 'btn btn-default btn-xs'
                         = link_to "No notification", approve_event_path(event), :class => 'btn btn-default btn-xs'
-
-                = link_to "Deny", "#denyMessageModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal"
+                = link_to "Deny", "#denyMessageModal", :class => "btn btn-danger btn-xs", "data-toggle" => "modal", "data-target" => "##{dom_id(event, :event_deny)}"
                 /  "Deny"
                 / Modal
-                #denyMessageModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "denyMessage", :role => "dialog"}
+                .modal.fade{:id => dom_id(event, :event_deny),"aria-hidden" => "true", "aria-labelledby" => "denyMessage", :role => "dialog"}
                   .modal-dialog
                     .modal-content
                       .modal-header

@@ -97,8 +97,8 @@ class EventsController < ApplicationController
 
   def approve_email
     set_event
-  #  @event.approved = true;
-  #  @event.save!
+    @event.approved = true;
+    @event.save!
     flash[:notice] = "Email Sent"
     UserMailer.event_approved(@event.creator, @event).deliver_now
     redirect_to admin_path
