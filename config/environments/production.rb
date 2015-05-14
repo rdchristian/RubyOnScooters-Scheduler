@@ -85,11 +85,12 @@ Rails.application.configure do
   ActionMailer::Base.raise_delivery_errors = true
   #Email Stuff
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.mandrill.com',
+    :address        => 'smtp.mandrillapp.com',
     :port           => '587',
     :authentication => :plain,
-    :user_name      => ENV['MANDRILL_USERNAME'],
-    :password       => ENV['MANDRILL_APIKEY'],
+    :enable_starttls_auto => true,
+    :user_name      => "app34890788@heroku.com",
+    :password       => "IhmXYiuAVBO5xZ-MV21cbw",
     :domain         => 'rubyonscooters-scheduler.heroku.com',
   }
   ActionMailer::Base.delivery_method = :smtp
