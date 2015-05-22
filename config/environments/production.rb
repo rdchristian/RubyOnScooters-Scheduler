@@ -91,7 +91,7 @@ Rails.application.configure do
     :enable_starttls_auto => true,
     :user_name      => "app34890788@heroku.com",
     :password       => "IhmXYiuAVBO5xZ-MV21cbw",
-    :domain         => 'rubyonscooters-scheduler.heroku.com',
+    :domain         => 'fc-scheduler.heroku.com',
   }
   ActionMailer::Base.delivery_method = :smtp
 end
