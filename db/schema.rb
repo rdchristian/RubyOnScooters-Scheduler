@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505014522) do
+ActiveRecord::Schema.define(version: 20151114173041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,12 +108,12 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.integer  "phone",           limit: 8
     t.string   "home_group"
     t.integer  "user_level",                default: 0
     t.boolean  "activated",                 default: false
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer  "phone",           limit: 8
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
