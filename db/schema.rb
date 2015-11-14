@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20150505014522) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.integer  "phone"
+    t.bigint  "phone"
     t.string   "home_group"
     t.integer  "user_level",      default: 0
     t.boolean  "activated",       default: false
